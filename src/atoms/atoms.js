@@ -5,6 +5,19 @@ export const userAtom = atom({
   default: null,
 })
 
+export const categoriesAtom = atom({
+  key: 'categoriesAtom',
+  default: [
+    'New Arrivals',
+    'Best Sellers',
+    'Necklaces',
+    'Earrings',
+    'Rings',
+    'Bracelets',
+    'View All',
+  ],
+})
+
 export const errorAtom = atom({
   key: 'errorAtom',
   default: [],

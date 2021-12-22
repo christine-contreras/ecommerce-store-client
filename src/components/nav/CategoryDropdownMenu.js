@@ -1,6 +1,9 @@
 import * as React from 'react'
 import { Menu, MenuItem, Typography } from '@mui/material'
+import { categoriesAtom } from '../../atoms/atoms'
+
 import { useNavigate } from 'react-router'
+import { useRecoilValue } from 'recoil'
 
 const CategoryDropdownMenu = ({
   moreAnchorEl,
@@ -9,15 +12,8 @@ const CategoryDropdownMenu = ({
 }) => {
   let navigate = useNavigate()
 
-  const pages = [
-    'New Arrivals',
-    'Best Sellers',
-    'Necklaces',
-    'Earrings',
-    'Rings',
-    'Bracelets',
-    'View All',
-  ]
+  const categories = useRecoilValue(categoriesAtom)
+
   return (
     <Menu
       className='menu'
@@ -35,7 +31,7 @@ const CategoryDropdownMenu = ({
       <Typography variant='subtitle2' component='p'>
         Categories
       </Typography>
-      {pages.map((page) => (
+      {categories.map((page) => (
         <MenuItem
           onClick={() => navigate(`/`)}
           key={`category-menu-item-${page}`}>

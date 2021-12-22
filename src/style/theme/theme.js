@@ -47,9 +47,13 @@ export const theme = createTheme({
       },
       fontFamily: '"Afterglow", cursive',
     },
-    // h4: {
-    //   fontFamily: '"Libre Caslon Text", serif',
-    // },
+    h4: {
+      fontSize: '2.5em',
+      '@media (max-width:600px)': {
+        fontSize: '1.5em',
+      },
+      fontFamily: '"Afterglow", cursive',
+    },
     // h5: {
     //   fontFamily: '"Libre Caslon Text", serif',
     // },
