@@ -1,0 +1,21 @@
+.logo {
+    max-width: 150px;
+}
+
+.menu .MuiPaper-root{
+    width: 100%;
+    max-width: 500px;
+    padding: 2em;
+    border-radius: 0;
+}
+
+.menu .MuiMenuItem-root{
+    padding-left: 0;
+    font-size: .9em;
+}
+
+.menu .MuiMenuItem-root:hover{
+    background: none;
+    opacity: .8;
+    padding-left: 5px;
+}
