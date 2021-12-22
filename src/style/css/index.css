@@ -34,6 +34,10 @@ a.link-img{
   width: 100%;
 }
 
+.img-arc{
+  border-radius: 50% 50% 0 0;
+}
+
 .MuiPaper-rounded.container-paper{
   display: flex;
   flex-direction: column;
@@ -100,6 +104,27 @@ a.link-img{
 }
 
 
+.hero-container{
+  padding: 2em;
+}
+
+.background-box {
+  position: absolute;
+  width: 35%;
+  height: 100vh;
+  top: 0;
+  z-index: -1;
+}
+
+.background-box.right{
+  right: 0
+}
+
+.background-box.left{
+  left: 0
+}
+
+
 @media (min-width: 1200px) {
   .hero-container {
       min-height: 50vh;
@@ -109,4 +134,14 @@ a.link-img{
 
 .hidden {
   display: none;
+}
+
+
+
+@media (min-width: 600px) {
+  .text-column{
+    column-count: 2;
+    column-gap: 2em;
+  }
+  
 }

@@ -18,7 +18,7 @@ const SiteLinks = () => {
     setMoreAnchorEl(null)
   }
   return (
-    <Grid item xs={4} sm={5} sx={{ textAlign: { xs: 'center', sm: 'left' } }}>
+    <Grid item xs={4} md={5} sx={{ textAlign: { xs: 'center', sm: 'left' } }}>
       <Button
         variant='text'
         sx={{ color: 'text.primary', marginRight: 2 }}

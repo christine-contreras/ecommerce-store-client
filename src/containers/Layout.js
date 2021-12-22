@@ -8,7 +8,9 @@ const Layout = ({ children }) => {
       <Grid item>
         <Nav />
       </Grid>
-      <Grid item>{children}</Grid>
+      <Grid item container sx={{ pt: 15 }}>
+        {children}
+      </Grid>
     </Grid>
   )
 }

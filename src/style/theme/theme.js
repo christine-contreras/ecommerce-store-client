@@ -59,7 +59,7 @@ export const theme = createTheme({
     // },
     subtitle1: {
       fontSize: '1.25em',
-      color: grey[700],
+      fontWeight: 500,
     },
     subtitle2: {
       fontSize: '.9em',

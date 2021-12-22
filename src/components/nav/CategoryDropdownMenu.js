@@ -26,7 +26,12 @@ const CategoryDropdownMenu = ({
       id='menu-options'
       keepMounted
       open={isMenuOpen}
-      onClose={handleMenuClose}>
+      onClose={handleMenuClose}
+      sx={{
+        '& .MuiPaper-root': {
+          backgroundColor: 'secondary',
+        },
+      }}>
       <Typography variant='subtitle2' component='p'>
         Categories
       </Typography>

@@ -6,7 +6,7 @@ import { useRecoilValue } from 'recoil'
 import { IconButton, Badge, Button, Grid } from '@mui/material'
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined'
 
-import LoggedIn from './LoggedIn'
+import LoggedInMenu from './LoggedInMenu'
 
 const UserLinks = () => {
   const user = useRecoilValue(userAtom)
@@ -21,9 +21,10 @@ const UserLinks = () => {
         container
         alignItems='center'
         justifyContent='flex-end'
+        flexWrap='nowrap'
         spacing={3}
         xs={4}
-        sm={5}>
+        md={5}>
         <Grid item xs='auto'>
           <IconButton size='large' aria-label='cart' color='inherit'>
             <Badge
@@ -40,17 +41,16 @@ const UserLinks = () => {
         </Grid>
 
         {user ? (
-          <LoggedIn />
+          <LoggedInMenu />
         ) : (
-          // <Grid item xs='auto'>
-          //   <Button
-          //     variant='text'
-          //     sx={{ color: 'text.primary', marginRight: 2 }}
-          //     onClick={() => navigate(`/login`)}>
-          //     Log In
-          //   </Button>
-          // </Grid>
-          <LoggedIn />
+          <Grid item xs='auto'>
+            <Button
+              variant='text'
+              sx={{ color: 'text.primary', marginRight: 2 }}
+              onClick={() => navigate(`/login`)}>
+              Log In
+            </Button>
+          </Grid>
         )}
       </Grid>
     </>

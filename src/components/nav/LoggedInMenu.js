@@ -9,7 +9,7 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 
 import UserDropdownMenu from './UserDropdownMenu'
 
-const LoggedIn = () => {
+const LoggedInMenu = () => {
   const user = useRecoilValue(userAtom)
   // console.log(`user: ${user}`)
 
@@ -63,4 +63,4 @@ const LoggedIn = () => {
   )
 }
 
-export default LoggedIn
+export default LoggedInMenu
