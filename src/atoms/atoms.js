@@ -5,6 +5,20 @@ export const userAtom = atom({
   default: null,
 })
 
+export const adminAtom = selector({
+  key: 'adminAtom',
+  get: ({ get }) => {
+    const user = get(userAtom)
+    const isAdmin = user ? user.isAdmin : false
+    return isAdmin
+  },
+})
+
+export const cartAtom = atom({
+  key: 'cartAtom',
+  default: [],
+})
+
 export const categoriesAtom = atom({
   key: 'categoriesAtom',
   default: [
@@ -16,11 +30,6 @@ export const categoriesAtom = atom({
     'Bracelets',
     'View All',
   ],
-})
-
-export const errorAtom = atom({
-  key: 'errorAtom',
-  default: [],
 })
 
 export const loadingAtom = atom({

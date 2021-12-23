@@ -25,7 +25,7 @@ const ContactInfo = () => {
         </Grid>
 
         <Grid item xs={6} md={12}>
-          <Typography sx={{ fontWeight: 500 }}>Monday-Friday</Typography>
+          <Typography sx={{ fontWeight: 500 }}>Monday - Friday</Typography>
           <Typography component='p'>8pm - 7pm CST</Typography>
         </Grid>
       </Grid>

@@ -9,9 +9,9 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 
 import UserDropdownMenu from './UserDropdownMenu'
 
-const LoggedInMenu = () => {
+const LoggedInMenu = ({ onLogout }) => {
   const user = useRecoilValue(userAtom)
-  // console.log(`user: ${user}`)
+  console.log(user)
 
   //user menu to see more options
   const [moreAnchorEl, setMoreAnchorEl] = React.useState(null)
@@ -37,7 +37,7 @@ const LoggedInMenu = () => {
             <PersonOutlineOutlinedIcon />
           </Grid>
           <Grid item xs='auto' sx={{ display: { xs: 'none', sm: 'block' } }}>
-            <Typography>Christine</Typography>
+            <Typography>{user.first_name}</Typography>
           </Grid>
         </Grid>
 
@@ -58,6 +58,7 @@ const LoggedInMenu = () => {
         moreAnchorEl={moreAnchorEl}
         isMenuOpen={isMenuOpen}
         handleMenuClose={handleMenuClose}
+        onLogout={onLogout}
       />
     </>
   )

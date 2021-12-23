@@ -1,8 +1,14 @@
 import React from 'react'
-import { Grid } from '@mui/material'
+import { Grid, Container } from '@mui/material'
+import { adminAtom } from '../atoms/atoms'
+import { useRecoilValue } from 'recoil'
+
 import Nav from './Nav'
 import Footer from './Footer'
-const Layout = ({ children }) => {
+
+const Layout = ({ children, onLogout }) => {
+  const isAdmin = useRecoilValue(adminAtom)
+
   return (
     <Grid
       container
@@ -10,14 +16,16 @@ const Layout = ({ children }) => {
       justifyContent='space-between'
       sx={{ minHeight: '100vh' }}>
       <Grid item>
-        <Nav />
+        <Nav onLogout={onLogout} />
       </Grid>
-      <Grid item container sx={{ pt: 15, flexGrow: 1 }}>
-        {children}
+      <Grid item container sx={{ pt: 15, pb: 3, flexGrow: 1 }}>
+        <Container maxWidth='xl'>{children}</Container>
       </Grid>
-      <Grid item container>
-        <Footer />
-      </Grid>
+      {!isAdmin && (
+        <Grid item container>
+          <Footer />
+        </Grid>
+      )}
     </Grid>
   )
 }

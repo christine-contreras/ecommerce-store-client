@@ -51,7 +51,7 @@ const Hero = () => {
 
       <Box
         className='background-box right'
-        sx={{ backgroundColor: 'primary.light' }}
+        sx={{ backgroundColor: 'primary.main' }}
       />
     </Grid>
   )

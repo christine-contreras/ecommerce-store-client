@@ -1,5 +1,8 @@
 import React from 'react'
 import '../style/css/nav.css'
+import { adminAtom } from '../atoms/atoms'
+import { useRecoilValue } from 'recoil'
+
 import { Grid, Toolbar, AppBar } from '@mui/material'
 import { useScrollTrigger } from '@mui/material'
 
@@ -20,7 +23,9 @@ function AppbarScroll(props) {
   })
 }
 
-const Nav = (props) => {
+const Nav = ({ props, onLogout }) => {
+  const isAdmin = useRecoilValue(adminAtom)
+
   return (
     <AppbarScroll {...props}>
       <AppBar
@@ -29,11 +34,16 @@ const Nav = (props) => {
         sx={{ color: 'text.primary' }}>
         <Toolbar>
           <Grid container spacing={2} alignItems='flex-end'>
-            <SiteLinks />
-
+            <Grid
+              item
+              xs={4}
+              md={5}
+              sx={{ textAlign: { xs: 'center', sm: 'left' } }}>
+              {!isAdmin && <SiteLinks />}
+            </Grid>
             <Logo />
 
-            <UserLinks />
+            <UserLinks onLogout={onLogout} />
           </Grid>
         </Toolbar>
       </AppBar>
