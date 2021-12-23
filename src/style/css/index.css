@@ -139,7 +139,7 @@ a.link-sm{
 }
 
 .hidden {
-  display: none;
+  visibility: hidden;
 }
 
 

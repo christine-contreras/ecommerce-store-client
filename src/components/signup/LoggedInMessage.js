@@ -14,7 +14,7 @@ const LoggedInMessage = ({ onLogout }) => {
         If you would like to create a new account please logout.
       </Typography>
       <div className='padding-top'>
-        <ButtonGroup variant='contained' color='primary'>
+        <ButtonGroup variant='contained' color='info'>
           <Button className='btn' onClick={() => navigate(`/`)}>
             Go To Homepage
           </Button>

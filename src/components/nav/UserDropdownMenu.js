@@ -21,8 +21,10 @@ const UserDropdownMenu = ({
       onClose={handleMenuClose}>
       {!isAdmin && (
         <>
-          <MenuItem onClick={() => navigate(`/user/profile`)}>Profile</MenuItem>
-          <MenuItem onClick={() => navigate(`/user/orders`)}>
+          <MenuItem onClick={() => navigate(`/profile/my-info`)}>
+            Profile
+          </MenuItem>
+          <MenuItem onClick={() => navigate(`/profile/my-orders`)}>
             My Orders
           </MenuItem>
         </>

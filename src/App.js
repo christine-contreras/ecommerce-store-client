@@ -9,12 +9,11 @@ import { userAtom, cartAtom } from './atoms/atoms'
 import Layout from './containers/Layout'
 import Home from './containers/Home'
 import SignUpLogin from './containers/SignUpLogin'
-import Dashboard from './containers/admin/Dashboard'
-import Profile from './containers/profile/Profile'
+import Dashboard from './containers/profile/Dashboard'
+import Main from './containers/profile/Main'
 
 function App() {
   const appliedTheme = createTheme(theme)
-
   const setUser = useSetRecoilState(userAtom)
   const setCart = useSetRecoilState(cartAtom)
 
@@ -82,23 +81,11 @@ function App() {
               element={<SignUpLogin onLogout={handleLogout} title='Login' />}
             />
 
-            <Route path='/profile' element={<Profile />}>
-              {/* <Route
-                  path='my-bookclubs'
-                  element={
-                    <BookClubs user={user} fetchUser={handleCheckLogin} />
-                  }
-                /> */}
+            <Route path='/profile' element={<Dashboard />}>
+              <Route path='my-info' element={<Main title='Profile Info' />} />
             </Route>
 
-            <Route path='/admin-dashboard' element={<Dashboard />}>
-              {/* <Route
-                  path='my-bookclubs'
-                  element={
-                    <BookClubs user={user} fetchUser={handleCheckLogin} />
-                  }
-                /> */}
-            </Route>
+            <Route path='/admin-dashboard' element={<Dashboard />}></Route>
           </Routes>
         </Layout>
       </Router>
