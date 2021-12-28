@@ -14,6 +14,15 @@ export const adminAtom = selector({
   },
 })
 
+export const addressAtom = selector({
+  key: 'addressAtom',
+  get: ({ get }) => {
+    const user = get(userAtom)
+    const address = user.address
+    return address
+  },
+})
+
 export const cartAtom = atom({
   key: 'cartAtom',
   default: [],

@@ -83,6 +83,10 @@ function App() {
 
             <Route path='/profile' element={<Dashboard />}>
               <Route path='my-info' element={<Main title='Profile Info' />} />
+              <Route
+                path='my-shipping'
+                element={<Main title='Shipping Info' />}
+              />
             </Route>
 
             <Route path='/admin-dashboard' element={<Dashboard />}></Route>

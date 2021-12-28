@@ -9,7 +9,9 @@ const SideNav = () => {
   const isAdmin = useRecoilValue(adminAtom)
   const user = useRecoilValue(userAtom)
   return (
-    <Paper sx={{ p: 4, backgroundColor: 'primary.main' }} elevation={0}>
+    <Paper
+      sx={{ p: 4, backgroundColor: 'primary.main', height: '100%' }}
+      elevation={0}>
       {!isAdmin && user && (
         <Grid item>
           <Typography component='p' variant='h4' paddingTop>

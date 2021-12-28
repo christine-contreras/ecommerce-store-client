@@ -75,7 +75,7 @@ const FormLogin = () => {
         </form>
       </Grid>
 
-      <Grid item>
+      <Grid item sx={{ width: '70%' }}>
         <Stack sx={{ width: '100%' }} spacing={2} className='padding-top'>
           {errors.map((error) => (
             <Alert severity='error' variant='filled' key={error}>
