@@ -39,15 +39,7 @@ export const cartAtom = atom({
 
 export const categoriesAtom = atom({
   key: 'categoriesAtom',
-  default: [
-    'New Arrivals',
-    'Best Sellers',
-    'Necklaces',
-    'Earrings',
-    'Rings',
-    'Bracelets',
-    'View All',
-  ],
+  default: [],
 })
 
 export const loadingAtom = atom({

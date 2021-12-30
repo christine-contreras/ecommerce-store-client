@@ -98,6 +98,14 @@ hr {
   font-weight: bold;
 }
 
+.MuiButton-root.MuiButton-outlinedInfo.btn:hover, .MuiButton-root.MuiButton-outlinedInfo.btn:active{
+  background-color: rgb(41 17 8 / 36%);
+}
+
+.MuiButton-root.btn-radius{
+  border-radius: 32px;
+}
+
 /* .MuiButton-root.btn-primary{
   background-color: #291108;
   color: #fff;

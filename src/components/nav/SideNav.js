@@ -12,7 +12,7 @@ const SideNav = () => {
     <Paper
       sx={{ p: 4, backgroundColor: 'primary.main', height: '100%' }}
       elevation={0}>
-      {!isAdmin && user && (
+      {user && (
         <Grid item>
           <Typography component='p' variant='h4' paddingTop>
             Hello, {user.first_name}

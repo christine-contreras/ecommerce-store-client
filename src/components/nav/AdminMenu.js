@@ -8,14 +8,22 @@ const AdminMenu = () => {
   return (
     <MenuList className='side-menu'>
       <MenuItem
-        className={location.pathname === '/profile/my-info' ? 'active' : null}>
-        <Link to='/profile/my-info'>My Info</Link>
+        className={
+          location.pathname === '/admin-dashboard/categories' ? 'active' : null
+        }>
+        <Link to='/admin-dashboard/categories'>Categories</Link>
       </MenuItem>
       <MenuItem
         className={
-          location.pathname === '/profile/my-bookclubs' ? 'active' : null
+          location.pathname === '/admin-dashboard/products' ? 'active' : null
         }>
-        <Link to='/profile/my-bookclubs'>My Book Clubs</Link>
+        <Link to='/admin-dashboard/products'>Products</Link>
+      </MenuItem>
+      <MenuItem
+        className={
+          location.pathname === '/admin-dashboard/orders' ? 'active' : null
+        }>
+        <Link to='/admin-dashboard/orders'>Orders</Link>
       </MenuItem>
     </MenuList>
   )

@@ -4,7 +4,7 @@ import theme from './style/theme/theme'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
 import { useSetRecoilState } from 'recoil'
-import { userAtom, cartAtom } from './atoms/atoms'
+import { userAtom, cartAtom, categoriesAtom } from './atoms/atoms'
 
 import Layout from './containers/Layout'
 import Home from './containers/Home'
@@ -16,6 +16,7 @@ function App() {
   const appliedTheme = createTheme(theme)
   const setUser = useSetRecoilState(userAtom)
   const setCart = useSetRecoilState(cartAtom)
+  const setCategories = useSetRecoilState(categoriesAtom)
 
   React.useEffect(() => {
     // auto-login
@@ -23,6 +24,9 @@ function App() {
 
     // check or create cart
     handleCheckCart()
+
+    // fetch categories
+    handleFetchCategories()
   })
 
   const handleCheckLogin = () => {
@@ -50,6 +54,19 @@ function App() {
     })
   }
 
+  const handleFetchCategories = () => {
+    fetch('/api/categories').then((response) => {
+      if (response.ok) {
+        response.json().then((categories) => {
+          setCategories(categories)
+        })
+      } else {
+        response.json().then((err) => console.log(err))
+      }
+    })
+  }
+
+  //change to  useResetRecoilState(state)
   const handleLogout = () => {
     fetch('/api/logout', {
       method: 'DELETE',
@@ -93,7 +110,19 @@ function App() {
               />
             </Route>
 
-            <Route path='/admin-dashboard' element={<Dashboard />}></Route>
+            <Route path='/admin-dashboard' element={<Dashboard />}>
+              <Route
+                path='categories'
+                element={<Main title='Category Taxonomy' />}
+              />
+
+              <Route
+                path='products'
+                element={<Main title='Product Catalog' />}
+              />
+
+              <Route path='orders' element={<Main title='Order History' />} />
+            </Route>
           </Routes>
         </Layout>
       </Router>
