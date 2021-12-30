@@ -18,8 +18,17 @@ export const addressAtom = selector({
   key: 'addressAtom',
   get: ({ get }) => {
     const user = get(userAtom)
-    const address = user.address
+    const address = user ? user.address : null
     return address
+  },
+})
+
+export const userOrdersAtom = selector({
+  key: 'userOrdersAtom',
+  get: ({ get }) => {
+    const user = get(userAtom)
+    const orders = user ? user.orders : []
+    return orders
   },
 })
 

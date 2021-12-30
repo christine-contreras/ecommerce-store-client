@@ -87,6 +87,10 @@ function App() {
                 path='my-shipping'
                 element={<Main title='Shipping Info' />}
               />
+              <Route
+                path='my-orders'
+                element={<Main title='Order History' />}
+              />
             </Route>
 
             <Route path='/admin-dashboard' element={<Dashboard />}></Route>
