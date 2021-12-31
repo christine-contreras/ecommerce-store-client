@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Grid, Typography, Button } from '@mui/material'
 import FormProfile from '../../components/profile/FormProfile'
-import DeleteModal from '../../components/profile/DeleteModal'
+import DeleteModal from '../../components/DeleteModal'
 
 import { userAtom } from '../../atoms/atoms'
 import { useRecoilState } from 'recoil'
@@ -44,7 +44,7 @@ const MyInfo = () => {
 
       <DeleteModal
         openModal={openModal}
-        handleCloseModel={handleCloseModel}
+        closeModal={handleCloseModel}
         handleDelete={handleDeleteProfile}
         item='Account'
         warningMessage='Are you sure you want to delete your account?'

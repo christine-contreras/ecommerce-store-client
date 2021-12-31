@@ -1,48 +1,52 @@
 import * as React from 'react'
 import { Grid, Button } from '@mui/material'
-import { useRecoilState } from 'recoil'
+import { useRecoilValue } from 'recoil'
 import { categoriesAtom } from '../../atoms/atoms'
-import { DataGrid } from '@mui/x-data-grid'
-import TableActions from '../../components/dashboard/TableActions'
+import TableActionsCategory from '../../components/dashboard/TableActionsCategory'
+import FormModal from '../../components/dashboard/FormModal'
+import Table from '../../components/dashboard/Table'
+
 const Categories = () => {
-  const [categories, setCategories] = useRecoilState(categoriesAtom)
+  const categories = useRecoilValue(categoriesAtom)
   console.log(categories)
+
+  //handle category create modal
+  const [openCategoryModal, setOpenCategoryModal] = React.useState(false)
+  const handleOpenCreateCategoryModel = () => setOpenCategoryModal(true)
+  const handleCloseCreateCategoryModel = () => setOpenCategoryModal(false)
+
   const columns = [
-    { field: 'id', headerName: 'ID #', width: 150 },
-    { field: 'name', headerName: 'Name', width: 200 },
-    { field: 'product_slotted', headerName: 'Products Slotted', width: 150 },
-    { field: 'status', headerName: 'Status', width: 150 },
+    { field: 'id', headerName: 'Category #', width: 150 },
+    { field: 'name', headerName: 'Category Name', width: 300 },
+    { field: 'products_slotted', headerName: 'Products Slotted', width: 150 },
+    { field: 'isActive', headerName: 'Is Active?', width: 150 },
     {
       field: 'actions',
       headerName: 'Action',
       width: 300,
-      renderCell: (params) => <TableActions item='Category' />,
+      renderCell: (params) => <TableActionsCategory category={params.row} />,
     },
-  ]
-
-  const rows = [
-    { id: 1, name: 'Hello' },
-    { id: 2, name: 'DataGridPro' },
-    { id: 3, name: 'MUI' },
   ]
 
   return (
     <Grid item container flexDirection='column' wrap='nowrap' spacing={3}>
       <Grid item textAlign='right' xs={12}>
-        <Button variant='outlined' className='btn' color='info'>
-          Add Category
+        <Button
+          variant='contained'
+          className='btn b-radius'
+          color='info'
+          onClick={handleOpenCreateCategoryModel}>
+          Add A Category
         </Button>
       </Grid>
 
-      <Grid
-        item
-        container
-        sx={{ height: '100%', width: '100%', minHeight: 300 }}
-        xs={12}>
-        <Grid item flexGrow={1}>
-          <DataGrid rows={rows} columns={columns} />
-        </Grid>
-      </Grid>
+      <Table rows={categories} columns={columns} />
+
+      {/* modal */}
+      <FormModal
+        openModal={openCategoryModal}
+        closeModal={handleCloseCreateCategoryModel}
+      />
     </Grid>
   )
 }

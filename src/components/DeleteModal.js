@@ -1,21 +1,25 @@
 import React from 'react'
-import '../../style/css/modal.css'
 import { Typography, Modal, Alert, Grid, Button } from '@mui/material'
+
 const DeleteModal = ({
   openModal,
-  handleCloseModel,
-  handleDelete,
+  closeModal,
   item,
   warningMessage,
+  handleDelete,
 }) => {
   return (
     <Modal
       className='modal'
       open={openModal}
-      onClose={handleCloseModel}
-      aria-labelledby='modal-delete-modal'
-      aria-describedby='modal-delete-modal'>
-      <Grid container flexDirection='column' className='modal-body' spacing={2}>
+      onClose={closeModal}
+      aria-labelledby='modal-delete'
+      aria-describedby='modal-delete'>
+      <Grid
+        container
+        flexDirection='column'
+        className='modal-body b-radius-sm'
+        spacing={2}>
         <Grid item>
           <Typography component='h1' variant='h4' align='center' paddingTop>
             Delete {item}
@@ -38,7 +42,7 @@ const DeleteModal = ({
             variant='contained'
             className='btn btn-lg'
             color='info'
-            onClick={handleCloseModel}>
+            onClick={closeModal}>
             Exit
           </Button>
         </Grid>

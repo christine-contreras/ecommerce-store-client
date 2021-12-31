@@ -92,6 +92,14 @@ hr {
   flex-flow: column wrap;
 }
 
+.b-radius, .b-radius.MuiPaper-root, .MuiButton-root.b-radius{
+  border-radius: 32px;
+}
+
+.b-radius-sm, .b-radius-sm.MuiPaper-root{
+  border-radius: 10px;
+}
+
 .MuiButton-root.btn{
   min-width: 200px;
   padding: 10px;
@@ -100,10 +108,6 @@ hr {
 
 .MuiButton-root.MuiButton-outlinedInfo.btn:hover, .MuiButton-root.MuiButton-outlinedInfo.btn:active{
   background-color: rgb(41 17 8 / 36%);
-}
-
-.MuiButton-root.btn-radius{
-  border-radius: 32px;
 }
 
 /* .MuiButton-root.btn-primary{
