@@ -18,13 +18,14 @@ const TableActionsCategory = ({ category }) => {
   const handleCloseDeleteModel = () => setOpenDeleteModal(false)
 
   const handleDeleteCategory = () => {
-    fetch(`/api/goals/${category.id}`, {
+    fetch(`/api/categories/${category.id}`, {
       method: 'DELETE',
     })
       .then((response) => {
         if (response.ok) {
           const newCategoryList = categories.filter((c) => c.id !== category.id)
           setCategories(newCategoryList)
+          handleCloseDeleteModel()
         }
       })
       .catch((err) => {

@@ -4,6 +4,10 @@ position: absolute;
     left: 0;
 }
 
+.modal .MuiBackdrop-root{
+    background-color: rgb(41 17 8 / 75%);
+}
+
 .modal-body{
     position: absolute;
     top: 30%;

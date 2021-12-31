@@ -57,9 +57,10 @@ const FormCategory = ({ category, closeModal }) => {
     }).then((response) => {
       setLoading(false)
       if (response.ok) {
-        response.json().then((category) => {
-          setCategories((prevCategories) => [...prevCategories, category])
+        response.json().then((data) => {
+          setCategories((prevCategories) => [...prevCategories, data])
           closeModal()
+          setUpdated(true)
         })
       } else {
         response.json().then((err) => {
@@ -89,7 +90,7 @@ const FormCategory = ({ category, closeModal }) => {
       })
       .catch((err) => {
         setLoading(false)
-        setErrors(err.errors || [err.error])
+        setErrors(err.errors)
       })
   }
 

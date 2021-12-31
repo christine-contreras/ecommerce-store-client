@@ -42,7 +42,7 @@ const Categories = () => {
 
       <Table rows={categories} columns={columns} />
 
-      {/* modal */}
+      {/* create category modal */}
       <FormModal
         openModal={openCategoryModal}
         closeModal={handleCloseCreateCategoryModel}
