@@ -22,11 +22,13 @@ const FormCategory = ({ category, closeModal }) => {
   const [updated, setUpdated] = React.useState(false)
   const [errors, setErrors] = React.useState([])
 
-  // React.useEffect(() => {
-  //     if (!newGoal && goal) {
-  //       setComplete(goal.complete)
-  //     }
-  //   }, [goal])
+  React.useEffect(() => {
+    if (category) {
+      setName(category.name)
+      setDescription(category.description)
+      setActive(category.isActive)
+    }
+  }, [category])
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -108,8 +110,7 @@ const FormCategory = ({ category, closeModal }) => {
           align='center'
           paddingTop
           paddingBottom>
-          Create Category
-          {/* {!newGoal ? 'Edit Goal' : 'New Goal'} */}
+          {category ? 'Edit Category' : 'Create Category'}
         </Typography>
       </Grid>
 
@@ -168,14 +169,13 @@ const FormCategory = ({ category, closeModal }) => {
           ))}
           {loading && (
             <Alert severity='info' variant='filled'>
-              {/* {!newGoal ? 'Updating' : 'Creating'} Goal... Do Not Refresh Page */}
-              Creating Category... Do Not Refresh
+              {category ? 'Edit' : 'Creating'} Category... Do Not Refresh Page
             </Alert>
           )}
 
           {updated && (
             <Alert severity='success' variant='filled'>
-              Category Updated
+              Category {category ? 'Updated' : 'Created'}
             </Alert>
           )}
         </Stack>

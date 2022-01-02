@@ -3,7 +3,7 @@ import { Modal } from '@mui/material'
 import { useLocation } from 'react-router'
 import FormCategory from './FormCategory'
 
-const FormModal = ({ openModal, closeModal }) => {
+const FormModal = ({ openModal, closeModal, item }) => {
   let location = useLocation()
   return (
     <Modal
@@ -13,7 +13,7 @@ const FormModal = ({ openModal, closeModal }) => {
       aria-labelledby='edit-modal'
       aria-describedby='edit-modal'>
       {location.pathname.includes('categories') && (
-        <FormCategory closeModal={closeModal} />
+        <FormCategory closeModal={closeModal} category={item} />
       )}
     </Modal>
   )

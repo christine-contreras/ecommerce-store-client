@@ -2,6 +2,7 @@ import * as React from 'react'
 import { Grid, Button, Tooltip, IconButton } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
 import DeleteModal from '../DeleteModal'
+import FormModal from './FormModal'
 import { categoriesAtom } from '../../atoms/atoms'
 import { useRecoilState } from 'recoil'
 
@@ -37,7 +38,11 @@ const TableActionsCategory = ({ category }) => {
     <>
       <Grid container alignItems='center' justifyContent='center' spacing={1}>
         <Grid item>
-          <Button variant='outlined' className='btn b-radius' color='info'>
+          <Button
+            variant='outlined'
+            className='btn b-radius'
+            color='info'
+            onClick={handleOpenEditModel}>
             Edit
           </Button>
         </Grid>
@@ -59,6 +64,13 @@ const TableActionsCategory = ({ category }) => {
         handleDelete={handleDeleteCategory}
         item='Category'
         warningMessage={`Are you sure you want to delete the ${category.name} category? All Products slotted to this category will be removed.`}
+      />
+
+      {/* edit category modal */}
+      <FormModal
+        openModal={openEditModal}
+        closeModal={handleCloseEditModel}
+        item={category}
       />
     </>
   )
