@@ -2,12 +2,12 @@ import * as React from 'react'
 import { Grid, Button, Tooltip, IconButton } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
 import DeleteModal from '../DeleteModal'
-import CategoryModal from './CategoryModal'
-import { categoriesAtom } from '../../atoms/atoms'
+import ProductModal from './ProductModal'
+import { productsAtom } from '../../atoms/atoms'
 import { useRecoilState } from 'recoil'
 
-const TableActionsCategory = ({ category }) => {
-  const [categories, setCategories] = useRecoilState(categoriesAtom)
+const TableActionsProduct = ({ product }) => {
+  const [products, setProducts] = useRecoilState(productsAtom)
   //handle edit modal
   const [openEditModal, setOpenEditModal] = React.useState(false)
   const handleOpenEditModel = () => setOpenEditModal(true)
@@ -18,14 +18,14 @@ const TableActionsCategory = ({ category }) => {
   const handleOpenDeleteModel = () => setOpenDeleteModal(true)
   const handleCloseDeleteModel = () => setOpenDeleteModal(false)
 
-  const handleDeleteCategory = () => {
-    fetch(`/api/categories/${category.id}`, {
+  const handleDeleteProduct = () => {
+    fetch(`/api/products/${prouct.id}`, {
       method: 'DELETE',
     })
       .then((response) => {
         if (response.ok) {
-          const newCategoryList = categories.filter((c) => c.id !== category.id)
-          setCategories(newCategoryList)
+          const newProductList = products.filter((p) => p.id !== product.id)
+          setProducts(newProductList)
           handleCloseDeleteModel()
         }
       })
@@ -47,7 +47,7 @@ const TableActionsCategory = ({ category }) => {
           </Button>
         </Grid>
         <Grid item>
-          <Tooltip title='Delete Category'>
+          <Tooltip title='Delete Product'>
             <IconButton
               aria-label='delete'
               color='error'
@@ -61,19 +61,19 @@ const TableActionsCategory = ({ category }) => {
       <DeleteModal
         openModal={openDeleteModal}
         closeModal={handleCloseDeleteModel}
-        handleDelete={handleDeleteCategory}
-        item='Category'
-        warningMessage={`Are you sure you want to delete the ${category.name} category? All Products slotted to this category will be removed.`}
+        handleDelete={handleDeleteProduct}
+        item='Product'
+        warningMessage={`Are you sure you want to delete ${product.name}? All Skus for this product will be deleted.`}
       />
 
       {/* edit category modal */}
-      <CategoryModal
+      <ProductModal
         openModal={openEditModal}
         closeModal={handleCloseEditModel}
-        category={category}
+        product={product}
       />
     </>
   )
 }
 
-export default TableActionsCategory
+export default TableActionsProduct

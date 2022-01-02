@@ -5,6 +5,7 @@ import MyInfo from './MyInfo'
 import MyShipping from './MyShipping'
 import MyOrders from './MyOrders'
 import Categories from '../admin/Categories'
+import Products from '../admin/Products'
 const Main = ({ title }) => {
   let location = useLocation()
   return (
@@ -19,6 +20,7 @@ const Main = ({ title }) => {
       {location.pathname.includes('my-shipping') && <MyShipping />}
       {location.pathname.includes('my-orders') && <MyOrders />}
       {location.pathname.includes('categories') && <Categories />}
+      {location.pathname.includes('products') && <Products />}
     </>
   )
 }

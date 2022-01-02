@@ -42,7 +42,7 @@ const Hero = () => {
         sx={{ order: { xs: -1, md: 1 } }}
         textAlign='center'>
         <img
-          class='img-arc img-responsive'
+          className='img-arc img-responsive'
           src={HeroImage}
           role='presentation'
           style={{ maxWidth: 700 }}

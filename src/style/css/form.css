@@ -11,13 +11,55 @@ position: absolute;
 .modal-body{
     position: absolute;
     top: 30%;
-    left: 50%;
-    transform: translate(-30%, -50%);
-    width: 90%;
+    left: 5%;
+    transform: translate(0, -50%);
+    width: 90% !important;
     background-color: #f8f4ef;
-    max-width: 500px;
-    padding: 2em;
+    margin-left: 0 !important;
+
 }
+
+
+.modal-body-bg{
+    position: absolute;
+    top: 30%;
+    left: 5%;
+    transform: translate(0, -50%);
+    width: 90% !important;
+    background-color: #f8f4ef;
+    margin-left: 0 !important;
+
+}
+
+
+
+@media (min-width: 500px) {
+    .modal-body{
+        position: absolute;
+        top: 30% !important;
+        left: 50%;
+        transform: translate(-50%, -30%);
+        width: 90% !important;
+        background-color: #f8f4ef;
+        max-width: 500px;
+        padding: 2em;
+    }
+    
+  }
+
+  @media (min-width: 1200px) {
+    .modal-body-bg{
+        position: absolute;
+        top: 30% !important;
+        left: 50%;
+        transform: translate(-50%, -30%);
+        width: 90% !important;
+        background-color: #f8f4ef;
+        max-width: 1200px;
+        padding: 2em;
+    }
+    
+  }
     
     
 .form {

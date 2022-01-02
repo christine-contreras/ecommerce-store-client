@@ -42,6 +42,11 @@ export const categoriesAtom = atom({
   default: [],
 })
 
+export const productsAtom = atom({
+  key: 'productsAtom',
+  default: [],
+})
+
 export const loadingAtom = atom({
   key: 'loadingAtom',
   default: false,
