@@ -16,8 +16,8 @@ const Menu = () => {
       {categories.map((page) => (
         <MenuItem
           onClick={() => navigate(`/`)}
-          key={`footer-menu-item-${page}`}>
-          {page}
+          key={`footer-menu-item-${page.name}`}>
+          {page.name}
         </MenuItem>
       ))}
     </MenuList>

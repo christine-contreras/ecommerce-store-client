@@ -34,8 +34,8 @@ const CategoryDropdownMenu = ({
       {categories.map((page) => (
         <MenuItem
           onClick={() => navigate(`/`)}
-          key={`category-menu-item-${page}`}>
-          {page}
+          key={`category-menu-item-${page.name}`}>
+          {page.name}
         </MenuItem>
       ))}
     </Menu>
