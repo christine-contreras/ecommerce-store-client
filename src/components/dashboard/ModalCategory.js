@@ -2,7 +2,7 @@ import React from 'react'
 import { Modal } from '@mui/material'
 import FormCategory from './FormCategory'
 
-const CategoryModal = ({ openModal, closeModal, category }) => {
+const ModalCategory = ({ openModal, closeModal, category }) => {
   return (
     <Modal
       className='modal'
@@ -15,4 +15,4 @@ const CategoryModal = ({ openModal, closeModal, category }) => {
   )
 }
 
-export default CategoryModal
+export default ModalCategory

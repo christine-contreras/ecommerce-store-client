@@ -3,7 +3,7 @@ import { Grid, Button } from '@mui/material'
 import { useRecoilValue } from 'recoil'
 import { categoriesAtom } from '../../atoms/atoms'
 import TableActionsCategory from '../../components/dashboard/TableActionsCategory'
-import CategoryModal from '../../components/dashboard/CategoryModal'
+import ModalCategory from '../../components/dashboard/ModalCategory'
 import Table from '../../components/dashboard/Table'
 
 const Categories = () => {
@@ -43,7 +43,7 @@ const Categories = () => {
       <Table rows={categories} columns={columns} />
 
       {/* create category modal */}
-      <CategoryModal
+      <ModalCategory
         openModal={openCategoryModal}
         closeModal={handleCloseCreateCategoryModel}
       />

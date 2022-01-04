@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Grid, Button, Tooltip, IconButton } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
 import DeleteModal from '../DeleteModal'
-import ProductModal from './ProductModal'
+import ModalProduct from './ModalProduct'
 import { productsAtom } from '../../atoms/atoms'
 import { useRecoilState } from 'recoil'
 
@@ -19,7 +19,7 @@ const TableActionsProduct = ({ product }) => {
   const handleCloseDeleteModel = () => setOpenDeleteModal(false)
 
   const handleDeleteProduct = () => {
-    fetch(`/api/products/${prouct.id}`, {
+    fetch(`/api/products/${product.id}`, {
       method: 'DELETE',
     })
       .then((response) => {
@@ -67,7 +67,7 @@ const TableActionsProduct = ({ product }) => {
       />
 
       {/* edit category modal */}
-      <ProductModal
+      <ModalProduct
         openModal={openEditModal}
         closeModal={handleCloseEditModel}
         product={product}

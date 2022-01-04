@@ -2,9 +2,9 @@ import * as React from 'react'
 import { Grid, Button } from '@mui/material'
 import { useRecoilState } from 'recoil'
 import { productsAtom } from '../../atoms/atoms'
-import TableActionsCategory from '../../components/dashboard/TableActionsCategory'
-import ProductModal from '../../components/dashboard/ProductModal'
+import ModalProduct from '../../components/dashboard/ModalProduct'
 import Table from '../../components/dashboard/Table'
+import TableActionsProduct from '../../components/dashboard/TableActionsProduct'
 
 const Products = () => {
   const [products, setProducts] = useRecoilState(productsAtom)
@@ -34,15 +34,15 @@ const Products = () => {
   const handleCloseCreateProductModel = () => setOpenProductModal(false)
 
   const columns = [
-    { field: 'id', headerName: 'Product #', width: 150 },
-    { field: 'name', headerName: 'Product', width: 300 },
-    { field: 'quantity', headerName: 'Stock', width: 150 },
+    { field: 'id', headerName: 'Product #', width: 125 },
+    { field: 'title', headerName: 'Product', width: 250 },
+    { field: 'quantity', headerName: 'Stock', width: 125 },
     { field: 'isActive', headerName: 'Is Active?', width: 150 },
     {
       field: 'actions',
       headerName: 'Action',
       width: 300,
-      renderCell: (params) => <TableActionsCategory product={params.row} />,
+      renderCell: (params) => <TableActionsProduct product={params.row} />,
     },
   ]
 
@@ -61,7 +61,7 @@ const Products = () => {
       <Table rows={products} columns={columns} />
 
       {/* create category modal */}
-      <ProductModal
+      <ModalProduct
         openModal={openProductModal}
         closeModal={handleCloseCreateProductModel}
       />

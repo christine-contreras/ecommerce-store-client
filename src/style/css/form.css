@@ -16,6 +16,8 @@ position: absolute;
     width: 90% !important;
     background-color: #f8f4ef;
     margin-left: 0 !important;
+    max-height: 90vh;
+    overflow-y: scroll;
 
 }
 
@@ -28,6 +30,8 @@ position: absolute;
     width: 90% !important;
     background-color: #f8f4ef;
     margin-left: 0 !important;
+    max-height: 90vh;
+    overflow-y: scroll;
 
 }
 
@@ -36,7 +40,7 @@ position: absolute;
 @media (min-width: 500px) {
     .modal-body{
         position: absolute;
-        top: 30% !important;
+        top: 30%;
         left: 50%;
         transform: translate(-50%, -30%);
         width: 90% !important;
@@ -50,7 +54,7 @@ position: absolute;
   @media (min-width: 1200px) {
     .modal-body-bg{
         position: absolute;
-        top: 30% !important;
+        top: 30%;
         left: 50%;
         transform: translate(-50%, -30%);
         width: 90% !important;
@@ -83,3 +87,16 @@ position: absolute;
     margin: 1.25em 0;
 }
 
+.MuiTabs-root.tabs {
+    border-bottom: 1px solid #b47a43;
+}
+
+.MuiTabs-root.tabs .MuiTab-root.Mui-selected{
+    border-radius: 10px 10px 0 0;
+    background: #b47a43;
+    color: #FFF8ED;
+}
+
+.MuiTabs-root.tabs .MuiTabs-indicator{
+    background-color: #b47a43;
+}

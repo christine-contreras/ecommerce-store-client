@@ -47,6 +47,45 @@ export const productsAtom = atom({
   default: [],
 })
 
+export const selectedSkusAtom = atom({
+  key: 'selectedSkusAtom',
+  default: [],
+})
+
+export const updateSkus = selector({
+  key: 'updateSkus',
+  get:
+    (productID) =>
+    ({ get }) => {
+      const products = get(productsAtom)
+      const product = products.find((p) => p.id === productID)
+      return product.skus
+    },
+  set: ({ set, get }, productID, updatedSkus) => {
+    const products = get(productsAtom)
+    const product = products.find((p) => p.id === productID)
+    set(
+      productsAtom,
+      products.map((p) =>
+        p.id === productID ? { ...product, skus: updatedSkus } : product
+      )
+    )
+  },
+})
+
+// export const updateProductsAtom = selector({
+//   key: 'updateProductsAtom',
+//   set: ({ set, get }, updatedProduct) => {
+//     const products = get(productsAtom)
+//     set(
+//       productsAtom,
+//       products.map((product) =>
+//         product.id === updatedProduct.id ? updatedProduct : product
+//       )
+//     )
+//   },
+// })
+
 export const loadingAtom = atom({
   key: 'loadingAtom',
   default: false,

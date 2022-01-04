@@ -1,34 +1,22 @@
 import * as React from 'react'
-import {
-  Typography,
-  TextField,
-  FormControlLabel,
-  Switch,
-  Grid,
-  Alert,
-  Stack,
-  Button,
-  FormGroup,
-} from '@mui/material'
-import { categoriesAtom } from '../../atoms/atoms'
+import { TextField, Grid, Alert, Stack, Button } from '@mui/material'
+import { productsAtom } from '../../atoms/atoms'
 import { useRecoilState } from 'recoil'
 
-const FormCategory = ({ category, closeModal }) => {
-  const [categories, setCategories] = useRecoilState(categoriesAtom)
-  const [name, setName] = React.useState('')
+const FormProduct = ({ product }) => {
+  const [products, setProducts] = useRecoilState(productsAtom)
+  const [title, setTitle] = React.useState('')
   const [description, setDescription] = React.useState('')
-  const [active, setActive] = React.useState(false)
   const [loading, setLoading] = React.useState(false)
   const [updated, setUpdated] = React.useState(false)
   const [errors, setErrors] = React.useState([])
 
   React.useEffect(() => {
-    if (category) {
-      setName(category.name)
-      setDescription(category.description)
-      setActive(category.isActive)
+    if (product) {
+      setTitle(product.title)
+      setDescription(product.description)
     }
-  }, [category])
+  }, [product])
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -36,32 +24,31 @@ const FormCategory = ({ category, closeModal }) => {
     setLoading(true)
     setUpdated(false)
 
-    const newCategory = {
-      name,
+    const newProduct = {
+      title,
       description,
-      isActive: active,
     }
 
-    if (category) {
-      updateCategory(newCategory)
+    if (product) {
+      updateProduct(newProduct)
     } else {
-      createCategory(newCategory)
+      createProduct(newProduct)
     }
   }
 
-  const createCategory = (newCategory) => {
-    fetch('/api/categories', {
+  const createProduct = (newProduct) => {
+    fetch('/api/products', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(newCategory),
+      body: JSON.stringify(newProduct),
     }).then((response) => {
       setLoading(false)
       if (response.ok) {
         response.json().then((data) => {
-          setCategories((prevCategories) => [...prevCategories, data])
-          closeModal()
+          setProducts((prevProducts) => [...prevProducts, data])
+          product = data
           setUpdated(true)
         })
       } else {
@@ -72,22 +59,20 @@ const FormCategory = ({ category, closeModal }) => {
     })
   }
 
-  const updateCategory = (newCategory) => {
-    fetch(`/api/categories/${category.id}`, {
+  const updateProduct = (newProduct) => {
+    fetch(`/api/products/${product.id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
       },
-      body: JSON.stringify(newCategory),
+      body: JSON.stringify(newProduct),
     })
       .then((response) => response.json())
       .then((data) => {
         setLoading(false)
-        const newCategoryList = categories.map((c) =>
-          c.id === data.id ? data : c
-        )
-        setCategories(newCategoryList)
+        const newList = products.map((p) => (p.id === data.id ? data : p))
+        setProducts(newList)
         setUpdated(true)
       })
       .catch((err) => {
@@ -97,27 +82,11 @@ const FormCategory = ({ category, closeModal }) => {
   }
 
   return (
-    <Grid
-      container
-      flexDirection='column'
-      className='modal-body b-radius-sm'
-      sx={{ top: '40%' }}
-      spacing={2}>
-      <Grid item>
-        <Typography
-          component='h1'
-          variant='h4'
-          align='center'
-          paddingTop
-          paddingBottom>
-          {category ? 'Edit Category' : 'Create Category'}
-        </Typography>
-      </Grid>
-
+    <Grid item container flexDirection='column' spacing={2}>
       <form onSubmit={handleSubmit} className='form'>
         <Grid container justifyContent='flex-end'>
           <Grid item>
-            <FormGroup>
+            {/* <FormGroup>
               <FormControlLabel
                 control={
                   <Switch
@@ -128,14 +97,14 @@ const FormCategory = ({ category, closeModal }) => {
                 }
                 label='Active'
               />
-            </FormGroup>
+            </FormGroup> */}
           </Grid>
         </Grid>
 
         <TextField
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          label='Name'
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          label='Product Name'
           variant='outlined'
           color='info'
           fullWidth
@@ -149,7 +118,7 @@ const FormCategory = ({ category, closeModal }) => {
           color='info'
           fullWidth
           multiline
-          rows={3}
+          rows={5}
         />
 
         <Button
@@ -157,7 +126,7 @@ const FormCategory = ({ category, closeModal }) => {
           variant='contained'
           className='btn btn-lg'
           color='info'>
-          Submit
+          Save Summary
         </Button>
       </form>
       <Grid item>
@@ -169,14 +138,13 @@ const FormCategory = ({ category, closeModal }) => {
           ))}
           {loading && (
             <Alert severity='info' variant='filled'>
-              {category ? 'Editing' : 'Creating'} Category... Do Not Refresh
-              Page
+              {product ? 'Editing' : 'Creating'} Product... Do Not Refresh Page
             </Alert>
           )}
 
           {updated && (
             <Alert severity='success' variant='filled'>
-              Category {category ? 'Updated' : 'Created'}
+              Product {product ? 'Updated' : 'Created'}
             </Alert>
           )}
         </Stack>
@@ -185,4 +153,4 @@ const FormCategory = ({ category, closeModal }) => {
   )
 }
 
-export default FormCategory
+export default FormProduct

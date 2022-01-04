@@ -1,9 +1,10 @@
 import * as React from 'react'
 import { Modal, Tab, Grid } from '@mui/material'
 import { TabContext, TabList, TabPanel } from '@mui/lab'
-import ProductTabs from '../../containers/admin/ProductTabs'
+import FormProduct from './FormProduct'
+import Skus from '../../containers/admin/Skus'
 
-const ProductModal = ({ openModal, closeModal, product }) => {
+const ModalProduct = ({ openModal, closeModal, product }) => {
   const [tabValue, setTabValue] = React.useState('1')
 
   const handleTabChange = (e, newTabValue) => {
@@ -21,22 +22,29 @@ const ProductModal = ({ openModal, closeModal, product }) => {
         container
         flexDirection='column'
         className='modal-body-bg b-radius-sm'
-        sx={{ top: '40%' }}
         spacing={2}>
         <Grid item>
           <TabContext value={tabValue}>
             <Grid item container flexDirection='column'>
               <Grid item>
-                <TabList onChange={handleTabChange} aria-label='Product Tabs'>
+                <TabList
+                  onChange={handleTabChange}
+                  aria-label='Product Tabs'
+                  textColor='inherit'
+                  className='tabs'>
                   <Tab label='Summary' value='1' />
                   <Tab label='SKUs' value='2' />
                   <Tab label='Categories' value='3' />
                 </TabList>
               </Grid>
 
-              <Grid item>
-                <TabPanel value='1'>Item One</TabPanel>
-                <TabPanel value='2'>Item Two</TabPanel>
+              <Grid item container>
+                <TabPanel value='1'>
+                  <FormProduct product={product} />
+                </TabPanel>
+                <TabPanel value='2' sx={{ width: '100%' }}>
+                  <Skus product={product} />
+                </TabPanel>
                 <TabPanel value='3'>Item Three</TabPanel>
               </Grid>
             </Grid>
@@ -47,4 +55,4 @@ const ProductModal = ({ openModal, closeModal, product }) => {
   )
 }
 
-export default ProductModal
+export default ModalProduct
