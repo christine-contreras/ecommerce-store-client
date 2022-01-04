@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Grid, Button } from '@mui/material'
+import { Grid, Button, Typography } from '@mui/material'
 import Table from '../../components/dashboard/Table'
 import TableActionsSku from '../../components/dashboard/TableActionsSku'
 import ModalSku from '../../components/dashboard/ModalSku'
@@ -59,14 +59,27 @@ const Skus = ({ product }) => {
       wrap='nowrap'
       spacing={3}
       xs={12}>
-      <Grid item textAlign='right' xs={12}>
-        <Button
-          variant='contained'
-          className='btn b-radius'
-          color='info'
-          onClick={handleOpenCreateSkuModal}>
-          Add A SKU
-        </Button>
+      <Grid
+        item
+        container
+        spacing={2}
+        sx={{ justifyContent: { sm: 'space-between' } }}>
+        <Grid item xs={12} sm='auto'>
+          <Typography component='h1' variant='h5' align='center' paddingTop>
+            Product SKUs
+          </Typography>
+        </Grid>
+        <Grid item container xs={12} sm='auto' justifyContent='center'>
+          <Grid item sx={{ textAlign: { xs: 'center', sm: 'right' } }}>
+            <Button
+              variant='contained'
+              className='btn b-radius'
+              color='info'
+              onClick={handleOpenCreateSkuModal}>
+              Add A SKU
+            </Button>
+          </Grid>
+        </Grid>
       </Grid>
 
       <Table rows={skus} columns={columns} />

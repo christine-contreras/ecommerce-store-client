@@ -1,9 +1,10 @@
 import * as React from 'react'
+import '../../style/css/modal.css'
 import { Modal, Tab, Grid } from '@mui/material'
 import { TabContext, TabList, TabPanel } from '@mui/lab'
 import FormProduct from './FormProduct'
 import Skus from '../../containers/admin/Skus'
-
+import ProductCategories from '../../containers/admin/ProductCategories'
 const ModalProduct = ({ openModal, closeModal, product }) => {
   const [tabValue, setTabValue] = React.useState('1')
 
@@ -39,13 +40,15 @@ const ModalProduct = ({ openModal, closeModal, product }) => {
               </Grid>
 
               <Grid item container>
-                <TabPanel value='1'>
+                <TabPanel value='1' sx={{ width: '100%' }}>
                   <FormProduct product={product} />
                 </TabPanel>
                 <TabPanel value='2' sx={{ width: '100%' }}>
                   <Skus product={product} />
                 </TabPanel>
-                <TabPanel value='3'>Item Three</TabPanel>
+                <TabPanel value='3' sx={{ width: '100%' }}>
+                  <ProductCategories product={product} />
+                </TabPanel>
               </Grid>
             </Grid>
           </TabContext>

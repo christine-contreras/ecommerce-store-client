@@ -1,4 +1,5 @@
 import * as React from 'react'
+import '../../style/css/modal.css'
 import { Modal } from '@mui/material'
 import FormSku from './FormSku'
 

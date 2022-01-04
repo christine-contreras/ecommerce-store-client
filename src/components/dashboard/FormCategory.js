@@ -101,7 +101,6 @@ const FormCategory = ({ category, closeModal }) => {
       container
       flexDirection='column'
       className='modal-body b-radius-sm'
-      sx={{ top: '40%' }}
       spacing={2}>
       <Grid item>
         <Typography

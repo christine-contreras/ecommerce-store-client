@@ -1,4 +1,5 @@
 import React from 'react'
+import '../style/css/modal.css'
 import { Typography, Modal, Alert, Grid, Button } from '@mui/material'
 
 const DeleteModal = ({

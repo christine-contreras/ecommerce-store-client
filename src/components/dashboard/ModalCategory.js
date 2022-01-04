@@ -1,4 +1,5 @@
 import React from 'react'
+import '../../style/css/modal.css'
 import { Modal } from '@mui/material'
 import FormCategory from './FormCategory'
 

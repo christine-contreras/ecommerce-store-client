@@ -1,5 +1,12 @@
 import * as React from 'react'
-import { TextField, Grid, Alert, Stack, Button } from '@mui/material'
+import {
+  TextField,
+  Grid,
+  Alert,
+  Stack,
+  Button,
+  Typography,
+} from '@mui/material'
 import { productsAtom } from '../../atoms/atoms'
 import { useRecoilState } from 'recoil'
 
@@ -83,6 +90,12 @@ const FormProduct = ({ product }) => {
 
   return (
     <Grid item container flexDirection='column' spacing={2}>
+      <Grid item>
+        <Typography component='h1' variant='h5' align='center' paddingTop>
+          Product Summary
+        </Typography>
+      </Grid>
+
       <form onSubmit={handleSubmit} className='form'>
         <Grid container justifyContent='flex-end'>
           <Grid item>
@@ -129,6 +142,7 @@ const FormProduct = ({ product }) => {
           Save Summary
         </Button>
       </form>
+
       <Grid item>
         <Stack sx={{ width: '100%' }} spacing={2} className='padding-top'>
           {errors.map((error) => (
