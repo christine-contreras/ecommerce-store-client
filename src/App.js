@@ -11,7 +11,8 @@ import Home from './containers/Home'
 import SignUpLogin from './containers/SignUpLogin'
 import Dashboard from './containers/profile/Dashboard'
 import Main from './containers/profile/Main'
-
+import PLP from './containers/PLP'
+import Container from './containers/Container'
 function App() {
   const appliedTheme = createTheme(theme)
   const setUser = useSetRecoilState(userAtom)
@@ -59,7 +60,6 @@ function App() {
       if (response.ok) {
         response.json().then((categories) => {
           setCategories(categories)
-          console.log(categories)
         })
       } else {
         response.json().then((err) => console.log(err))
@@ -123,6 +123,10 @@ function App() {
               />
 
               <Route path='orders' element={<Main title='Order History' />} />
+            </Route>
+
+            <Route path='/category' element={<Container />}>
+              <Route path=':id' element={<PLP />} />
             </Route>
           </Routes>
         </Layout>

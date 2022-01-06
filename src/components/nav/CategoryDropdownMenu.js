@@ -33,7 +33,7 @@ const CategoryDropdownMenu = ({
       </Typography>
       {categories.map((page) => (
         <MenuItem
-          onClick={() => navigate(`/`)}
+          onClick={() => navigate(`/category/${page.id}`)}
           key={`category-menu-item-${page.name}`}>
           {page.name}
         </MenuItem>

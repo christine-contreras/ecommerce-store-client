@@ -28,7 +28,7 @@ const FormLogin = () => {
       if (response.ok) {
         response.json().then((user) => {
           setUser(user)
-          user.isAdmin ? navigate('/admin-dashboard') : navigate('/')
+          user.isAdmin ? navigate('/admin-dashboard/products') : navigate('/')
         })
       } else {
         response.json().then((err) => setErrors(err.errors))

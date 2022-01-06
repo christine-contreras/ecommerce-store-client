@@ -90,8 +90,3 @@ export const selectedProductCategoriesAtom = atom({
 //     )
 //   },
 // })
-
-export const loadingAtom = atom({
-  key: 'loadingAtom',
-  default: false,
-})

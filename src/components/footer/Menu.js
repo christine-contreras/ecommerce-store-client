@@ -15,7 +15,7 @@ const Menu = () => {
       </Typography>
       {categories.map((page) => (
         <MenuItem
-          onClick={() => navigate(`/`)}
+          onClick={() => navigate(`/category/${page.id}`)}
           key={`footer-menu-item-${page.name}`}>
           {page.name}
         </MenuItem>

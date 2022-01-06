@@ -17,7 +17,6 @@ import { useRecoilValue } from 'recoil'
 const FormProductCategories = ({ product, updateProducts }) => {
   const categories = useRecoilValue(categoriesAtom)
   const productCategories = useRecoilValue(selectedProductCategoriesAtom)
-  console.log(productCategories)
   const [checkboxes, setCheckboxes] = React.useState([])
   const [loading, setLoading] = React.useState(false)
   const [updated, setUpdated] = React.useState(false)

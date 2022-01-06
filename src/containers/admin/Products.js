@@ -20,7 +20,6 @@ const Products = () => {
       if (response.ok) {
         response.json().then((products) => {
           setProducts(products)
-          console.log(products)
         })
       } else {
         response.json().then((err) => console.log(err))
