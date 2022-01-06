@@ -13,24 +13,33 @@ const UserDropdownMenu = ({
   let navigate = useNavigate()
   const isAdmin = useRecoilValue(adminAtom)
   return (
-    <Menu
-      anchorEl={moreAnchorEl}
-      id='menu-options'
-      keepMounted
-      open={isMenuOpen}
-      onClose={handleMenuClose}>
-      {!isAdmin && (
-        <>
+    <>
+      {!isAdmin ? (
+        <Menu
+          anchorEl={moreAnchorEl}
+          id='menu-options'
+          keepMounted
+          open={isMenuOpen}
+          onClose={handleMenuClose}>
           <MenuItem onClick={() => navigate(`/profile/my-info`)}>
             Profile
           </MenuItem>
           <MenuItem onClick={() => navigate(`/profile/my-orders`)}>
             My Orders
           </MenuItem>
-        </>
+          <MenuItem onClick={onLogout}>Logout</MenuItem>
+        </Menu>
+      ) : (
+        <Menu
+          anchorEl={moreAnchorEl}
+          id='menu-options'
+          keepMounted
+          open={isMenuOpen}
+          onClose={handleMenuClose}>
+          <MenuItem onClick={onLogout}>Logout</MenuItem>
+        </Menu>
       )}
-      <MenuItem onClick={onLogout}>Logout</MenuItem>
-    </Menu>
+    </>
   )
 }
 export default UserDropdownMenu

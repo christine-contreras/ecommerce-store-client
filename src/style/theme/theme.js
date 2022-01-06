@@ -62,10 +62,13 @@ export const theme = createTheme({
     // h5: {
     //   fontFamily: '"Libre Caslon Text", serif',
     // },
-    // h6: {
-    //   fontSize: '1em',
-    //   fontFamily: '"Libre Caslon Text", serif',
-    // },
+    h6: {
+      fontSize: '4em',
+      '@media (max-width:600px)': {
+        fontSize: '3em',
+      },
+      fontFamily: '"Leky Calgria"',
+    },
     subtitle1: {
       fontSize: '1.25em',
       fontWeight: 500,

@@ -60,6 +60,7 @@ function App() {
       if (response.ok) {
         response.json().then((categories) => {
           setCategories(categories)
+          console.log(categories)
         })
       } else {
         response.json().then((err) => console.log(err))
