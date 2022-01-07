@@ -14,7 +14,7 @@ import {
 } from '@mui/material'
 import { selectedSkusAtom } from '../../atoms/atoms'
 import { useRecoilValue } from 'recoil'
-
+import { DirectUpload } from 'activestorage'
 const FormSku = ({ sku, product, closeModal, updateProducts }) => {
   const sizes = ['one size', '4', '5', '6', '7', '8', '9']
   const colors = ['Gold', 'Silver', 'Rose Gold']
@@ -45,14 +45,28 @@ const FormSku = ({ sku, product, closeModal, updateProducts }) => {
     setLoading(true)
     setUpdated(false)
 
-    const newSku = {
-      price,
-      color,
-      size,
-      quantity,
-      //   image,
-      product_id: product.id,
-    }
+    const newSku = new FormData()
+    newSku.append('price', price)
+    newSku.append('color', color)
+    newSku.append('size', size)
+    newSku.append('quantity', quantity)
+    newSku.append('image', image)
+
+    // const newSku = new FormData()
+    // newSku.append('sku[price]', price)
+    // newSku.append('sku[color]', color)
+    // newSku.append('sku[size]', size)
+    // newSku.append('sku[quantity]', quantity)
+    // newSku.append('sku[image]', image)
+
+    // const newSku = {
+    //   price,
+    //   color,
+    //   size,
+    //   quantity,
+    //   image,
+    //   product_id: product.id,
+    // }
 
     if (sku) {
       updateSku(newSku)
@@ -64,10 +78,7 @@ const FormSku = ({ sku, product, closeModal, updateProducts }) => {
   const createSkus = (newSku) => {
     fetch('/api/skus', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(newSku),
+      body: newSku,
     }).then((response) => {
       setLoading(false)
       if (response.ok) {
@@ -88,11 +99,7 @@ const FormSku = ({ sku, product, closeModal, updateProducts }) => {
   const updateSku = (newSku) => {
     fetch(`/api/skus/${sku.id}`, {
       method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-      },
-      body: JSON.stringify(newSku),
+      body: newSku,
     })
       .then((response) => response.json())
       .then((data) => {
