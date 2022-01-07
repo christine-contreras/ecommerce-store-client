@@ -14,7 +14,6 @@ import {
 } from '@mui/material'
 import { selectedSkusAtom } from '../../atoms/atoms'
 import { useRecoilValue } from 'recoil'
-import { DirectUpload } from 'activestorage'
 const FormSku = ({ sku, product, closeModal, updateProducts }) => {
   const sizes = ['one size', '4', '5', '6', '7', '8', '9']
   const colors = ['Gold', 'Silver', 'Rose Gold']
@@ -35,7 +34,7 @@ const FormSku = ({ sku, product, closeModal, updateProducts }) => {
       setSize(sku.size)
       setColor(sku.color)
       setQuantity(sku.quantity)
-      //   setImage(sku.image)
+      // setImage(sku.image)
     }
   }, [sku])
 
@@ -50,23 +49,8 @@ const FormSku = ({ sku, product, closeModal, updateProducts }) => {
     newSku.append('color', color)
     newSku.append('size', size)
     newSku.append('quantity', quantity)
+    newSku.append('product_id', product.id)
     newSku.append('image', image)
-
-    // const newSku = new FormData()
-    // newSku.append('sku[price]', price)
-    // newSku.append('sku[color]', color)
-    // newSku.append('sku[size]', size)
-    // newSku.append('sku[quantity]', quantity)
-    // newSku.append('sku[image]', image)
-
-    // const newSku = {
-    //   price,
-    //   color,
-    //   size,
-    //   quantity,
-    //   image,
-    //   product_id: product.id,
-    // }
 
     if (sku) {
       updateSku(newSku)
@@ -188,15 +172,21 @@ const FormSku = ({ sku, product, closeModal, updateProducts }) => {
         </Grid>
 
         <Grid item container flexDirection='column' spacing={2} sx={{ pb: 3 }}>
-          {image && (
+          {image ? (
             <Grid item>
               <img src={URL.createObjectURL(image)} style={{ maxWidth: 200 }} />
             </Grid>
+          ) : (
+            sku.image.url && (
+              <Grid item>
+                <img src={sku.image.url} style={{ maxWidth: 200 }} />
+              </Grid>
+            )
           )}
 
           <Grid item>
             <Button variant='contained' component='label' color='inherit'>
-              {image ? 'Upload New Image' : 'Upload Image'}
+              {sku.image.url || image ? 'Upload New Image' : 'Upload Image'}
               <input
                 type='file'
                 hidden

@@ -5,19 +5,22 @@ import FormSku from './FormSku'
 
 const ModalSku = ({ openModal, closeModal, sku, product, updateProducts }) => {
   return (
-    <Modal
-      className='modal'
-      open={openModal}
-      onClose={closeModal}
-      aria-labelledby='edit-modal'
-      aria-describedby='edit-modal'>
-      <FormSku
-        closeModal={closeModal}
-        sku={sku}
-        product={product}
-        updateProducts={updateProducts}
-      />
-    </Modal>
+    <>
+      <Modal
+        key='modal-sku'
+        className='modal'
+        open={openModal}
+        onClose={closeModal}
+        aria-labelledby='edit-modal'
+        aria-describedby='edit-modal'>
+        <FormSku
+          closeModal={closeModal}
+          sku={sku}
+          product={product}
+          updateProducts={updateProducts}
+        />
+      </Modal>
+    </>
   )
 }
 

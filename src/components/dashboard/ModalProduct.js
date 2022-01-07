@@ -2,7 +2,7 @@ import * as React from 'react'
 import '../../style/css/modal.css'
 import { Modal, Tab, Grid } from '@mui/material'
 import { TabContext, TabList, TabPanel } from '@mui/lab'
-import FormProduct from './FormProduct'
+import ProductSummary from '../../containers/admin/ProductSummary'
 import Skus from '../../containers/admin/Skus'
 import ProductCategories from '../../containers/admin/ProductCategories'
 const ModalProduct = ({ openModal, closeModal, product }) => {
@@ -41,7 +41,7 @@ const ModalProduct = ({ openModal, closeModal, product }) => {
 
               <Grid item container>
                 <TabPanel value='1' sx={{ width: '100%' }}>
-                  <FormProduct product={product} />
+                  <ProductSummary product={product} />
                 </TabPanel>
                 <TabPanel value='2' sx={{ width: '100%' }}>
                   <Skus product={product} />

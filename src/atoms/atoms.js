@@ -53,7 +53,7 @@ export const selectedSkusAtom = atom({
 })
 
 export const selectedProductCategoriesAtom = atom({
-  key: 'selectedSkusAtom',
+  key: 'selectedProductCategoriesAtom',
   default: [],
 })
 

@@ -33,10 +33,11 @@ const Skus = ({ product }) => {
 
   const columns = [
     { field: 'id', headerName: 'Sku #', width: 125 },
-    { field: 'color', headerName: 'Color', width: 250 },
+    { field: 'color', headerName: 'Color', width: 125 },
     { field: 'size', headerName: 'Size', width: 125 },
     { field: 'price', headerName: 'Price', width: 125 },
-    { field: 'quantity', headerName: 'Quantity', width: 150 },
+    { field: 'quantity', headerName: 'Quantity', width: 125 },
+    { field: 'hasImage?', headerName: 'Image', width: 125 },
     {
       field: 'actions',
       headerName: 'Action',

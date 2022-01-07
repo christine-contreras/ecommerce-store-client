@@ -36,27 +36,25 @@ const TableActionsSku = ({ sku, product, updateProducts }) => {
   }
 
   return (
-    <>
-      <Grid container alignItems='center' justifyContent='center' spacing={1}>
-        <Grid item>
-          <Button
-            variant='outlined'
-            className='btn b-radius'
-            color='info'
-            onClick={handleOpenEditModel}>
-            Edit
-          </Button>
-        </Grid>
-        <Grid item>
-          <Tooltip title='Delete Product'>
-            <IconButton
-              aria-label='delete'
-              color='error'
-              onClick={handleOpenDeleteModel}>
-              <DeleteIcon />
-            </IconButton>
-          </Tooltip>
-        </Grid>
+    <Grid container alignItems='center' justifyContent='center' spacing={1}>
+      <Grid item>
+        <Button
+          variant='outlined'
+          className='btn b-radius'
+          color='info'
+          onClick={handleOpenEditModel}>
+          Edit
+        </Button>
+      </Grid>
+      <Grid item>
+        <Tooltip title='Delete Product'>
+          <IconButton
+            aria-label='delete'
+            color='error'
+            onClick={handleOpenDeleteModel}>
+            <DeleteIcon />
+          </IconButton>
+        </Tooltip>
       </Grid>
 
       <DeleteModal
@@ -75,7 +73,7 @@ const TableActionsSku = ({ sku, product, updateProducts }) => {
         sku={sku}
         updateProducts={updateProducts}
       />
-    </>
+    </Grid>
   )
 }
 
