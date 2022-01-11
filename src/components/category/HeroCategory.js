@@ -1,7 +1,7 @@
 import React from 'react'
 import { Grid, Typography, Box } from '@mui/material'
-import HeroImage from '../../style/images/hero2.png'
-const HeroCategory = ({ name, description }) => {
+import defaultImage from '../../style/images/default.png'
+const HeroCategory = ({ name, description, image }) => {
   return (
     <Grid
       item
@@ -38,7 +38,7 @@ const HeroCategory = ({ name, description }) => {
         textAlign='center'>
         <img
           className='img-responsive img-shadow'
-          src={HeroImage}
+          src={image ? image : defaultImage}
           role='presentation'
           style={{ maxWidth: 400, margin: 'auto' }}
         />

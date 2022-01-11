@@ -36,6 +36,7 @@ const PLP = () => {
             <HeroCategory
               name={category.name}
               description={category.description}
+              image={category.image_url}
             />
           </Grid>
           <Grid item container>

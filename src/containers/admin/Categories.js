@@ -16,10 +16,11 @@ const Categories = () => {
   const handleCloseCreateCategoryModel = () => setOpenCategoryModal(false)
 
   const columns = [
-    { field: 'id', headerName: 'Category #', width: 150 },
-    { field: 'name', headerName: 'Category Name', width: 300 },
+    { field: 'id', headerName: 'Category #', width: 125 },
+    { field: 'name', headerName: 'Category Name', width: 200 },
     { field: 'products_slotted', headerName: 'Products Slotted', width: 150 },
-    { field: 'isActive', headerName: 'Is Active?', width: 150 },
+    { field: 'hasImage?', headerName: 'Image', width: 125 },
+    { field: 'isActive', headerName: 'Is Active?', width: 125 },
     {
       field: 'actions',
       headerName: 'Action',

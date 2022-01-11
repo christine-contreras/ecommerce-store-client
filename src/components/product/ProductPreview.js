@@ -5,27 +5,27 @@ import {
   Card,
   CardActionArea,
   CardMedia,
-  CardActions,
   CardContent,
   Typography,
-  Button,
+  Radio,
 } from '@mui/material'
 import ProductPlaceHolder from '../../style/images/product-placeholder.jpg'
+import ProductColors from './ProductColors'
 const ProductPreview = ({ product }) => {
-  const [imgURL, setImgURL] = React.useState(null)
-
+  const [productOptions, setProductOptions] = React.useState([])
+  const [option, setOption] = React.useState(0)
   React.useEffect(() => {
-    if (product && product.skus[0]) {
-      setImgURL(product.skus[0].image_url)
+    if (product) {
+      setProductOptions(product.options)
     }
-  })
+  }, [product])
   return (
     <Grid item xs={6} md={4} lg={3}>
       <Card className='product-card' elevation={0} square={true}>
         <CardActionArea>
           <CardMedia
             component='img'
-            image={imgURL ? imgURL : ProductPlaceHolder}
+            image={productOptions[option]?.image_url ?? ProductPlaceHolder}
             alt={product.title}
           />
           <CardContent>
@@ -38,11 +38,18 @@ const ProductPreview = ({ product }) => {
                 <Typography>{product.title}</Typography>
               </Grid>
               <Grid item xs={12} md='auto' textAlign='center'>
-                <Typography>$ {parseInt(product.skus[0].price)}</Typography>
+                <Typography>
+                  $ {parseInt(productOptions[option]?.price)}
+                </Typography>
               </Grid>
             </Grid>
           </CardContent>
         </CardActionArea>
+        <ProductColors
+          productOptions={productOptions}
+          option={option}
+          setOption={setOption}
+        />
       </Card>
     </Grid>
   )

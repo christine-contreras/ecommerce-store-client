@@ -17,6 +17,7 @@ const FormCategory = ({ category, closeModal }) => {
   const [categories, setCategories] = useRecoilState(categoriesAtom)
   const [name, setName] = React.useState('')
   const [description, setDescription] = React.useState('')
+  const [image, setImage] = React.useState(null)
   const [active, setActive] = React.useState(false)
   const [loading, setLoading] = React.useState(false)
   const [updated, setUpdated] = React.useState(false)
@@ -36,10 +37,13 @@ const FormCategory = ({ category, closeModal }) => {
     setLoading(true)
     setUpdated(false)
 
-    const newCategory = {
-      name,
-      description,
-      isActive: active,
+    const newCategory = new FormData()
+    newCategory.append('name', name)
+    newCategory.append('description', description)
+    newCategory.append('isActive', active)
+
+    if (image) {
+      newCategory.append('image', image)
     }
 
     if (category) {
@@ -52,10 +56,7 @@ const FormCategory = ({ category, closeModal }) => {
   const createCategory = (newCategory) => {
     fetch('/api/categories', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(newCategory),
+      body: newCategory,
     }).then((response) => {
       setLoading(false)
       if (response.ok) {
@@ -75,11 +76,7 @@ const FormCategory = ({ category, closeModal }) => {
   const updateCategory = (newCategory) => {
     fetch(`/api/categories/${category.id}`, {
       method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-      },
-      body: JSON.stringify(newCategory),
+      body: newCategory,
     })
       .then((response) => response.json())
       .then((data) => {
@@ -100,6 +97,7 @@ const FormCategory = ({ category, closeModal }) => {
     <Grid
       container
       flexDirection='column'
+      wrap='nowrap'
       className='modal-body b-radius-sm'
       spacing={2}>
       <Grid item>
@@ -150,6 +148,35 @@ const FormCategory = ({ category, closeModal }) => {
           multiline
           rows={3}
         />
+
+        <Grid item container flexDirection='column' spacing={2} sx={{ pb: 3 }}>
+          {image ? (
+            <Grid item>
+              <img src={URL.createObjectURL(image)} style={{ maxWidth: 200 }} />
+            </Grid>
+          ) : (
+            category &&
+            category.image_url && (
+              <Grid item>
+                <img src={category.image_url} style={{ maxWidth: 200 }} />
+              </Grid>
+            )
+          )}
+
+          <Grid item>
+            <Button variant='contained' component='label' color='inherit'>
+              {category?.image_url || image
+                ? 'Upload New Image'
+                : 'Upload Image'}
+              <input
+                type='file'
+                hidden
+                accept='image/*'
+                onChange={(e) => setImage(e.target.files[0])}
+              />
+            </Button>
+          </Grid>
+        </Grid>
 
         <Button
           type='submit'

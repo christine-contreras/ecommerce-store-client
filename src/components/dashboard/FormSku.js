@@ -35,7 +35,6 @@ const FormSku = ({ sku, closeModal, updateProducts }) => {
       setSize(sku.size)
       setColor(sku.color)
       setQuantity(sku.quantity)
-      // setImage(sku.image)
     }
   }, [sku, product])
 

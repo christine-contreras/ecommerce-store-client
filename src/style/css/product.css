@@ -2,3 +2,18 @@
     color: #b47a43;
 }
 
+.MuiRadio-root.Gold .MuiSvgIcon-root{
+ background: linear-gradient(rgb(200, 177, 139) 0%, #fce2b9 100%);
+ color: transparent;
+ border-radius: 100%;
+}
+
+.MuiRadio-root.Silver .MuiSvgIcon-root{
+    background: linear-gradient(rgb(196, 196, 196) 0%, rgb(224, 224, 224) 100%);
+    color: transparent;
+    border-radius: 100%;
+}
+
+.MuiRadio-root.Mui-checked .MuiSvgIcon-root{
+    color: rgba(41, 17, 8, 0.25) !important;
+}
