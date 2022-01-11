@@ -1,14 +1,14 @@
 import * as React from 'react'
 import { Grid, Button } from '@mui/material'
-import { useRecoilState } from 'recoil'
-import { productsAtom } from '../../atoms/atoms'
+import { useRecoilState, useResetRecoilState } from 'recoil'
+import { productsAtom, selectedProductAtom } from '../../atoms/atoms'
 import ModalProduct from '../../components/dashboard/ModalProduct'
 import Table from '../../components/dashboard/Table'
 import TableActionsProduct from '../../components/dashboard/TableActionsProduct'
 
 const Products = () => {
   const [products, setProducts] = useRecoilState(productsAtom)
-  console.log(products)
+  const selectedProduct = useResetRecoilState(selectedProductAtom)
 
   React.useEffect(() => {
     // fetch all products
@@ -19,7 +19,7 @@ const Products = () => {
     fetch('/api/products').then((response) => {
       if (response.ok) {
         response.json().then((products) => {
-          setProducts(products)
+          setProducts(products.sort((a, b) => a.id - b.id))
         })
       } else {
         response.json().then((err) => console.log(err))
@@ -29,14 +29,18 @@ const Products = () => {
 
   //handle product create modal
   const [openProductModal, setOpenProductModal] = React.useState(false)
-  const handleOpenCreateProductModel = () => setOpenProductModal(true)
+  const handleOpenCreateProductModel = () => {
+    selectedProduct()
+    setOpenProductModal(true)
+  }
   const handleCloseCreateProductModel = () => setOpenProductModal(false)
 
   const columns = [
-    { field: 'id', headerName: 'Product #', width: 125 },
+    { field: 'id', headerName: 'Product #', width: 100 },
     { field: 'title', headerName: 'Product', width: 250 },
-    { field: 'quantity', headerName: 'Stock', width: 125 },
-    { field: 'isActive', headerName: 'Is Active?', width: 150 },
+    { field: 'quantity', headerName: '# Of SKUs', width: 125 },
+    { field: 'isActive', headerName: 'Is Active?', width: 125 },
+    { field: 'isSlotted', headerName: 'Is Slotted?', width: 125 },
     {
       field: 'actions',
       headerName: 'Action',

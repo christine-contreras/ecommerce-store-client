@@ -3,31 +3,31 @@ import { Grid, Button, Typography } from '@mui/material'
 import Table from '../../components/dashboard/Table'
 import TableActionsSku from '../../components/dashboard/TableActionsSku'
 import ModalSku from '../../components/dashboard/ModalSku'
-import { updateSkus, selectedSkusAtom, productsAtom } from '../../atoms/atoms'
+import {
+  selectedProductSkusAtom,
+  productsAtom,
+  selectedProductAtom,
+} from '../../atoms/atoms'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
-const Skus = ({ product }) => {
-  const [skus, setSkus] = useRecoilState(selectedSkusAtom)
+const Skus = () => {
+  const skus = useRecoilValue(selectedProductSkusAtom)
   const setProducts = useSetRecoilState(productsAtom)
+  const [product, setProduct] = useRecoilState(selectedProductAtom)
   //handle sku create modal
   const [openSkuModal, setOpenSkuModal] = React.useState(false)
   const handleOpenCreateSkuModal = () => setOpenSkuModal(true)
   const handleCloseCreateSkuModal = () => setOpenSkuModal(false)
 
-  React.useEffect(() => {
-    if (product) {
-      setSkus(product.skus)
-    }
-  }, [product])
-
   const updateProductListNewSkus = (newSkusList) => {
-    product = {
+    const updatedproduct = {
       ...product,
       skus: newSkusList,
       quantity: newSkusList.length,
       isActive: newSkusList.length === 0 ? 'inactive' : 'active',
     }
+    setProduct(updatedproduct)
     setProducts((prevProducts) =>
-      prevProducts.map((p) => (p.id === product.id ? product : p))
+      prevProducts.map((p) => (p.id === updatedproduct.id ? updatedproduct : p))
     )
   }
 
@@ -45,7 +45,6 @@ const Skus = ({ product }) => {
       renderCell: (params) => (
         <TableActionsSku
           sku={params.row}
-          product={product}
           updateProducts={updateProductListNewSkus}
         />
       ),
@@ -89,7 +88,6 @@ const Skus = ({ product }) => {
       <ModalSku
         openModal={openSkuModal}
         closeModal={handleCloseCreateSkuModal}
-        product={product}
         updateProducts={updateProductListNewSkus}
       />
     </Grid>

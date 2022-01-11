@@ -1,25 +1,22 @@
 import * as React from 'react'
 import { Grid, Typography } from '@mui/material'
 import FormProductCategories from '../../components/dashboard/FormProductCategories'
-import { selectedProductCategoriesAtom, productsAtom } from '../../atoms/atoms'
-import { useSetRecoilState } from 'recoil'
+import { productsAtom, selectedProductAtom } from '../../atoms/atoms'
+import { useRecoilState, useSetRecoilState } from 'recoil'
 
-const ProductCategories = ({ product }) => {
-  const setProductCategories = useSetRecoilState(selectedProductCategoriesAtom)
+const ProductCategories = () => {
   const setProducts = useSetRecoilState(productsAtom)
-  React.useEffect(() => {
-    if (product) {
-      setProductCategories(product.categories)
-    }
-  }, [product])
+  const [product, setProduct] = useRecoilState(selectedProductAtom)
 
   const updateProductListNewCategories = (newCategoryList) => {
-    product = {
+    const updatedproduct = {
       ...product,
       categories: newCategoryList,
+      isSlotted: 'yes',
     }
+    setProduct(updatedproduct)
     setProducts((prevProducts) =>
-      prevProducts.map((p) => (p.id === product.id ? product : p))
+      prevProducts.map((p) => (p.id === updatedproduct.id ? updatedproduct : p))
     )
   }
 
@@ -36,10 +33,7 @@ const ProductCategories = ({ product }) => {
         </Typography>
       </Grid>
 
-      <FormProductCategories
-        updateProducts={updateProductListNewCategories}
-        product={product}
-      />
+      <FormProductCategories updateProducts={updateProductListNewCategories} />
     </Grid>
   )
 }

@@ -1,4 +1,4 @@
-import { atom, selector } from 'recoil'
+import { atom, selector, selectorFamily } from 'recoil'
 
 export const userAtom = atom({
   key: 'userAtom',
@@ -47,46 +47,89 @@ export const productsAtom = atom({
   default: [],
 })
 
-export const selectedSkusAtom = atom({
-  key: 'selectedSkusAtom',
-  default: [],
+export const selectedProductAtom = atom({
+  key: 'selectedProductAtom',
+  default: null,
 })
 
-export const selectedProductCategoriesAtom = atom({
+export const selectedProductImageUrlAtom = selector({
+  key: 'selectedProductImageUrlAtom',
+  get: ({ get }) => {
+    const product = get(selectedProductAtom)
+    const url = product && product.skus[0] ? product.skus[0].image_url : null
+    return url
+  },
+})
+
+export const selectedProductSkusAtom = selector({
+  key: 'selectedProductSkusAtom',
+  get: ({ get }) => {
+    const product = get(selectedProductAtom)
+    const skus = product ? product.skus : []
+    return skus
+  },
+  set: ({ set }, newValue) =>
+    set(selectedProductAtom, { ...selectedProductAtom, skus: newValue }),
+})
+
+export const selectedProductCategoriesAtom = selector({
   key: 'selectedProductCategoriesAtom',
-  default: [],
+  get: ({ get }) => {
+    const product = get(selectedProductAtom)
+    const categories = product ? product.categories : []
+    return categories
+  },
+  set: ({ set }, newValue) =>
+    set(selectedProductAtom, { ...selectedProductAtom, categories: newValue }),
 })
 
-// export const updateSkus = selector({
-//   key: 'updateSkus',
-//   get:
-//     (productID) =>
-//     ({ get }) => {
-//       const products = get(productsAtom)
-//       const product = products.find((p) => p.id === productID)
-//       return product.skus
-//     },
-//   set: ({ set, get }, productID, updatedSkus) => {
-//     const products = get(productsAtom)
-//     const product = products.find((p) => p.id === productID)
-//     set(
-//       productsAtom,
-//       products.map((p) =>
-//         p.id === productID ? { ...product, skus: updatedSkus } : product
-//       )
-//     )
-//   },
-// })
+export const selectedCategoryAtom = atom({
+  key: 'selectedCategoryAtom',
+  default: null,
+})
 
-// export const updateProductsAtom = selector({
-//   key: 'updateProductsAtom',
-//   set: ({ set, get }, updatedProduct) => {
-//     const products = get(productsAtom)
-//     set(
-//       productsAtom,
-//       products.map((product) =>
-//         product.id === updatedProduct.id ? updatedProduct : product
-//       )
-//     )
-//   },
-// })
+export const selectedCategoryProductsAtom = selector({
+  key: 'selectedCategoryProductsAtom',
+  get: ({ get }) => {
+    const category = get(selectedCategoryAtom)
+    const products = category ? category.products : []
+    return products
+  },
+  set: ({ set }, newValue) =>
+    set(selectedCategoryAtom, { ...selectedCategoryAtom, products: newValue }),
+})
+
+export const selectedCategoryProductsCountAtom = selector({
+  key: 'selectedCategoryProductsCountAtom',
+  get: ({ get }) => {
+    const products = get(selectedCategoryProductsAtom)
+    return products ? products.length : 0
+  },
+})
+
+export const plpFilterSelectorAtom = atom({
+  key: 'plpFilterAtom',
+  default: 'View All',
+})
+
+export const plpFilteredProducts = selector({
+  key: 'plpFilteredProducts',
+  get: ({ get }) => {
+    const filter = get(plpFilterSelectorAtom)
+    const products = get(selectedCategoryProductsAtom)
+    const list = [...products]
+
+    switch (filter) {
+      case 'Price: Low To High':
+        return list.sort(
+          (a, b) => parseInt(a.skus[0].price) - parseInt(b.skus[0].price)
+        )
+      case 'Price: High To Low':
+        return list.sort(
+          (a, b) => parseInt(b.skus[0].price) - parseInt(a.skus[0].price)
+        )
+      default:
+        return list
+    }
+  },
+})

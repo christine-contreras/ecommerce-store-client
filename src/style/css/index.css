@@ -92,6 +92,10 @@ hr {
   flex-flow: column wrap;
 }
 
+.flex-grow.MuiGrid-item.MuiGrid-root {
+  flex-grow: 1;
+}
+
 .b-radius, .b-radius.MuiPaper-root, .MuiButton-root.b-radius{
   border-radius: 32px;
 }

@@ -3,7 +3,7 @@ import '../../style/css/modal.css'
 import { Modal } from '@mui/material'
 import FormSku from './FormSku'
 
-const ModalSku = ({ openModal, closeModal, sku, product, updateProducts }) => {
+const ModalSku = ({ openModal, closeModal, sku, updateProducts }) => {
   return (
     <>
       <Modal
@@ -16,7 +16,6 @@ const ModalSku = ({ openModal, closeModal, sku, product, updateProducts }) => {
         <FormSku
           closeModal={closeModal}
           sku={sku}
-          product={product}
           updateProducts={updateProducts}
         />
       </Modal>

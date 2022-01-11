@@ -3,14 +3,18 @@ import { Grid, Button, Tooltip, IconButton } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
 import DeleteModal from '../DeleteModal'
 import ModalProduct from './ModalProduct'
-import { productsAtom } from '../../atoms/atoms'
-import { useRecoilState } from 'recoil'
+import { productsAtom, selectedProductAtom } from '../../atoms/atoms'
+import { useRecoilState, useSetRecoilState } from 'recoil'
 
 const TableActionsProduct = ({ product }) => {
   const [products, setProducts] = useRecoilState(productsAtom)
+  const setSelectedProduct = useSetRecoilState(selectedProductAtom)
   //handle edit modal
   const [openEditModal, setOpenEditModal] = React.useState(false)
-  const handleOpenEditModel = () => setOpenEditModal(true)
+  const handleOpenEditModel = () => {
+    setSelectedProduct(product)
+    setOpenEditModal(true)
+  }
   const handleCloseEditModel = () => setOpenEditModal(false)
 
   //handle delete modal
@@ -70,7 +74,6 @@ const TableActionsProduct = ({ product }) => {
       <ModalProduct
         openModal={openEditModal}
         closeModal={handleCloseEditModel}
-        product={product}
       />
     </>
   )

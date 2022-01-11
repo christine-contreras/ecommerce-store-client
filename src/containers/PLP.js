@@ -2,8 +2,8 @@ import * as React from 'react'
 import '../style/css/category.css'
 import { Grid } from '@mui/material'
 import { useParams } from 'react-router-dom'
-import { useRecoilValue } from 'recoil'
-import { categoriesAtom } from '../atoms/atoms'
+import { useRecoilState, useRecoilValue } from 'recoil'
+import { categoriesAtom, selectedCategoryAtom } from '../atoms/atoms'
 import HeroCategory from '../components/category/HeroCategory'
 import CategoryProducts from '../components/category/CategoryProducts'
 import Loading from '../components/category/Loading'
@@ -12,16 +12,16 @@ const PLP = () => {
   let params = useParams()
 
   const categories = useRecoilValue(categoriesAtom)
-  const [category, setCategory] = React.useState(null)
+  const [category, setCategory] = useRecoilState(selectedCategoryAtom)
   const [loading, setLoading] = React.useState(true)
 
   React.useEffect(() => {
     if (categories) {
       setLoading(false)
-      const selectedCategory = categories.filter(
+      const selectedCategory = categories.find(
         (cat) => cat.id === parseInt(params.id)
       )
-      setCategory(selectedCategory ? selectedCategory[0] : null)
+      setCategory(selectedCategory ? selectedCategory : null)
     }
   }, [categories, params])
   return (
@@ -32,7 +32,7 @@ const PLP = () => {
         <NotFound />
       ) : (
         <>
-          <Grid item sx={{ p: 4 }}>
+          <Grid item container sx={{ p: 4 }}>
             <HeroCategory
               name={category.name}
               description={category.description}

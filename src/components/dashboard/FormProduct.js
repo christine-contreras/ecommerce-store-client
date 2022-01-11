@@ -7,11 +7,12 @@ import {
   Button,
   Typography,
 } from '@mui/material'
-import { productsAtom } from '../../atoms/atoms'
-import { useRecoilState } from 'recoil'
+import { productsAtom, selectedProductAtom } from '../../atoms/atoms'
+import { useRecoilState, useRecoilValue } from 'recoil'
 
-const FormProduct = ({ product }) => {
+const FormProduct = () => {
   const [products, setProducts] = useRecoilState(productsAtom)
+  const [product, setProduct] = useRecoilState(selectedProductAtom)
   const [title, setTitle] = React.useState('')
   const [description, setDescription] = React.useState('')
   const [loading, setLoading] = React.useState(false)
@@ -54,8 +55,9 @@ const FormProduct = ({ product }) => {
       setLoading(false)
       if (response.ok) {
         response.json().then((data) => {
+          setProduct(data)
           setProducts((prevProducts) => [...prevProducts, data])
-          product = data
+
           setUpdated(true)
         })
       } else {

@@ -12,13 +12,14 @@ import {
   MenuItem,
   Typography,
 } from '@mui/material'
-import { selectedSkusAtom } from '../../atoms/atoms'
+import { selectedProductAtom, selectedProductSkusAtom } from '../../atoms/atoms'
 import { useRecoilValue } from 'recoil'
-const FormSku = ({ sku, product, closeModal, updateProducts }) => {
+const FormSku = ({ sku, closeModal, updateProducts }) => {
   const sizes = ['one size', '4', '5', '6', '7', '8', '9']
   const colors = ['Gold', 'Silver', 'Rose Gold']
 
-  const skus = useRecoilValue(selectedSkusAtom)
+  const skus = useRecoilValue(selectedProductSkusAtom)
+  const product = useRecoilValue(selectedProductAtom)
   const [price, setPrice] = React.useState(1)
   const [size, setSize] = React.useState(sizes[0])
   const [color, setColor] = React.useState(colors[0])
@@ -36,7 +37,7 @@ const FormSku = ({ sku, product, closeModal, updateProducts }) => {
       setQuantity(sku.quantity)
       // setImage(sku.image)
     }
-  }, [sku])
+  }, [sku, product])
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -50,7 +51,10 @@ const FormSku = ({ sku, product, closeModal, updateProducts }) => {
     newSku.append('size', size)
     newSku.append('quantity', quantity)
     newSku.append('product_id', product.id)
-    newSku.append('image', image)
+
+    if (image) {
+      newSku.append('image', image)
+    }
 
     if (sku) {
       updateSku(newSku)
@@ -67,6 +71,7 @@ const FormSku = ({ sku, product, closeModal, updateProducts }) => {
       setLoading(false)
       if (response.ok) {
         response.json().then((data) => {
+          sku = data
           const newSkusList = [...skus, data]
           updateProducts(newSkusList)
           setUpdated(true)
@@ -102,6 +107,7 @@ const FormSku = ({ sku, product, closeModal, updateProducts }) => {
     <Grid
       container
       flexDirection='column'
+      flexWrap='nowrap'
       className='modal-body b-radius-sm'
       spacing={2}>
       <Grid item xs='auto'>
@@ -112,15 +118,18 @@ const FormSku = ({ sku, product, closeModal, updateProducts }) => {
       <form onSubmit={handleSubmit} className='form'>
         <Grid item container spacing={2}>
           <Grid item xs={6}>
-            <TextField
-              value={price}
-              onChange={(e) => setPrice(parseInt(e.target.value))}
-              label='Price'
-              variant='standard'
-              color='info'
-              fullWidth
-              placeholder='125.00'
-            />
+            <FormControl color='info' variant='outlined'>
+              <InputLabel htmlFor='sku-price'>Price</InputLabel>
+              <Input
+                required
+                id='sku-price'
+                aria-describedby='sku-price'
+                type='number'
+                value={price}
+                onChange={(e) => setPrice(parseInt(e.target.value))}
+                inputProps={{ min: '1' }}
+              />
+            </FormControl>
           </Grid>
           <Grid item xs={6}>
             <FormControl color='info' variant='outlined'>
@@ -177,16 +186,19 @@ const FormSku = ({ sku, product, closeModal, updateProducts }) => {
               <img src={URL.createObjectURL(image)} style={{ maxWidth: 200 }} />
             </Grid>
           ) : (
-            sku.image.url && (
+            sku &&
+            sku.image_url && (
               <Grid item>
-                <img src={sku.image.url} style={{ maxWidth: 200 }} />
+                <img src={sku.image_url} style={{ maxWidth: 200 }} />
               </Grid>
             )
           )}
 
           <Grid item>
             <Button variant='contained' component='label' color='inherit'>
-              {sku.image.url || image ? 'Upload New Image' : 'Upload Image'}
+              {(sku && sku.image_url) || image
+                ? 'Upload New Image'
+                : 'Upload Image'}
               <input
                 type='file'
                 hidden

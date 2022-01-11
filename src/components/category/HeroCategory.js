@@ -4,6 +4,7 @@ import HeroImage from '../../style/images/hero2.png'
 const HeroCategory = ({ name, description }) => {
   return (
     <Grid
+      item
       container
       spacing={2}
       alignItems='center'

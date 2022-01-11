@@ -1,18 +1,19 @@
 import * as React from 'react'
 import { Grid } from '@mui/material'
 import FormProduct from '../../components/dashboard/FormProduct'
-const ProductSummary = ({ product }) => {
-  const [imgURL, setImageURL] = React.useState(null)
+import {
+  selectedProductAtom,
+  selectedProductImageUrlAtom,
+} from '../../atoms/atoms'
+import { useRecoilValue } from 'recoil'
+const ProductSummary = () => {
+  const imgURL = useRecoilValue(selectedProductImageUrlAtom)
+  const product = useRecoilValue(selectedProductAtom)
 
-  React.useEffect(() => {
-    if (product.skus.length !== 0) {
-      setImageURL(product.skus[0].image.url)
-    }
-  }, [product])
   return (
     <Grid container item>
       <Grid item xs={12} md={6}>
-        <FormProduct product={product} />
+        <FormProduct />
       </Grid>
       <Grid item xs={12} md={6}>
         {imgURL && (

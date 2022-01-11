@@ -11,12 +11,15 @@ import {
 } from '@mui/material'
 import {
   categoriesAtom,
+  selectedProductAtom,
   selectedProductCategoriesAtom,
 } from '../../atoms/atoms'
 import { useRecoilValue } from 'recoil'
-const FormProductCategories = ({ product, updateProducts }) => {
+const FormProductCategories = ({ updateProducts }) => {
   const categories = useRecoilValue(categoriesAtom)
+  const product = useRecoilValue(selectedProductAtom)
   const productCategories = useRecoilValue(selectedProductCategoriesAtom)
+
   const [checkboxes, setCheckboxes] = React.useState([])
   const [loading, setLoading] = React.useState(false)
   const [updated, setUpdated] = React.useState(false)
@@ -85,7 +88,7 @@ const FormProductCategories = ({ product, updateProducts }) => {
     )
     return falseList
       .map((item) => {
-        let found = productCategories.find((pc) => pc.category_id === item.id)
+        let found = productCategories.find((pc) => pc.id === item.id)
         if (found) {
           return item.id
         }
@@ -97,7 +100,7 @@ const FormProductCategories = ({ product, updateProducts }) => {
     const trueList = checkboxes.filter((checkbox) => checkbox.checked === true)
     return trueList
       .map((item) => {
-        let found = productCategories.find((pc) => pc.category_id === item.id)
+        let found = productCategories.find((pc) => pc.id === item.id)
         if (!found) {
           return item.id
         }
