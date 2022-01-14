@@ -17,3 +17,31 @@
 .MuiRadio-root.Mui-checked .MuiSvgIcon-root{
     color: rgba(41, 17, 8, 0.25) !important;
 }
+
+.carousel .MuiTypography-root{
+    color: #FFF8ED;
+}
+
+img.selected {
+    border: 2px solid #533731;
+}
+
+.MuiGrid-root.pdp-info {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.price {
+    position: relative;
+}
+
+.price::before {
+    content: '2';
+    font-family: "Leky Calgria";
+    font-size: 5em;
+    position: absolute;
+    top: -150%;
+    left: -150%;
+    color: #f8d7b1;
+    z-index: -1;
+}

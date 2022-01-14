@@ -52,6 +52,20 @@ export const selectedProductAtom = atom({
   default: null,
 })
 
+export const selectedOptionIndexAtom = atom({
+  key: 'selectedOptionIndexAtom',
+  default: 0,
+})
+
+export const selectedProductOptionsAtom = selector({
+  key: 'selectedProductOptionsAtom',
+  get: ({ get }) => {
+    const product = get(selectedProductAtom)
+    const options = product ? product.options : null
+    return options
+  },
+})
+
 export const selectedProductImageUrlAtom = selector({
   key: 'selectedProductImageUrlAtom',
   get: ({ get }) => {

@@ -13,6 +13,7 @@ import Dashboard from './containers/profile/Dashboard'
 import Main from './containers/profile/Main'
 import PLP from './containers/PLP'
 import Container from './containers/Container'
+import PDP from './containers/PDP'
 function App() {
   const appliedTheme = createTheme(theme)
   const setUser = useSetRecoilState(userAtom)
@@ -128,6 +129,10 @@ function App() {
 
             <Route path='/category' element={<Container />}>
               <Route path=':id' element={<PLP />} />
+            </Route>
+
+            <Route path='/product' element={<Container />}>
+              <Route path=':id' element={<PDP />} />
             </Route>
           </Routes>
         </Layout>

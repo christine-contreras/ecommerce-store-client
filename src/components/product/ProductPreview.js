@@ -7,11 +7,15 @@ import {
   CardMedia,
   CardContent,
   Typography,
-  Radio,
 } from '@mui/material'
 import ProductPlaceHolder from '../../style/images/product-placeholder.jpg'
 import ProductColors from './ProductColors'
+import { useNavigate } from 'react-router-dom'
+import { selectedProductAtom } from '../../atoms/atoms'
+import { useSetRecoilState } from 'recoil'
 const ProductPreview = ({ product }) => {
+  let navigate = useNavigate()
+  const setProduct = useSetRecoilState(selectedProductAtom)
   const [productOptions, setProductOptions] = React.useState([])
   const [option, setOption] = React.useState(0)
   React.useEffect(() => {
@@ -19,10 +23,15 @@ const ProductPreview = ({ product }) => {
       setProductOptions(product.options)
     }
   }, [product])
+
+  const handleProductClick = () => {
+    setProduct(product)
+    navigate(`/product/${product.id}`)
+  }
   return (
     <Grid item xs={6} md={4} lg={3}>
       <Card className='product-card' elevation={0} square={true}>
-        <CardActionArea>
+        <CardActionArea onClick={handleProductClick}>
           <CardMedia
             component='img'
             image={productOptions[option]?.image_url ?? ProductPlaceHolder}

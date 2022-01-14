@@ -11,7 +11,6 @@ import {
 const CategoryProducts = () => {
   const count = useRecoilValue(selectedCategoryProductsCountAtom)
   const products = useRecoilValue(plpFilteredProducts)
-  console.log(products)
   return (
     <Grid
       container

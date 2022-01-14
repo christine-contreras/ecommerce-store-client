@@ -1,7 +1,10 @@
 import React from 'react'
 import { Grid, Typography, Box } from '@mui/material'
 import defaultImage from '../../style/images/default.png'
-const HeroCategory = ({ name, description, image }) => {
+import { useRecoilValue } from 'recoil'
+import { selectedCategoryAtom } from '../../atoms/atoms'
+const HeroCategory = () => {
+  const { name, description, image_url } = useRecoilValue(selectedCategoryAtom)
   return (
     <Grid
       item
@@ -38,7 +41,7 @@ const HeroCategory = ({ name, description, image }) => {
         textAlign='center'>
         <img
           className='img-responsive img-shadow'
-          src={image ? image : defaultImage}
+          src={image_url ? image_url : defaultImage}
           role='presentation'
           style={{ maxWidth: 400, margin: 'auto' }}
         />

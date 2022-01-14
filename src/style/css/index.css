@@ -51,10 +51,20 @@ hr {
   border-radius: 50% 50% 0 0;
 }
 
+
+.img-shadow {
+  -webkit-box-shadow: -24px -20px 0px -3px #B47A43; 
+  box-shadow: -24px -20px 0px -3px #B47A43;
+}
+
+.img-shadow.light {
+  -webkit-box-shadow: -24px -20px 0px -3px #f8d7b1; 
+  box-shadow: -24px -20px 0px -3px #f8d7b1;
+}
+
 .MuiPaper-rounded.container-paper{
   display: flex;
   flex-direction: column;
-  /* border-radius: 32px; */
   padding: 1em;
 }
 
@@ -113,11 +123,6 @@ hr {
 .MuiButton-root.MuiButton-outlinedInfo.btn:hover, .MuiButton-root.MuiButton-outlinedInfo.btn:active{
   background-color: rgb(41 17 8 / 36%);
 }
-
-/* .MuiButton-root.btn-primary{
-  background-color: #291108;
-  color: #fff;
-} */
 
 .MuiButton-root.btn.btn-lg{
   min-width: 300px;

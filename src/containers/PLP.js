@@ -2,7 +2,7 @@ import * as React from 'react'
 import '../style/css/category.css'
 import { Grid } from '@mui/material'
 import { useParams } from 'react-router-dom'
-import { useRecoilState, useRecoilValue } from 'recoil'
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 import { categoriesAtom, selectedCategoryAtom } from '../atoms/atoms'
 import HeroCategory from '../components/category/HeroCategory'
 import CategoryProducts from '../components/category/CategoryProducts'
@@ -12,38 +12,46 @@ const PLP = () => {
   let params = useParams()
 
   const categories = useRecoilValue(categoriesAtom)
-  const [category, setCategory] = useRecoilState(selectedCategoryAtom)
+  const setCategory = useSetRecoilState(selectedCategoryAtom)
   const [loading, setLoading] = React.useState(true)
+  const [error, setError] = React.useState(false)
 
   React.useEffect(() => {
-    if (categories) {
-      setLoading(false)
+    if (categories.length !== 0) {
       const selectedCategory = categories.find(
         (cat) => cat.id === parseInt(params.id)
       )
-      setCategory(selectedCategory ? selectedCategory : null)
+      selectedCategory ? setCategory(selectedCategory) : setError(true)
+      setLoading(false)
+    } else {
+      fetchCategory()
     }
   }, [categories, params])
+
+  const fetchCategory = () => {
+    setLoading(true)
+    setError(false)
+    fetch(`/api/categories/${params.id}`)
+      .then((res) => res.json())
+      .then((data) => setCategory(data))
+      .catch((err) => {
+        setError(true)
+        setLoading(false)
+      })
+  }
   return (
     <>
       {loading ? (
         <Loading />
-      ) : !category ? (
+      ) : error ? (
         <NotFound />
       ) : (
         <>
           <Grid item container sx={{ p: 4 }}>
-            <HeroCategory
-              name={category.name}
-              description={category.description}
-              image={category.image_url}
-            />
+            <HeroCategory />
           </Grid>
           <Grid item container>
-            <CategoryProducts
-              products={category.products}
-              name={category.name}
-            />
+            <CategoryProducts />
           </Grid>
         </>
       )}
