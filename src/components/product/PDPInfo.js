@@ -17,6 +17,7 @@ const PDPInfo = () => {
         item
         container
         spacing={1}
+        flexWrap='nowrap'
         alignItems='center'
         justifyContent='space-between'>
         <PDPTitle />

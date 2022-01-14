@@ -22,7 +22,10 @@ const PDPImages = () => {
     <Grid item container xs={12} md={6} spacing={2}>
       <Grid item container flexDirection='column' xs={2}>
         {options.map((option, index) => (
-          <Grid item onClick={() => handleChangeOption(index)}>
+          <Grid
+            item
+            key={`${title} ${option.color} image`}
+            onClick={() => handleChangeOption(index)}>
             <img
               src={`${option.image_url}`}
               alt={`${title} ${option.color}`}

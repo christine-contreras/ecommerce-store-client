@@ -40,8 +40,7 @@ img.selected {
     font-family: "Leky Calgria";
     font-size: 5em;
     position: absolute;
-    top: -150%;
-    left: -150%;
+    transform: translate(-35%, -30%);
     color: #f8d7b1;
     z-index: -1;
 }

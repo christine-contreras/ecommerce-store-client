@@ -13,12 +13,12 @@ const PDPTitle = () => {
   const selectedOption = useRecoilValue(selectedOptionIndexAtom)
   return (
     <>
-      <Grid item>
+      <Grid item xs={10}>
         <Typography variant='h4' component='h1'>
           {title}
         </Typography>
       </Grid>
-      <Grid item>
+      <Grid item xs={2}>
         <Typography variant='h5' component='p' className='price'>
           $ {parseInt(options[selectedOption].price)}
         </Typography>
