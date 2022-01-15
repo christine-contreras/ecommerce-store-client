@@ -22,13 +22,7 @@ const PDPInfo = () => {
         justifyContent='space-between'>
         <PDPTitle />
       </Grid>
-      <Grid
-        item
-        container
-        spacing={1}
-        flexDirection='column'
-        alignItems='center'
-        justifyContent='center'>
+      <Grid item container spacing={1} flexDirection='column'>
         <PDPOptions />
       </Grid>
 

@@ -129,6 +129,13 @@ hr {
   padding: 20px;
 }
 
+@media (max-width: 900px) {
+  .MuiButton-root.btn.btn-lg.btn-checkout{
+    min-width: 100%;
+  }
+}
+
+
 .MuiButtonGroup-root .btn {
   padding: 20px;
   min-width: 50%;

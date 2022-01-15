@@ -19,7 +19,7 @@ const PDPImages = () => {
   }
 
   return (
-    <Grid item container xs={12} md={6} spacing={2}>
+    <Grid item container xs={12} md={5} lg={6} spacing={2}>
       <Grid item container flexDirection='column' xs={2}>
         {options.map((option, index) => (
           <Grid

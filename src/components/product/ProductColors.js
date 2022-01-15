@@ -1,12 +1,13 @@
 import React from 'react'
 import { Grid, Radio } from '@mui/material'
-const ProductColors = ({ productOptions, option, setOption }) => {
+const ProductColors = ({ options, option, setOption, product }) => {
   return (
     <Grid container item spacing={1}>
-      {productOptions.map((item, index) => (
+      {options.map((item, index) => (
         <Radio
-          checked={option === index}
-          onChange={(e) => setOption(e.target.value)}
+          key={`${product}-size-option-${item}`}
+          checked={parseInt(option) === index}
+          onClick={(e) => setOption(e.target.value)}
           value={index}
           name='radio-buttons'
           className={item.color}

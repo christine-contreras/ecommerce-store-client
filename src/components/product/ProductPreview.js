@@ -55,9 +55,10 @@ const ProductPreview = ({ product }) => {
           </CardContent>
         </CardActionArea>
         <ProductColors
-          productOptions={productOptions}
+          options={productOptions}
           option={option}
           setOption={setOption}
+          product={product.title}
         />
       </Card>
     </Grid>

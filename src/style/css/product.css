@@ -44,3 +44,24 @@ img.selected {
     color: #f8d7b1;
     z-index: -1;
 }
+
+.MuiFormGroup-root.size-option-container{
+    flex-direction: row;
+}
+
+.MuiFormControlLabel-root.size-option {
+    margin: 0 1em 0 0;
+    padding: 10px;
+    border-radius: 10px
+
+}
+
+.MuiFormControlLabel-root.size-option .MuiRadio-root{
+    display: none;
+
+}
+
+.MuiFormControlLabel-root.size-option.selected {
+    border: 2px solid;
+    
+}

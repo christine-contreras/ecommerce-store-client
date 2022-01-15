@@ -99,23 +99,6 @@ const FormProduct = () => {
       </Grid>
 
       <form onSubmit={handleSubmit} className='form'>
-        <Grid container justifyContent='flex-end'>
-          <Grid item>
-            {/* <FormGroup>
-              <FormControlLabel
-                control={
-                  <Switch
-                    checked={active}
-                    color='success'
-                    onChange={(e) => setActive(e.target.checked)}
-                  />
-                }
-                label='Active'
-              />
-            </FormGroup> */}
-          </Grid>
-        </Grid>
-
         <TextField
           value={title}
           onChange={(e) => setTitle(e.target.value)}
