@@ -24,7 +24,7 @@ const CartHeader = () => {
           Keep Shopping
         </Button>
       </Grid>
-      <Grid item conatiner xs='auto' sx={{ pr: 1 }}>
+      <Grid item container xs='auto' sx={{ pr: 1 }}>
         <Badge badgeContent={item_count} color='info'>
           <ShoppingCartOutlinedIcon />
         </Badge>

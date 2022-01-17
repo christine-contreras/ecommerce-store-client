@@ -2,16 +2,21 @@ import * as React from 'react'
 import '../style/css/cart.css'
 import { Modal, Grid, Collapse } from '@mui/material'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
-import { cartOpenAtom, toggleCartOpenAtom } from '../atoms/atoms'
+import {
+  cartAtom,
+  cartItemsAtom,
+  cartOpenAtom,
+  toggleCartOpenAtom,
+} from '../atoms/atoms'
 import CartHeader from '../components/cart/CartHeader'
 import CartTotal from '../components/cart/CartTotal'
 import CartItems from '../components/cart/CartItems'
-
+import CartEmpty from '../components/cart/CartEmpty'
 const Cart = () => {
   const modalOpen = useRecoilValue(cartOpenAtom)
   const setToggleCart = useSetRecoilState(toggleCartOpenAtom)
   const [loading, setLoading] = React.useState(false)
-
+  const cartItems = useRecoilValue(cartItemsAtom)
   return (
     <Modal
       className='modal'
@@ -29,7 +34,11 @@ const Cart = () => {
             <CartHeader />
           </Grid>
           <Grid item flexGrow={1}>
-            <CartItems setLoading={setLoading} />
+            {cartItems.length !== 0 ? (
+              <CartItems setLoading={setLoading} />
+            ) : (
+              <CartEmpty />
+            )}
           </Grid>
           <Grid item>
             <CartTotal loading={loading} />

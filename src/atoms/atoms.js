@@ -68,6 +68,11 @@ export const categoriesAtom = atom({
   default: [],
 })
 
+export const selectedCategoryAtom = atom({
+  key: 'selectedCategoryAtom',
+  default: null,
+})
+
 export const productsAtom = atom({
   key: 'productsAtom',
   default: [],
@@ -121,11 +126,6 @@ export const selectedProductCategoriesAtom = selector({
   },
   set: ({ set }, newValue) =>
     set(selectedProductAtom, { ...selectedProductAtom, categories: newValue }),
-})
-
-export const selectedCategoryAtom = atom({
-  key: 'selectedCategoryAtom',
-  default: null,
 })
 
 export const selectedCategoryProductsAtom = selector({

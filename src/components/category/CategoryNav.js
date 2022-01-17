@@ -9,14 +9,14 @@ import {
 } from '../../atoms/atoms'
 const CategoryNav = () => {
   const count = useRecoilValue(selectedCategoryProductsCountAtom)
-  const { name } = useRecoilValue(selectedCategoryAtom)
+  const category = useRecoilValue(selectedCategoryAtom)
   return (
     <Breadcrumbs
       separator={<ArrowCircleRightOutlinedIcon fontSize='small' />}
       aria-label='breadcrumbs'>
       <Link to='/'>Home</Link>
       <Typography sx={{ color: 'primary.dark', fontWeight: 'bold' }}>
-        {name}
+        {category?.name}
       </Typography>
       <Typography>
         {count} {count === 1 ? 'Product' : 'Products'}
