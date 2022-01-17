@@ -1,8 +1,8 @@
 import * as React from 'react'
 import { Grid, Button, TextField, Alert, Stack } from '@mui/material'
 import { useNavigate } from 'react-router'
-import { userAtom } from '../../atoms/atoms'
-import { useSetRecoilState } from 'recoil'
+import { checkoutAtom, userAtom } from '../../atoms/atoms'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 const FormSignup = () => {
   const [firstName, setFirstName] = React.useState('')
@@ -12,7 +12,7 @@ const FormSignup = () => {
   const [passwordConfirmation, setPasswordConfirmation] = React.useState('')
   const [errors, setErrors] = React.useState([])
   const setUser = useSetRecoilState(userAtom)
-
+  const checkout = useRecoilValue(checkoutAtom)
   let navigate = useNavigate()
 
   const handleSubmit = (e) => {
@@ -35,7 +35,7 @@ const FormSignup = () => {
         response
           .json()
           .then((user) => setUser(user))
-          .then(navigate('/'))
+          .then(checkout ? navigate('/checkout') : navigate('/'))
       } else {
         response.json().then((err) => setErrors(err.errors))
       }

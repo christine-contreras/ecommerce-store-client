@@ -1,10 +1,32 @@
 import React from 'react'
 import { Grid, Button, Typography } from '@mui/material'
 import LoadingButton from '@mui/lab/LoadingButton'
-import { useRecoilValue } from 'recoil'
-import { cartAtom } from '../../atoms/atoms'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
+import {
+  cartAtom,
+  cartItemsAtom,
+  checkoutAtom,
+  userAtom,
+  toggleCartOpenAtom,
+} from '../../atoms/atoms'
+import { useNavigate } from 'react-router-dom'
 const CartTotal = ({ loading }) => {
+  let navigate = useNavigate()
   const cart = useRecoilValue(cartAtom)
+  const cartItems = useRecoilValue(cartItemsAtom)
+  const user = useRecoilValue(userAtom)
+  const setCheckout = useSetRecoilState(checkoutAtom)
+  const setToggleCart = useSetRecoilState(toggleCartOpenAtom)
+
+  const handleAddToCart = () => {
+    setCheckout(true)
+    setToggleCart()
+    if (user) {
+      navigate('/checkout')
+    } else {
+      navigate('/login')
+    }
+  }
   return (
     <Grid item container sx={{ borderTop: '1px solid' }}>
       <Grid item container flexDirection='column' spacing={2} sx={{ p: 2 }}>
@@ -47,14 +69,24 @@ const CartTotal = ({ loading }) => {
         </Grid>
 
         <Grid item>
-          <LoadingButton
-            //   onClick={handleAddToCart}
-            loading={loading}
-            variant='contained'
-            className='btn btn-lg btn-100'
-            color='info'>
-            Continue To Checkout
-          </LoadingButton>
+          {cartItems?.length !== 0 ? (
+            <LoadingButton
+              onClick={handleAddToCart}
+              loading={loading}
+              variant='contained'
+              className='btn btn-lg btn-100'
+              color='info'>
+              Continue To Checkout
+            </LoadingButton>
+          ) : (
+            <Button
+              variant='contained'
+              className='btn btn-lg btn-100'
+              color='info'
+              disabled>
+              Add Items To Cart
+            </Button>
+          )}
         </Grid>
       </Grid>
     </Grid>

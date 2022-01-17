@@ -32,6 +32,11 @@ export const userOrdersAtom = selector({
   },
 })
 
+export const checkoutAtom = atom({
+  key: 'checkoutAtom',
+  default: false,
+})
+
 export const cartAtom = atom({
   key: 'cartAtom',
   default: [],
