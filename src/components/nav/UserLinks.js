@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { userAtom, adminAtom } from '../../atoms/atoms'
+import { userAtom, adminAtom, cartAtom } from '../../atoms/atoms'
 import { useRecoilValue } from 'recoil'
 
 import { IconButton, Badge, Button, Grid } from '@mui/material'
@@ -11,6 +11,7 @@ import LoggedInMenu from './LoggedInMenu'
 const UserLinks = ({ onLogout }) => {
   const user = useRecoilValue(userAtom)
   const isAdmin = useRecoilValue(adminAtom)
+  const { item_count } = useRecoilValue(cartAtom)
 
   let navigate = useNavigate()
 
@@ -29,7 +30,7 @@ const UserLinks = ({ onLogout }) => {
           <Grid item xs='auto'>
             <IconButton size='large' aria-label='cart' color='inherit'>
               <Badge
-                badgeContent={1}
+                badgeContent={item_count}
                 sx={{
                   '& .MuiBadge-badge': {
                     backgroundColor: 'primary.dark',

@@ -14,6 +14,7 @@ import Main from './containers/profile/Main'
 import PLP from './containers/PLP'
 import Container from './containers/Container'
 import PDP from './containers/PDP'
+import Cart from './containers/Cart'
 function App() {
   const appliedTheme = createTheme(theme)
   const setUser = useSetRecoilState(userAtom)
@@ -135,6 +136,8 @@ function App() {
               <Route path=':id' element={<PDP />} />
             </Route>
           </Routes>
+
+          <Cart />
         </Layout>
       </Router>
     </ThemeProvider>

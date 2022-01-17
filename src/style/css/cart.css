@@ -1,0 +1,10 @@
+.cart-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #f8f4ef;
+    width: 100%;
+    max-width: 500px;
+    height: 100%;
+    margin: 0 !important;
+}

@@ -1,8 +1,7 @@
 import * as React from 'react'
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material'
-const ProductQuantity = ({ max }) => {
-  const [quantity, setQuantity] = React.useState(1)
-  const [quantityOptions, setquantityOptions] = React.useState([1])
+const ProductQuantity = ({ max, quantity, setQuantity }) => {
+  const [quantityOptions, setquantityOptions] = React.useState([0])
 
   React.useEffect(() => {
     if (max) {
@@ -11,7 +10,7 @@ const ProductQuantity = ({ max }) => {
   }, [max])
 
   const createArray = () => {
-    return Array(10 - 1 + 1)
+    return Array(max - 1 + 1)
       .fill()
       .map((_, idx) => 1 + idx)
   }

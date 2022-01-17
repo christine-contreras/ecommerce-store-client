@@ -4,7 +4,7 @@ import defaultImage from '../../style/images/default.png'
 import { useRecoilValue } from 'recoil'
 import { selectedCategoryAtom } from '../../atoms/atoms'
 const HeroCategory = () => {
-  const { name, description, image_url } = useRecoilValue(selectedCategoryAtom)
+  const category = useRecoilValue(selectedCategoryAtom)
   return (
     <Grid
       item
@@ -23,12 +23,12 @@ const HeroCategory = () => {
         spacing={5}>
         <Grid item xs={12}>
           <Typography variant='h1' className='hero-title title-category'>
-            {name}
+            {category?.name}
           </Typography>
         </Grid>
 
         <Grid item xs={12} lg={11}>
-          <Typography>{description}</Typography>
+          <Typography>{category?.description}</Typography>
         </Grid>
       </Grid>
 
@@ -41,7 +41,7 @@ const HeroCategory = () => {
         textAlign='center'>
         <img
           className='img-responsive img-shadow'
-          src={image_url ? image_url : defaultImage}
+          src={category?.image_url ? category?.image_url : defaultImage}
           role='presentation'
           style={{ maxWidth: 400, margin: 'auto' }}
         />

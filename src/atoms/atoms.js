@@ -37,6 +37,32 @@ export const cartAtom = atom({
   default: [],
 })
 
+export const cartItemsAtom = selector({
+  key: 'cartItemsAtom',
+  get: ({ get }) => {
+    const cart = get(cartAtom)
+    const items = cart ? cart.selected_items : []
+    return items
+  },
+})
+
+export const cartOpenAtom = atom({
+  key: 'cartOpenAtom',
+  default: false,
+})
+
+export const toggleCartOpenAtom = selector({
+  key: 'toggleCartOpenAtom',
+  get: ({ get }) => {
+    const cartOpen = get(cartOpenAtom)
+    return cartOpen
+  },
+  set: ({ get, set }) => {
+    const cartOpen = get(cartOpenAtom)
+    set(cartOpenAtom, !cartOpen)
+  },
+})
+
 export const categoriesAtom = atom({
   key: 'categoriesAtom',
   default: [],
