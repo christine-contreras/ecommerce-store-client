@@ -17,6 +17,10 @@ body {
   height: 100vh;
 }
 
+.MuiTypography-root.small {
+  font-size: .9em;
+}
+
 a {
   text-decoration: none;
 }
@@ -128,6 +132,12 @@ hr {
   min-width: 300px;
   padding: 20px;
 }
+
+
+.MuiButton-root.btn.btn-lg.btn-100 {
+  width: 100%;
+}
+
 
 @media (max-width: 900px) {
   .MuiButton-root.btn.btn-lg.btn-checkout{

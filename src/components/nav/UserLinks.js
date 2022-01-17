@@ -1,7 +1,12 @@
 import * as React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { userAtom, adminAtom, cartAtom } from '../../atoms/atoms'
-import { useRecoilValue } from 'recoil'
+import {
+  userAtom,
+  adminAtom,
+  cartAtom,
+  toggleCartOpenAtom,
+} from '../../atoms/atoms'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 import { IconButton, Badge, Button, Grid } from '@mui/material'
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined'
@@ -12,6 +17,7 @@ const UserLinks = ({ onLogout }) => {
   const user = useRecoilValue(userAtom)
   const isAdmin = useRecoilValue(adminAtom)
   const { item_count } = useRecoilValue(cartAtom)
+  const setToggleCart = useSetRecoilState(toggleCartOpenAtom)
 
   let navigate = useNavigate()
 
@@ -28,7 +34,11 @@ const UserLinks = ({ onLogout }) => {
         md={5}>
         {!isAdmin && (
           <Grid item xs='auto'>
-            <IconButton size='large' aria-label='cart' color='inherit'>
+            <IconButton
+              size='large'
+              aria-label='cart'
+              color='inherit'
+              onClick={setToggleCart}>
               <Badge
                 badgeContent={item_count}
                 sx={{
