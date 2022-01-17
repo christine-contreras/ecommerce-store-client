@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import '../style/css/cart.css'
 import { Modal, Grid, Collapse } from '@mui/material'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
@@ -10,6 +10,8 @@ import CartItems from '../components/cart/CartItems'
 const Cart = () => {
   const modalOpen = useRecoilValue(cartOpenAtom)
   const setToggleCart = useSetRecoilState(toggleCartOpenAtom)
+  const [loading, setLoading] = React.useState(false)
+
   return (
     <Modal
       className='modal'
@@ -27,10 +29,10 @@ const Cart = () => {
             <CartHeader />
           </Grid>
           <Grid item flexGrow={1}>
-            <CartItems />
+            <CartItems setLoading={setLoading} />
           </Grid>
           <Grid item>
-            <CartTotal />
+            <CartTotal loading={loading} />
           </Grid>
         </Grid>
       </Collapse>

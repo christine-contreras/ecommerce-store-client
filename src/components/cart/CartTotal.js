@@ -1,9 +1,10 @@
 import React from 'react'
 import { Grid, Button, Typography } from '@mui/material'
+import LoadingButton from '@mui/lab/LoadingButton'
 import { useRecoilValue } from 'recoil'
 import { cartAtom } from '../../atoms/atoms'
-const CartTotal = () => {
-  const { total, shipping } = useRecoilValue(cartAtom)
+const CartTotal = ({ loading }) => {
+  const cart = useRecoilValue(cartAtom)
   return (
     <Grid item container sx={{ borderTop: '1px solid' }}>
       <Grid item container flexDirection='column' spacing={2} sx={{ p: 2 }}>
@@ -17,7 +18,7 @@ const CartTotal = () => {
             <Typography>Subtotal</Typography>
           </Grid>
           <Grid item>
-            <Typography>$ {parseInt(total)}</Typography>
+            <Typography>$ {parseInt(cart?.total)}</Typography>
           </Grid>
         </Grid>
 
@@ -26,7 +27,7 @@ const CartTotal = () => {
             <Typography>Estimated Shipping</Typography>
           </Grid>
           <Grid item>
-            <Typography>$ {parseInt(shipping)}</Typography>
+            <Typography>$ {parseInt(cart?.shipping)}</Typography>
           </Grid>
         </Grid>
 
@@ -38,18 +39,22 @@ const CartTotal = () => {
           </Grid>
           <Grid item>
             <Typography>
-              <strong>$ {parseInt(total) + parseInt(shipping)}</strong>
+              <strong>
+                $ {parseInt(cart?.total) + parseInt(cart?.shipping)}
+              </strong>
             </Typography>
           </Grid>
         </Grid>
 
         <Grid item>
-          <Button
+          <LoadingButton
+            //   onClick={handleAddToCart}
+            loading={loading}
             variant='contained'
             className='btn btn-lg btn-100'
             color='info'>
             Continue To Checkout
-          </Button>
+          </LoadingButton>
         </Grid>
       </Grid>
     </Grid>

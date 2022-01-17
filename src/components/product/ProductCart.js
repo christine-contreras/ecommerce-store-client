@@ -2,14 +2,72 @@ import * as React from 'react'
 import { Grid, Typography, IconButton } from '@mui/material'
 import HighlightOffIcon from '@mui/icons-material/HighlightOff'
 import ProductQuantity from './ProductQuantity'
-const ProductCart = ({ item }) => {
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
+import { cartAtom } from '../../atoms/atoms'
+const ProductCart = ({ item, setLoading }) => {
+  const [cart, setCart] = useRecoilState(cartAtom)
+  console.log(cart)
   const [quantity, setQuantity] = React.useState(0)
 
   React.useEffect(() => {
     if (item) {
       setQuantity(item.quantity)
     }
-  }, [item])
+  }, [item, cart])
+
+  const handleDeleteItemFromCart = () => {
+    setLoading(true)
+    fetch(`/api/carts/${cart.id}/delete-item`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: JSON.stringify({
+        selected_item_id: item.id,
+      }),
+    }).then((response) => {
+      if (response.ok) {
+        response.json().then((data) => {
+          setCart(data)
+          setLoading(false)
+        })
+      } else {
+        response.json().then((err) => {
+          console.log(err)
+          setLoading(false)
+        })
+      }
+    })
+  }
+
+  const handleChangeItemQuantity = (qty) => {
+    setLoading(true)
+    setQuantity(qty)
+    fetch(`/api/carts/${cart.id}/update-item-qty/${qty}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: JSON.stringify({
+        selected_item_id: item.id,
+      }),
+    }).then((response) => {
+      if (response.ok) {
+        response.json().then((data) => {
+          setCart(data)
+          setLoading(false)
+        })
+      } else {
+        response.json().then((err) => {
+          console.log(err)
+          setLoading(false)
+        })
+      }
+    })
+  }
+
   return (
     <Grid item container spacing={2}>
       <Grid item xs={4}>
@@ -44,7 +102,11 @@ const ProductCart = ({ item }) => {
             </Grid>
           </Grid>
           <Grid item xs='auto'>
-            <IconButton aria-label='delete' color='info' size='small'>
+            <IconButton
+              aria-label='delete'
+              color='info'
+              size='small'
+              onClick={handleDeleteItemFromCart}>
               <HighlightOffIcon />
             </IconButton>
           </Grid>
@@ -58,7 +120,7 @@ const ProductCart = ({ item }) => {
           <Grid item xs={6}>
             <ProductQuantity
               quantity={quantity}
-              setQuantity={setQuantity}
+              setQuantity={handleChangeItemQuantity}
               max={item?.sku?.quantity}
             />
           </Grid>
