@@ -15,7 +15,8 @@ import PLP from './containers/PLP'
 import Container from './containers/Container'
 import PDP from './containers/PDP'
 import Cart from './containers/Cart'
-import Checkout from './containers/Checkout'
+import OrderConfirmation from './containers/OrderConfirmation'
+
 function App() {
   const appliedTheme = createTheme(theme)
   const setUser = useSetRecoilState(userAtom)
@@ -137,7 +138,7 @@ function App() {
               <Route path=':id' element={<PDP />} />
             </Route>
 
-            <Route path='/checkout' element={<Checkout />} />
+            <Route path='/order-confirmation' element={<OrderConfirmation />} />
           </Routes>
 
           <Cart />

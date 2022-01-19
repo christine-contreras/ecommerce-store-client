@@ -2,7 +2,7 @@ import React from 'react'
 import { Grid, Skeleton, Typography, Box, Container } from '@mui/material'
 const Loading = () => {
   return (
-    <>
+    <Grid item container sx={{ backgroundColor: 'secondary.main' }}>
       <Container maxWidth='xl'>
         <Grid
           container
@@ -42,7 +42,7 @@ const Loading = () => {
           />
         </Grid>
       </Container>
-    </>
+    </Grid>
   )
 }
 

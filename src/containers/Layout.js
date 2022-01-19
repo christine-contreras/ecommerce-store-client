@@ -18,8 +18,7 @@ const Layout = ({ children, onLogout }) => {
       <Grid item>
         <Nav onLogout={onLogout} />
       </Grid>
-      <Grid item container sx={{ pt: 15, pb: 3, flexGrow: 1 }}>
-        {/* <Container maxWidth='xl'>{children}</Container> */}
+      <Grid item container sx={{ pt: 15, flexGrow: 1 }}>
         {children}
       </Grid>
       {!isAdmin && (
