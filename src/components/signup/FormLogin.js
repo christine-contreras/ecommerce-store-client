@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Grid, Button, TextField, Alert, Stack } from '@mui/material'
 import { useNavigate } from 'react-router'
-import { userAtom, checkoutAtom } from '../../atoms/atoms'
+import { userAtom, checkoutAtom, stripeCheckoutAtom } from '../../atoms/atoms'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 const FormLogin = () => {
@@ -12,6 +12,8 @@ const FormLogin = () => {
   const [errors, setErrors] = React.useState([])
   const setUser = useSetRecoilState(userAtom)
   const checkout = useRecoilValue(checkoutAtom)
+  const startCheckout = useSetRecoilState(stripeCheckoutAtom)
+
   const handleSubmit = (e) => {
     e.preventDefault()
     setErrors([])
@@ -31,7 +33,7 @@ const FormLogin = () => {
           user?.isAdmin
             ? navigate('/admin-dashboard/products')
             : checkout
-            ? navigate('/checkout')
+            ? startCheckout()
             : navigate('/')
         })
       } else {

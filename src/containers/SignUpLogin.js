@@ -11,7 +11,7 @@ import LoggedInMessage from '../components/signup/LoggedInMessage'
 import { userAtom } from '../atoms/atoms'
 import { useRecoilValue } from 'recoil'
 
-const SignUpLogin = ({ title, onLogout }) => {
+const SignUpLogin = ({ title, onLogout, handleCheckout }) => {
   let location = useLocation()
 
   const user = useRecoilValue(userAtom)
@@ -32,7 +32,7 @@ const SignUpLogin = ({ title, onLogout }) => {
             location.pathname === '/create-account' ? (
               <>
                 <Grid item>
-                  <FormSignup />
+                  <FormSignup handleCheckout={handleCheckout} />
                 </Grid>
                 <Grid item>
                   <Link to='/login' underline='hover'>
@@ -43,7 +43,7 @@ const SignUpLogin = ({ title, onLogout }) => {
             ) : (
               <>
                 <Grid item>
-                  <FormLogin />
+                  <FormLogin handleCheckout={handleCheckout} />
                 </Grid>
                 <Grid item>
                   <Link to='/create-account' underline='hover'>

@@ -46,7 +46,7 @@ const PDP = () => {
       ) : error ? (
         <NotFound />
       ) : (
-        <Container maxWidth='xl' sx={{ pt: 6 }}>
+        <Container maxWidth='xl' sx={{ pt: 6, pb: 6 }}>
           <Button
             variant='text'
             color='info'

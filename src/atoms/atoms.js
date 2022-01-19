@@ -68,6 +68,33 @@ export const toggleCartOpenAtom = selector({
   },
 })
 
+export const stripeCheckoutAtom = selector({
+  key: 'stripeCheckoutAtom',
+  get: ({ get }) => get(cartOpenAtom),
+  set: ({ get, set }) => {
+    const cart = get(cartAtom)
+    const items = get(cartItemsAtom)
+    const cartItemsIds = items?.map((item) => item.id)
+    const cartOpen = get(cartOpenAtom)
+    fetch('/api/checkout', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        items: cartItemsIds,
+        shipping: cart.shipping,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        window.location = data.url
+      })
+      .catch((err) => console.log(err))
+    set(cartOpen, false)
+  },
+})
+
 export const categoriesAtom = atom({
   key: 'categoriesAtom',
   default: [],

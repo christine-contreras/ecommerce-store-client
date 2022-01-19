@@ -15,18 +15,20 @@ import OrderPreview from '../components/order/OrderPreview'
 const OrderConfirmation = () => {
   let navigate = useNavigate()
   const userOrders = useRecoilValue(userOrdersAtom)
+  const cartItems = useRecoilValue(cartItemsAtom)
   const [user, setUser] = useRecoilState(userAtom)
   const [cart, setCart] = useRecoilState(cartAtom)
+
   const [loading, setLoading] = React.useState(true)
   const [error, setError] = React.useState(false)
   const [order, setOrder] = React.useState(null)
 
-  const cartItems = useRecoilValue(cartItemsAtom)
-
   React.useEffect(() => {
+    setLoading(true)
+    setError(false)
     const search = new URLSearchParams(window.location.search)
 
-    if (search.has('session_id') && cartItems && cartItems?.length !== 0) {
+    if (search.has('session_id')) {
       const session = search.get('session_id')
       const orderExists = userOrders.find(
         (order) => order.session_id === session
@@ -35,10 +37,17 @@ const OrderConfirmation = () => {
         setOrder(orderExists)
         setLoading(false)
       } else {
-        handleFetchStripeOrder(session)
+        if (cartItems && cartItems?.length !== 0) {
+          handleFetchStripeOrder(session)
+        }
       }
+    } else {
+      setTimeout(() => {
+        setLoading(false)
+        setError(true)
+      }, 2000)
     }
-  }, [cartItems])
+  }, [cartItems, order, user])
 
   const handleFetchStripeOrder = (session_id) => {
     const items = handleCheckoutItems()
@@ -57,7 +66,6 @@ const OrderConfirmation = () => {
         setOrder(data)
         const newUser = { ...user, orders: [...userOrders, data] }
         setUser(newUser)
-
         const newCart = {
           ...cart,
           total: '0',
@@ -67,6 +75,7 @@ const OrderConfirmation = () => {
         }
         setCart(newCart)
         setLoading(false)
+        setError(false)
       })
       .catch((err) => {
         console.log(err)

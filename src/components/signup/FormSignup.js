@@ -1,10 +1,10 @@
 import * as React from 'react'
 import { Grid, Button, TextField, Alert, Stack } from '@mui/material'
 import { useNavigate } from 'react-router'
-import { checkoutAtom, userAtom } from '../../atoms/atoms'
+import { checkoutAtom, userAtom, stripeCheckoutAtom } from '../../atoms/atoms'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 
-const FormSignup = () => {
+const FormSignup = ({ handleCheckout }) => {
   const [firstName, setFirstName] = React.useState('')
   const [lastName, setLastName] = React.useState('')
   const [email, setEmail] = React.useState('')
@@ -13,6 +13,7 @@ const FormSignup = () => {
   const [errors, setErrors] = React.useState([])
   const setUser = useSetRecoilState(userAtom)
   const checkout = useRecoilValue(checkoutAtom)
+  const startCheckout = useSetRecoilState(stripeCheckoutAtom)
   let navigate = useNavigate()
 
   const handleSubmit = (e) => {
@@ -35,7 +36,7 @@ const FormSignup = () => {
         response
           .json()
           .then((user) => setUser(user))
-          .then(checkout ? navigate('/checkout') : navigate('/'))
+          .then(checkout ? startCheckout() : navigate('/'))
       } else {
         response.json().then((err) => setErrors(err.errors))
       }

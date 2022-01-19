@@ -4,10 +4,11 @@ import { useRecoilValue } from 'recoil'
 import { userAtom } from '../../atoms/atoms'
 const Shipping = ({ address }) => {
   const user = useRecoilValue(userAtom)
+  console.log(user)
   return (
     <Grid item container flexDirection='column'>
       <Grid item>
-        <Typography>{`${user?.first_name} ${user?.last_name}`}</Typography>
+        <Typography>{`${user.first_name} ${user.last_name}`}</Typography>
       </Grid>
       <Grid item>
         <Typography>{address?.line1}</Typography>
