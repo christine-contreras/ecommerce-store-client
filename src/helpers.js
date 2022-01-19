@@ -1,3 +1,8 @@
+import dateFormat from 'dateformat'
+export const changeDate = (date) => {
+  return dateFormat(date, 'mmmm dd, yyyy')
+}
+
 export const countries = [
   { code: 'AF', code3: 'AFG', name: 'Afghanistan', number: '004' },
   { code: 'AL', code3: 'ALB', name: 'Albania', number: '008' },

@@ -1,12 +1,11 @@
 import React from 'react'
 import { Grid, Typography } from '@mui/material'
 import Order from '../../components/dashboard/Order'
+import OrderPreview from '../../components/order/OrderPreview'
 import { userOrdersAtom } from '../../atoms/atoms'
 import { useRecoilValue } from 'recoil'
 const MyOrders = () => {
   const orders = useRecoilValue(userOrdersAtom)
-  console.log(orders)
-
   return (
     <Grid container flexDirection='column' sx={{ pt: 3 }}>
       {orders.length === 0 && (
@@ -20,9 +19,15 @@ const MyOrders = () => {
           </Typography>
         </Grid>
       )}
-      {orders.map((order) => (
-        <Order key={`order-${order.id}`} order={order} />
-      ))}
+      <Grid item container spacing={4} flexDirection='column'>
+        {[...orders]
+          ?.sort((a, b) => a.id - b.id)
+          .map((order) => (
+            <Grid item key={`my-order-${order.id}`}>
+              <OrderPreview order={order} />
+            </Grid>
+          ))}
+      </Grid>
     </Grid>
   )
 }
