@@ -1,14 +1,10 @@
 import React from 'react'
 import { Grid, Typography } from '@mui/material'
-import { useRecoilValue } from 'recoil'
-import { userAtom } from '../../atoms/atoms'
-const Shipping = ({ address }) => {
-  const user = useRecoilValue(userAtom)
-  console.log(user)
+const Shipping = ({ address, name }) => {
   return (
     <Grid item container flexDirection='column'>
       <Grid item>
-        <Typography>{`${user.first_name} ${user.last_name}`}</Typography>
+        <Typography>{name}</Typography>
       </Grid>
       <Grid item>
         <Typography>{address?.line1}</Typography>

@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import '../style/css/home.css'
 import image1 from '../style/images/home-bracelets.jpg'
 import image2 from '../style/images/home-background.jpg'
@@ -9,7 +9,11 @@ import Hero from '../components/home/Hero'
 import Carousel from './Carousel'
 import FeaturedOneColumn from '../components/home/FeaturedOneColumn'
 import FeaturedTwoColumn from '../components/home/FeaturedTwoColumn'
+import { useRecoilValue } from 'recoil'
+import { categoriesAtom } from '../atoms/atoms'
 const Home = () => {
+  const categories = useRecoilValue(categoriesAtom)
+  const [carouselCategory, setCarouselCategory] = React.useState(null)
   const categoryOneColumn = {
     image: image1,
     background: image2,
@@ -32,12 +36,24 @@ const Home = () => {
       url: '/category/4',
     },
   ]
+
+  React.useEffect(() => {
+    if (categories) {
+      const category = categories.find((cat) => cat.name === 'Best Sellers')
+      category && setCarouselCategory(category)
+    }
+  }, [categories])
   return (
     <>
       <Container maxWidth='xl'>
         <Hero />
       </Container>
-      <Carousel />
+      {carouselCategory && (
+        <Carousel
+          title={carouselCategory.name}
+          products={carouselCategory.products}
+        />
+      )}
       <Container maxWidth='xl'>
         <FeaturedOneColumn category={categoryOneColumn} />
         <FeaturedTwoColumn categories={categoriesTwoColumns} />

@@ -32,6 +32,131 @@ export const userOrdersAtom = selector({
   },
 })
 
+//orders
+export const ordersAtom = atom({
+  key: 'ordersAtom',
+  default: [],
+})
+
+export const selectedOrderAtom = atom({
+  key: 'selectedOrderAtom',
+  default: null,
+})
+
+// categories
+export const categoriesAtom = atom({
+  key: 'categoriesAtom',
+  default: [],
+})
+
+export const selectedCategoryAtom = atom({
+  key: 'selectedCategoryAtom',
+  default: null,
+})
+
+export const selectedCategoryProductsAtom = selector({
+  key: 'selectedCategoryProductsAtom',
+  get: ({ get }) => {
+    const category = get(selectedCategoryAtom)
+    const products = category ? category.products : []
+    return products
+  },
+  set: ({ set }, newValue) =>
+    set(selectedCategoryAtom, { ...selectedCategoryAtom, products: newValue }),
+})
+
+export const selectedCategoryProductsCountAtom = selector({
+  key: 'selectedCategoryProductsCountAtom',
+  get: ({ get }) => {
+    const products = get(selectedCategoryProductsAtom)
+    return products ? products.length : 0
+  },
+})
+
+export const plpFilterSelectorAtom = atom({
+  key: 'plpFilterAtom',
+  default: 'View All',
+})
+
+export const plpFilteredProducts = selector({
+  key: 'plpFilteredProducts',
+  get: ({ get }) => {
+    const filter = get(plpFilterSelectorAtom)
+    const products = get(selectedCategoryProductsAtom)
+    const list = [...products]
+
+    switch (filter) {
+      case 'Price: Low To High':
+        return list.sort(
+          (a, b) => parseInt(a.skus[0].price) - parseInt(b.skus[0].price)
+        )
+      case 'Price: High To Low':
+        return list.sort(
+          (a, b) => parseInt(b.skus[0].price) - parseInt(a.skus[0].price)
+        )
+      default:
+        return list
+    }
+  },
+})
+
+//products
+export const productsAtom = atom({
+  key: 'productsAtom',
+  default: [],
+})
+
+export const selectedProductAtom = atom({
+  key: 'selectedProductAtom',
+  default: null,
+})
+
+export const selectedOptionIndexAtom = atom({
+  key: 'selectedOptionIndexAtom',
+  default: 0,
+})
+
+export const selectedProductOptionsAtom = selector({
+  key: 'selectedProductOptionsAtom',
+  get: ({ get }) => {
+    const product = get(selectedProductAtom)
+    const options = product ? product.options : null
+    return options
+  },
+})
+
+export const selectedProductImageUrlAtom = selector({
+  key: 'selectedProductImageUrlAtom',
+  get: ({ get }) => {
+    const product = get(selectedProductAtom)
+    const url = product && product.skus[0] ? product.skus[0].image_url : null
+    return url
+  },
+})
+
+export const selectedProductSkusAtom = selector({
+  key: 'selectedProductSkusAtom',
+  get: ({ get }) => {
+    const product = get(selectedProductAtom)
+    const skus = product ? product.skus : []
+    return skus
+  },
+  set: ({ set }, newValue) =>
+    set(selectedProductAtom, { ...selectedProductAtom, skus: newValue }),
+})
+
+export const selectedProductCategoriesAtom = selector({
+  key: 'selectedProductCategoriesAtom',
+  get: ({ get }) => {
+    const product = get(selectedProductAtom)
+    const categories = product ? product.categories : []
+    return categories
+  },
+  set: ({ set }, newValue) =>
+    set(selectedProductAtom, { ...selectedProductAtom, categories: newValue }),
+})
+
+// checkout and cart
 export const checkoutAtom = atom({
   key: 'checkoutAtom',
   default: false,
@@ -92,116 +217,5 @@ export const stripeCheckoutAtom = selector({
       })
       .catch((err) => console.log(err))
     set(cartOpen, false)
-  },
-})
-
-export const categoriesAtom = atom({
-  key: 'categoriesAtom',
-  default: [],
-})
-
-export const selectedCategoryAtom = atom({
-  key: 'selectedCategoryAtom',
-  default: null,
-})
-
-export const productsAtom = atom({
-  key: 'productsAtom',
-  default: [],
-})
-
-export const selectedProductAtom = atom({
-  key: 'selectedProductAtom',
-  default: null,
-})
-
-export const selectedOptionIndexAtom = atom({
-  key: 'selectedOptionIndexAtom',
-  default: 0,
-})
-
-export const selectedProductOptionsAtom = selector({
-  key: 'selectedProductOptionsAtom',
-  get: ({ get }) => {
-    const product = get(selectedProductAtom)
-    const options = product ? product.options : null
-    return options
-  },
-})
-
-export const selectedProductImageUrlAtom = selector({
-  key: 'selectedProductImageUrlAtom',
-  get: ({ get }) => {
-    const product = get(selectedProductAtom)
-    const url = product && product.skus[0] ? product.skus[0].image_url : null
-    return url
-  },
-})
-
-export const selectedProductSkusAtom = selector({
-  key: 'selectedProductSkusAtom',
-  get: ({ get }) => {
-    const product = get(selectedProductAtom)
-    const skus = product ? product.skus : []
-    return skus
-  },
-  set: ({ set }, newValue) =>
-    set(selectedProductAtom, { ...selectedProductAtom, skus: newValue }),
-})
-
-export const selectedProductCategoriesAtom = selector({
-  key: 'selectedProductCategoriesAtom',
-  get: ({ get }) => {
-    const product = get(selectedProductAtom)
-    const categories = product ? product.categories : []
-    return categories
-  },
-  set: ({ set }, newValue) =>
-    set(selectedProductAtom, { ...selectedProductAtom, categories: newValue }),
-})
-
-export const selectedCategoryProductsAtom = selector({
-  key: 'selectedCategoryProductsAtom',
-  get: ({ get }) => {
-    const category = get(selectedCategoryAtom)
-    const products = category ? category.products : []
-    return products
-  },
-  set: ({ set }, newValue) =>
-    set(selectedCategoryAtom, { ...selectedCategoryAtom, products: newValue }),
-})
-
-export const selectedCategoryProductsCountAtom = selector({
-  key: 'selectedCategoryProductsCountAtom',
-  get: ({ get }) => {
-    const products = get(selectedCategoryProductsAtom)
-    return products ? products.length : 0
-  },
-})
-
-export const plpFilterSelectorAtom = atom({
-  key: 'plpFilterAtom',
-  default: 'View All',
-})
-
-export const plpFilteredProducts = selector({
-  key: 'plpFilteredProducts',
-  get: ({ get }) => {
-    const filter = get(plpFilterSelectorAtom)
-    const products = get(selectedCategoryProductsAtom)
-    const list = [...products]
-
-    switch (filter) {
-      case 'Price: Low To High':
-        return list.sort(
-          (a, b) => parseInt(a.skus[0].price) - parseInt(b.skus[0].price)
-        )
-      case 'Price: High To Low':
-        return list.sort(
-          (a, b) => parseInt(b.skus[0].price) - parseInt(a.skus[0].price)
-        )
-      default:
-        return list
-    }
   },
 })

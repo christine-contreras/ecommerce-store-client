@@ -34,7 +34,7 @@ const OrderPreview = ({ order }) => {
         </Grid>
 
         <Grid item sx={{ pb: 2 }}>
-          <Shipping address={order?.address} />
+          <Shipping address={order?.address} name={order?.name} />
         </Grid>
 
         <Grid item container flexDirection='column' spacing={2}>

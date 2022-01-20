@@ -4,13 +4,7 @@ import theme from './style/theme/theme'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
 import { useSetRecoilState, useRecoilValue, useRecoilState } from 'recoil'
-import {
-  userAtom,
-  cartAtom,
-  categoriesAtom,
-  cartItemsAtom,
-  cartOpenAtom,
-} from './atoms/atoms'
+import { userAtom, cartAtom, categoriesAtom } from './atoms/atoms'
 
 import Layout from './containers/Layout'
 import Home from './containers/Home'
@@ -86,26 +80,6 @@ function App() {
       if (response.ok) setUser(null)
     })
   }
-
-  // const handleStripeCheckout = () => {
-  //   const items = cartItems?.map((item) => item.id)
-  //   fetch('/api/checkout', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify({
-  //       items,
-  //       shipping: cart.shipping,
-  //     }),
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setCartOpen(false)
-  //       window.location = data.url
-  //     })
-  //     .catch((err) => console.log(err))
-  // }
 
   return (
     <ThemeProvider theme={appliedTheme}>

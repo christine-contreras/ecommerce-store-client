@@ -1,0 +1,64 @@
+.slick-track {
+    display: flex;
+  }
+  .slick-slider {
+    display: flex;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+  
+  .slick-slide {
+    padding-right: 10px;
+  }
+  
+  .slick-slide:last-child {
+    padding-right: 0;
+  }
+
+  .slick-list {
+    margin: 0 3%;
+  }
+
+  .slick-prev:before, .slick-next:before {
+    font-size: 30px;
+}
+
+.slick-prev, .slick-next{
+    top: 40%;
+    width: 30px;
+    height: 30px;
+}
+
+.slick-prev {
+    left: 2%;
+}
+
+.slick-next{
+    right: 5%;
+}
+
+@media (min-width: 600px) {
+    .slick-list {
+        margin: 0 6%;
+      }
+
+      .slick-prev {
+        left: 0;
+    }
+    
+    .slick-next{
+        right: 2%;
+    }
+}
+
+
+  .carousel-card.MuiPaper-root {
+      background-color: transparent;
+  }
+
+.MuiGrid-root.carousel-card-container {
+    max-width: 300px;
+    margin: auto;
+}

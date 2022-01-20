@@ -13,7 +13,7 @@ import ProductColors from './ProductColors'
 import { useNavigate } from 'react-router-dom'
 import { selectedProductAtom } from '../../atoms/atoms'
 import { useSetRecoilState } from 'recoil'
-const ProductPreview = ({ product }) => {
+const ProductPreview = ({ product, carousel }) => {
   let navigate = useNavigate()
   const setProduct = useSetRecoilState(selectedProductAtom)
   const [productOptions, setProductOptions] = React.useState([])
@@ -29,8 +29,18 @@ const ProductPreview = ({ product }) => {
     navigate(`/product/${product.id}`)
   }
   return (
-    <Grid item xs={6} md={4} lg={3}>
-      <Card className='product-card' elevation={0} square={true}>
+    <Grid
+      item
+      xs={carousel ? 12 : 6}
+      md={carousel ? 12 : 4}
+      lg={carousel ? 12 : 3}
+      className={
+        carousel ? 'carousel-card-container' : 'product-card-container'
+      }>
+      <Card
+        className={carousel ? 'carousel-card' : 'product-card'}
+        elevation={0}
+        square={true}>
         <CardActionArea onClick={handleProductClick}>
           <CardMedia
             component='img'
@@ -41,9 +51,10 @@ const ProductPreview = ({ product }) => {
             <Grid
               container
               spacing={1}
+              wrap='nowrap'
               alignItems='center'
               justifyContent='space-between'>
-              <Grid item xs={12} md='auto' textAlign='center'>
+              <Grid item xs={12} md={10}>
                 <Typography>{product.title}</Typography>
               </Grid>
               <Grid item xs={12} md='auto' textAlign='center'>
