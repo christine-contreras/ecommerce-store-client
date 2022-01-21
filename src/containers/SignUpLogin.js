@@ -1,9 +1,9 @@
 import React from 'react'
 import '../style/css/form.css'
-import { useLocation } from 'react-router'
+import { useLocation, useNavigate } from 'react-router'
 import { Link } from 'react-router-dom'
-import { Grid, Typography, Box, Container } from '@mui/material'
-
+import { Grid, Typography, Box, Container, Button } from '@mui/material'
+import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined'
 import FormSignup from '../components/signup/FormSignup'
 import FormLogin from '../components/signup/FormLogin'
 import LoggedInMessage from '../components/signup/LoggedInMessage'
@@ -13,11 +13,12 @@ import { useRecoilValue } from 'recoil'
 
 const SignUpLogin = ({ title, onLogout, handleCheckout }) => {
   let location = useLocation()
+  let navigate = useNavigate()
 
   const user = useRecoilValue(userAtom)
 
   return (
-    <Container maxWidth='xl'>
+    <Container maxWidth='xl' sx={{ pt: 3, pb: 3 }}>
       <Grid container flexDirection='column' alignItems='center' spacing={4}>
         <Grid item>
           <Typography variant='h1'>{title}</Typography>
@@ -35,9 +36,14 @@ const SignUpLogin = ({ title, onLogout, handleCheckout }) => {
                   <FormSignup handleCheckout={handleCheckout} />
                 </Grid>
                 <Grid item>
-                  <Link to='/login' underline='hover'>
-                    Already Have An Account? Login Here
-                  </Link>
+                  <Button
+                    onClick={() => navigate('/login')}
+                    variant='outlined'
+                    color='info'
+                    size='large'
+                    endIcon={<ArrowCircleRightOutlinedIcon />}>
+                    <strong>Already Have An Account? Login Here</strong>
+                  </Button>
                 </Grid>
               </>
             ) : (
@@ -46,9 +52,14 @@ const SignUpLogin = ({ title, onLogout, handleCheckout }) => {
                   <FormLogin handleCheckout={handleCheckout} />
                 </Grid>
                 <Grid item>
-                  <Link to='/create-account' underline='hover'>
-                    Don't Have An Account? Sign Up
-                  </Link>
+                  <Button
+                    onClick={() => navigate('/create-account')}
+                    variant='outlined'
+                    color='info'
+                    size='large'
+                    endIcon={<ArrowCircleRightOutlinedIcon />}>
+                    <strong>Don't Have An Account? Sign Up</strong>
+                  </Button>
                 </Grid>
               </>
             )
