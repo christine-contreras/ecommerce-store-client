@@ -1,13 +1,25 @@
-import React from 'react'
+import * as React from 'react'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import '../style/css/carousel.css'
-import { Box, Grid, Typography, Container } from '@mui/material'
+import { Grid, Typography, Container } from '@mui/material'
 import Slider from 'react-slick'
+import { useRecoilValue } from 'recoil'
+import { categoriesAtom } from '../atoms/atoms'
 
 import ProductPreview from '../components/product/ProductPreview'
-const Carousel = ({ products, title }) => {
-  var settings = {
+const Carousel = ({ title }) => {
+  const categories = useRecoilValue(categoriesAtom)
+  const [carouselCategory, setCarouselCategory] = React.useState(null)
+
+  React.useEffect(() => {
+    if (categories) {
+      const category = categories.find((cat) => cat.name === 'Best Sellers')
+      category && setCarouselCategory(category)
+    }
+  }, [categories])
+
+  const settings = {
     dots: false,
     infinite: false,
     speed: 500,
@@ -56,7 +68,7 @@ const Carousel = ({ products, title }) => {
           </Grid>
           <Grid item container sx={{ overflow: 'unset' }}>
             <Slider {...settings}>
-              {products?.map((product) => (
+              {carouselCategory?.products.map((product) => (
                 <ProductPreview
                   product={product}
                   carousel={true}

@@ -4,6 +4,7 @@ import { Modal, Grid, Collapse } from '@mui/material'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 import { cartItemsAtom, cartOpenAtom, toggleCartOpenAtom } from '../atoms/atoms'
 import CartHeader from '../components/cart/CartHeader'
+import CartShippingGoal from '../components/cart/CartShippingGoal'
 import CartTotal from '../components/cart/CartTotal'
 import CartItems from '../components/cart/CartItems'
 import CartEmpty from '../components/cart/CartEmpty'
@@ -28,6 +29,9 @@ const Cart = () => {
           className='cart-container'>
           <Grid item>
             <CartHeader />
+          </Grid>
+          <Grid item>
+            <CartShippingGoal />
           </Grid>
           <Grid item flexGrow={1}>
             {cartItems?.length !== 0 ? (

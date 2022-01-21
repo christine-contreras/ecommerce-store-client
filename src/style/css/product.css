@@ -2,6 +2,17 @@
     color: #b47a43;
 }
 
+.card-actions.MuiButtonBase-root {
+    position: relative;
+}
+
+.card-actions.MuiButtonBase-root .MuiChip-root{
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 2px;
+}
+
 .MuiRadio-root.Gold .MuiSvgIcon-root{
  background: linear-gradient(rgb(200, 177, 139) 0%, #fce2b9 100%);
  color: transparent;

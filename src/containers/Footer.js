@@ -7,7 +7,10 @@ import BottomLinks from '../components/footer/BottomLinks'
 
 const Footer = () => {
   return (
-    <Grid item container sx={{ backgroundColor: 'secondary.dark', p: 5 }}>
+    <Grid
+      item
+      container
+      sx={{ backgroundColor: 'secondary.dark', p: { xs: 2, md: 5 } }}>
       <Container maxWidth='xl'>
         <Grid container flexDirection='column'>
           {/* top of footer */}

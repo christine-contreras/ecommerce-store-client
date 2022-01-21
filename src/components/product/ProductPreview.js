@@ -7,6 +7,7 @@ import {
   CardMedia,
   CardContent,
   Typography,
+  Chip,
 } from '@mui/material'
 import ProductPlaceHolder from '../../style/images/product-placeholder.jpg'
 import ProductColors from './ProductColors'
@@ -41,12 +42,19 @@ const ProductPreview = ({ product, carousel }) => {
         className={carousel ? 'carousel-card' : 'product-card'}
         elevation={0}
         square={true}>
-        <CardActionArea onClick={handleProductClick}>
+        <CardActionArea onClick={handleProductClick} className='card-actions'>
           <CardMedia
             component='img'
             image={productOptions[option]?.image_url ?? ProductPlaceHolder}
             alt={product.title}
           />
+          {product.best_seller ? (
+            <Chip label='Best Seller' className='badge' color='secondary' />
+          ) : (
+            product.new_arrival && (
+              <Chip label='New Arrival' className='badge' color='secondary' />
+            )
+          )}
           <CardContent>
             <Grid
               container
