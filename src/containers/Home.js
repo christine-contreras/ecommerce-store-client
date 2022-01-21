@@ -39,7 +39,7 @@ const Home = () => {
       <Container maxWidth='xl'>
         <Hero />
       </Container>
-      <Carousel />
+      <Carousel title='Best Sellers' />
       <Container maxWidth='xl'>
         <FeaturedOneColumn category={categoryOneColumn} />
         <FeaturedTwoColumn categories={categoriesTwoColumns} />

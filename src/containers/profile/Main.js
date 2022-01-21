@@ -19,10 +19,10 @@ const Main = ({ title }) => {
 
       {location.pathname.includes('my-info') && <MyInfo />}
       {location.pathname.includes('my-shipping') && <MyShipping />}
-      {location.pathname.includes('my-orders') && <MyOrders />}
+      {location.pathname.includes('profile/my-orders') && <MyOrders />}
       {location.pathname.includes('categories') && <Categories />}
       {location.pathname.includes('products') && <Products />}
-      {location.pathname.includes('orders') && <Orders />}
+      {location.pathname.includes('admin-dashboard/orders') && <Orders />}
     </>
   )
 }
