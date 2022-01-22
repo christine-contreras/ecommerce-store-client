@@ -78,7 +78,7 @@ const OrderConfirmation = () => {
         setError(false)
       })
       .catch((err) => {
-        console.log(err)
+        console.error(err)
         setError(true)
       })
   }
