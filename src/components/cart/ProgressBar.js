@@ -1,5 +1,5 @@
 import React from 'react'
-import { Grid, Typography, Box } from '@mui/material'
+import { Typography, Box } from '@mui/material'
 import LinearProgress from '@mui/material/LinearProgress'
 
 export default function LinearProgressWithLabel(props) {
@@ -12,12 +12,6 @@ export default function LinearProgressWithLabel(props) {
         <LinearProgress
           variant='determinate'
           {...props}
-          //   sx={{
-          //     backgroundColor: 'rgb(78 78 78 / 20%)',
-          //     '& .MuiLinearProgress-bar': {
-          //       backgroundColor: props.barColor,
-          //     },
-          //   }}
           sx={{
             backgroundColor: 'rgb(78 78 78 / 20%)',
             '& .MuiLinearProgress-bar': {

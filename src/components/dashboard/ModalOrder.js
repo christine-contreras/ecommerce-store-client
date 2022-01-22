@@ -1,6 +1,6 @@
 import React from 'react'
 import '../../style/css/modal.css'
-import { Modal, Grid } from '@mui/material'
+import { Modal } from '@mui/material'
 import FormOrder from './FormOrder'
 const ModalOrder = ({ openModal, closeModal, order }) => {
   return (

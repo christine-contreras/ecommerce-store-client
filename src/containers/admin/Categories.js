@@ -8,7 +8,6 @@ import Table from '../../components/dashboard/Table'
 
 const Categories = () => {
   const categories = useRecoilValue(categoriesAtom)
-  console.log(categories)
 
   //handle category create modal
   const [openCategoryModal, setOpenCategoryModal] = React.useState(false)

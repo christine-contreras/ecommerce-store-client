@@ -2,7 +2,7 @@ import * as React from 'react'
 import '../style/css/category.css'
 import { Grid } from '@mui/material'
 import { useParams } from 'react-router-dom'
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 import { categoriesAtom, selectedCategoryAtom } from '../atoms/atoms'
 import HeroCategory from '../components/category/HeroCategory'
 import CategoryProducts from '../components/category/CategoryProducts'
@@ -34,7 +34,7 @@ const PLP = () => {
     fetch(`/api/categories/${params.id}`)
       .then((res) => res.json())
       .then((data) => setCategory(data))
-      .catch((err) => {
+      .catch(() => {
         setError(true)
         setLoading(false)
       })

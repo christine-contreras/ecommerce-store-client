@@ -1,5 +1,5 @@
 import React from 'react'
-import { Grid, Box, Container } from '@mui/material'
+import { Grid } from '@mui/material'
 import { useRecoilValue, useRecoilState } from 'recoil'
 import {
   selectedOptionIndexAtom,

@@ -3,7 +3,6 @@ import { Grid, Box, Container, Button } from '@mui/material'
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
 import { useParams } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
-import { useLocation } from 'react-router'
 import { useRecoilState } from 'recoil'
 import { selectedProductAtom } from '../atoms/atoms'
 import NotFound from '../components/NotFound'
@@ -14,7 +13,6 @@ import Carousel from './Carousel'
 const PDP = () => {
   let params = useParams()
   let navigate = useNavigate()
-  let location = useLocation()
   const [product, setProduct] = useRecoilState(selectedProductAtom)
 
   const [loading, setLoading] = React.useState(true)
@@ -23,7 +21,6 @@ const PDP = () => {
   React.useEffect(() => {
     if (product) {
       setLoading(false)
-      console.log(product)
     } else {
       fetchProduct()
     }

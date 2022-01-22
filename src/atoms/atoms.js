@@ -1,4 +1,4 @@
-import { atom, selector, selectorFamily } from 'recoil'
+import { atom, selector } from 'recoil'
 
 export const userAtom = atom({
   key: 'userAtom',
@@ -38,11 +38,6 @@ export const ordersAtom = atom({
   default: [],
 })
 
-export const selectedOrderAtom = atom({
-  key: 'selectedOrderAtom',
-  default: null,
-})
-
 // categories
 export const categoriesAtom = atom({
   key: 'categoriesAtom',
@@ -61,8 +56,6 @@ export const selectedCategoryProductsAtom = selector({
     const products = category ? category.products : []
     return products
   },
-  set: ({ set }, newValue) =>
-    set(selectedCategoryAtom, { ...selectedCategoryAtom, products: newValue }),
 })
 
 export const selectedCategoryProductsCountAtom = selector({
@@ -141,8 +134,6 @@ export const selectedProductSkusAtom = selector({
     const skus = product ? product.skus : []
     return skus
   },
-  set: ({ set }, newValue) =>
-    set(selectedProductAtom, { ...selectedProductAtom, skus: newValue }),
 })
 
 export const selectedProductCategoriesAtom = selector({
@@ -152,8 +143,6 @@ export const selectedProductCategoriesAtom = selector({
     const categories = product ? product.categories : []
     return categories
   },
-  set: ({ set }, newValue) =>
-    set(selectedProductAtom, { ...selectedProductAtom, categories: newValue }),
 })
 
 // checkout and cart

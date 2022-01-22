@@ -8,7 +8,7 @@ import {
   Typography,
 } from '@mui/material'
 import { productsAtom, selectedProductAtom } from '../../atoms/atoms'
-import { useRecoilState, useRecoilValue } from 'recoil'
+import { useRecoilState } from 'recoil'
 
 const FormProduct = () => {
   const [products, setProducts] = useRecoilState(productsAtom)

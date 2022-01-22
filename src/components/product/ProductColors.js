@@ -5,7 +5,7 @@ const ProductColors = ({ options, option, setOption, product }) => {
     <Grid container item spacing={1}>
       {options.map((item, index) => (
         <Radio
-          key={`${product}-size-option-${item}`}
+          key={`${product}-color-option-${item.color}`}
           checked={parseInt(option) === index}
           onClick={(e) => setOption(e.target.value)}
           value={index}

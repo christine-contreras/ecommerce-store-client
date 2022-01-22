@@ -5,7 +5,6 @@ import { useRecoilValue } from 'recoil'
 import { selectedCategoryAtom } from '../../atoms/atoms'
 const HeroCategory = () => {
   const category = useRecoilValue(selectedCategoryAtom)
-  console.log(category)
   return (
     <Grid
       item

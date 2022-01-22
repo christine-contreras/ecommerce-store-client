@@ -9,11 +9,7 @@ const Social = () => {
         Social
       </Typography>
       {social.map((page) => (
-        <MenuItem
-          //   onClick={() => navigate(`/`)}
-          key={`footer-social-item-${page}`}>
-          {page}
-        </MenuItem>
+        <MenuItem key={`footer-social-item-${page}`}>{page}</MenuItem>
       ))}
     </MenuList>
   )

@@ -1,6 +1,5 @@
 import React from 'react'
 import { Grid, Typography } from '@mui/material'
-import Order from '../../components/dashboard/Order'
 import OrderPreview from '../../components/order/OrderPreview'
 import { userOrdersAtom } from '../../atoms/atoms'
 import { useRecoilValue } from 'recoil'

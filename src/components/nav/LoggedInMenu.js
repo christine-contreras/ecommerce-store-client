@@ -1,7 +1,6 @@
 import React from 'react'
 import { userAtom } from '../../atoms/atoms'
 import { useRecoilValue } from 'recoil'
-
 import { IconButton, Typography } from '@mui/material'
 import { Grid } from '@mui/material'
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined'
@@ -11,7 +10,6 @@ import UserDropdownMenu from './UserDropdownMenu'
 
 const LoggedInMenu = ({ onLogout }) => {
   const user = useRecoilValue(userAtom)
-  console.log(user)
 
   //user menu to see more options
   const [moreAnchorEl, setMoreAnchorEl] = React.useState(null)

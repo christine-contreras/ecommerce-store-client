@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Grid, Typography, IconButton } from '@mui/material'
 import HighlightOffIcon from '@mui/icons-material/HighlightOff'
 import ProductQuantity from './ProductQuantity'
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
+import { useRecoilState } from 'recoil'
 import { cartAtom } from '../../atoms/atoms'
 const ProductCart = ({ item, setLoading }) => {
   const [cart, setCart] = useRecoilState(cartAtom)

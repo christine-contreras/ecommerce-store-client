@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router'
 import { checkoutAtom, userAtom, stripeCheckoutAtom } from '../../atoms/atoms'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 
-const FormSignup = ({ handleCheckout }) => {
+const FormSignup = () => {
   const [firstName, setFirstName] = React.useState('')
   const [lastName, setLastName] = React.useState('')
   const [email, setEmail] = React.useState('')

@@ -1,7 +1,6 @@
 import React from 'react'
 import '../style/css/form.css'
 import { useLocation, useNavigate } from 'react-router'
-import { Link } from 'react-router-dom'
 import { Grid, Typography, Box, Container, Button } from '@mui/material'
 import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined'
 import FormSignup from '../components/signup/FormSignup'

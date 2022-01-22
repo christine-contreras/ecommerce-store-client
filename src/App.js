@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import theme from './style/theme/theme'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
-import { useSetRecoilState, useRecoilValue, useRecoilState } from 'recoil'
+import { useSetRecoilState } from 'recoil'
 import { userAtom, cartAtom, categoriesAtom } from './atoms/atoms'
 
 import Layout from './containers/Layout'
@@ -41,7 +41,7 @@ function App() {
           setUser(user)
         })
       } else {
-        response.json().then((err) => console.log(err))
+        response.json().then((err) => console.error(err))
       }
     })
   }
@@ -51,10 +51,9 @@ function App() {
       if (response.ok) {
         response.json().then((cart) => {
           setCart(cart)
-          console.log(cart)
         })
       } else {
-        response.json().then((err) => console.log(err))
+        response.json().then((err) => console.error(err))
       }
     })
   }
@@ -64,15 +63,13 @@ function App() {
       if (response.ok) {
         response.json().then((categories) => {
           setCategories(categories)
-          console.log(categories)
         })
       } else {
-        response.json().then((err) => console.log(err))
+        response.json().then((err) => console.error(err))
       }
     })
   }
 
-  //change to  useResetRecoilState(state)
   const handleLogout = () => {
     fetch('/api/logout', {
       method: 'DELETE',

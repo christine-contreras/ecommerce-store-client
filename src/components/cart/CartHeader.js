@@ -1,5 +1,5 @@
 import React from 'react'
-import { Grid, Button, IconButton, Badge, Icon } from '@mui/material'
+import { Grid, Button, Badge } from '@mui/material'
 import ArrowCircleLeftOutlinedIcon from '@mui/icons-material/ArrowCircleLeftOutlined'
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined'
 import { cartAtom, toggleCartOpenAtom } from '../../atoms/atoms'
