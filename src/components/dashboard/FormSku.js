@@ -73,6 +73,7 @@ const FormSku = ({ sku, closeModal, updateProducts }) => {
 
   const requestImageUploadUrl = () => {
     fetch('/api/presigned_url', {
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
