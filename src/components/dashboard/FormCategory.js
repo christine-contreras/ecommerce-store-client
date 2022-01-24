@@ -38,9 +38,9 @@ const FormCategory = ({ category, closeModal }) => {
     setUpdated(false)
 
     if (image) {
-      const newImage = new FormData()
-      newImage.append('image', image)
-      requestImageUploadUrl(newImage)
+      // const newImage = new FormData()
+      // newImage.append('image', image)
+      requestImageUploadUrl()
     } else {
       newCategoryNoImage()
     }
@@ -65,10 +65,15 @@ const FormCategory = ({ category, closeModal }) => {
     category ? updateCategory(newCategory) : createCategory(newCategory)
   }
 
-  const requestImageUploadUrl = (newImage) => {
+  const requestImageUploadUrl = () => {
     fetch('/api/presigned_url', {
       method: 'POST',
-      body: newImage,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        image_name: image?.name,
+      }),
     }).then((response) => {
       if (response.ok) {
         response.json().then((data) => {
