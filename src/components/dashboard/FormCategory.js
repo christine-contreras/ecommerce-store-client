@@ -38,7 +38,6 @@ const FormCategory = ({ category, closeModal }) => {
     setUpdated(false)
 
     if (image) {
-      debugger
       const newImage = new FormData()
       newImage.append('image', image)
       requestImageUploadUrl(newImage)
@@ -53,7 +52,6 @@ const FormCategory = ({ category, closeModal }) => {
       description,
       isActive: active,
     }
-    debugger
     category ? updateCategory(newCategory) : createCategory(newCategory)
   }
 
@@ -64,7 +62,6 @@ const FormCategory = ({ category, closeModal }) => {
       isActive: active,
       image_key: image?.name,
     }
-    debugger
     category ? updateCategory(newCategory) : createCategory(newCategory)
   }
 
@@ -75,7 +72,6 @@ const FormCategory = ({ category, closeModal }) => {
     }).then((response) => {
       if (response.ok) {
         response.json().then((data) => {
-          debugger
           data.url ? uploadImage(data.url) : newCategoryNewImage()
         })
       } else {
@@ -94,7 +90,6 @@ const FormCategory = ({ category, closeModal }) => {
       },
       body: image,
     }).then((response) => {
-      setLoading(false)
       if (response.ok) {
         console.log('image uploaded!')
         newCategoryNewImage()
@@ -104,30 +99,7 @@ const FormCategory = ({ category, closeModal }) => {
     })
   }
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault()
-  //   setErrors([])
-  //   setLoading(true)
-  //   setUpdated(false)
-
-  //   const newCategory = new FormData()
-  //   newCategory.append('name', name)
-  //   newCategory.append('description', description)
-  //   newCategory.append('isActive', active)
-
-  //   if (image) {
-  //     newCategory.append('image', image)
-  //   }
-
-  //   if (category) {
-  //     updateCategory(newCategory)
-  //   } else {
-  //     createCategory(newCategory)
-  //   }
-  // }
-
   const createCategory = (newCategory) => {
-    debugger
     fetch('/api/categories', {
       method: 'POST',
       headers: {
@@ -151,7 +123,6 @@ const FormCategory = ({ category, closeModal }) => {
   }
 
   const updateCategory = (newCategory) => {
-    debugger
     fetch(`/api/categories/${category.id}`, {
       method: 'PATCH',
       headers: {

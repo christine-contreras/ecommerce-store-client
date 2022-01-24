@@ -43,28 +43,82 @@ const FormSku = ({ sku, closeModal, updateProducts }) => {
     setLoading(true)
     setUpdated(false)
 
-    const newSku = new FormData()
-    newSku.append('price', price)
-    newSku.append('color', color)
-    newSku.append('size', size)
-    newSku.append('quantity', quantity)
-    newSku.append('product_id', product.id)
-
     if (image) {
-      newSku.append('image', image)
-    }
-
-    if (sku) {
-      updateSku(newSku)
+      debugger
+      const newImage = new FormData()
+      newImage.append('image', image)
+      requestImageUploadUrl(newImage)
     } else {
-      createSkus(newSku)
+      newSkuNoImage()
     }
   }
 
-  const createSkus = (newSku) => {
+  const newSkuNoImage = () => {
+    debugger
+    const newSku = {
+      price,
+      size,
+      color,
+      quantity,
+    }
+    sku ? updateSku(newSku) : createSku(newSku)
+  }
+
+  const newSkuNewImage = () => {
+    debugger
+    const newSku = {
+      price,
+      size,
+      color,
+      quantity,
+      image_key: image?.name,
+    }
+    sku ? updateSku(newSku) : createSku(newSku)
+  }
+
+  const requestImageUploadUrl = (newImage) => {
+    fetch('/api/presigned_url', {
+      method: 'POST',
+      body: newImage,
+    }).then((response) => {
+      if (response.ok) {
+        response.json().then((data) => {
+          debugger
+          data.url ? uploadImage(data.url) : newSkuNewImage()
+        })
+      } else {
+        response.json().then((err) => {
+          setErrors(err.errors)
+        })
+      }
+    })
+  }
+
+  const uploadImage = (url) => {
+    fetch(url, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+      body: image,
+    }).then((response) => {
+      if (response.ok) {
+        console.log('image uploaded!')
+        newSkuNewImage()
+      } else {
+        setErrors(['image failed to upload'])
+      }
+    })
+  }
+
+  const createSku = (newSku) => {
+    debugger
     fetch('/api/skus', {
       method: 'POST',
-      body: newSku,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newSku),
     }).then((response) => {
       setLoading(false)
       if (response.ok) {
@@ -84,9 +138,14 @@ const FormSku = ({ sku, closeModal, updateProducts }) => {
   }
 
   const updateSku = (newSku) => {
+    debugger
     fetch(`/api/skus/${sku.id}`, {
       method: 'PATCH',
-      body: newSku,
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: JSON.stringify(newSku),
     })
       .then((response) => response.json())
       .then((data) => {
