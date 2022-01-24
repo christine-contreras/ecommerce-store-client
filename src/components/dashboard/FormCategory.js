@@ -37,26 +37,103 @@ const FormCategory = ({ category, closeModal }) => {
     setLoading(true)
     setUpdated(false)
 
-    const newCategory = new FormData()
-    newCategory.append('name', name)
-    newCategory.append('description', description)
-    newCategory.append('isActive', active)
-
     if (image) {
-      newCategory.append('image', image)
-    }
-
-    if (category) {
-      updateCategory(newCategory)
+      debugger
+      const newImage = new FormData()
+      newImage.append('image', image)
+      requestImageUploadUrl(newImage)
     } else {
-      createCategory(newCategory)
+      newCategoryNoImage()
     }
   }
 
+  const newCategoryNoImage = () => {
+    const newCategory = {
+      name,
+      description,
+      isActive: active,
+    }
+    debugger
+    category ? updateCategory(newCategory) : createCategory(newCategory)
+  }
+
+  const newCategoryNewImage = () => {
+    const newCategory = {
+      name,
+      description,
+      isActive: active,
+      image_key: image?.name,
+    }
+    debugger
+    category ? updateCategory(newCategory) : createCategory(newCategory)
+  }
+
+  const requestImageUploadUrl = (newImage) => {
+    fetch('/api/presigned_url', {
+      method: 'POST',
+      body: newImage,
+    }).then((response) => {
+      if (response.ok) {
+        response.json().then((data) => {
+          debugger
+          data.url ? uploadImage(data.url) : newCategoryNewImage()
+        })
+      } else {
+        response.json().then((err) => {
+          setErrors(err.errors)
+        })
+      }
+    })
+  }
+
+  const uploadImage = (url) => {
+    fetch(url, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+      body: image,
+    }).then((response) => {
+      setLoading(false)
+      if (response.ok) {
+        console.log('image uploaded!')
+        newCategoryNewImage()
+      } else {
+        setErrors(['image failed to upload'])
+      }
+    })
+  }
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault()
+  //   setErrors([])
+  //   setLoading(true)
+  //   setUpdated(false)
+
+  //   const newCategory = new FormData()
+  //   newCategory.append('name', name)
+  //   newCategory.append('description', description)
+  //   newCategory.append('isActive', active)
+
+  //   if (image) {
+  //     newCategory.append('image', image)
+  //   }
+
+  //   if (category) {
+  //     updateCategory(newCategory)
+  //   } else {
+  //     createCategory(newCategory)
+  //   }
+  // }
+
   const createCategory = (newCategory) => {
+    debugger
     fetch('/api/categories', {
       method: 'POST',
-      body: newCategory,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newCategory),
     }).then((response) => {
       setLoading(false)
       if (response.ok) {
@@ -74,9 +151,14 @@ const FormCategory = ({ category, closeModal }) => {
   }
 
   const updateCategory = (newCategory) => {
+    debugger
     fetch(`/api/categories/${category.id}`, {
       method: 'PATCH',
-      body: newCategory,
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: JSON.stringify(newCategory),
     })
       .then((response) => response.json())
       .then((data) => {
