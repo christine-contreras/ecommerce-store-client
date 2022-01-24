@@ -38,8 +38,6 @@ const FormCategory = ({ category, closeModal }) => {
     setUpdated(false)
 
     if (image) {
-      // const newImage = new FormData()
-      // newImage.append('image', image)
       requestImageUploadUrl()
     } else {
       newCategoryNoImage()

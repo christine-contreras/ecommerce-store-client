@@ -44,17 +44,13 @@ const FormSku = ({ sku, closeModal, updateProducts }) => {
     setUpdated(false)
 
     if (image) {
-      debugger
-      const newImage = new FormData()
-      newImage.append('image', image)
-      requestImageUploadUrl(newImage)
+      requestImageUploadUrl()
     } else {
       newSkuNoImage()
     }
   }
 
   const newSkuNoImage = () => {
-    debugger
     const newSku = {
       price,
       size,
@@ -65,7 +61,6 @@ const FormSku = ({ sku, closeModal, updateProducts }) => {
   }
 
   const newSkuNewImage = () => {
-    debugger
     const newSku = {
       price,
       size,
@@ -76,14 +71,17 @@ const FormSku = ({ sku, closeModal, updateProducts }) => {
     sku ? updateSku(newSku) : createSku(newSku)
   }
 
-  const requestImageUploadUrl = (newImage) => {
+  const requestImageUploadUrl = () => {
     fetch('/api/presigned_url', {
-      method: 'POST',
-      body: newImage,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        image_name: image?.name,
+      }),
     }).then((response) => {
       if (response.ok) {
         response.json().then((data) => {
-          debugger
           data.url ? uploadImage(data.url) : newSkuNewImage()
         })
       } else {
@@ -112,7 +110,6 @@ const FormSku = ({ sku, closeModal, updateProducts }) => {
   }
 
   const createSku = (newSku) => {
-    debugger
     fetch('/api/skus', {
       method: 'POST',
       headers: {
@@ -138,7 +135,6 @@ const FormSku = ({ sku, closeModal, updateProducts }) => {
   }
 
   const updateSku = (newSku) => {
-    debugger
     fetch(`/api/skus/${sku.id}`, {
       method: 'PATCH',
       headers: {
