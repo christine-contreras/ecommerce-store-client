@@ -56,6 +56,7 @@ const FormSku = ({ sku, closeModal, updateProducts }) => {
       size,
       color,
       quantity,
+      product_id: product.id,
     }
     sku ? updateSku(newSku) : createSku(newSku)
   }
@@ -67,6 +68,7 @@ const FormSku = ({ sku, closeModal, updateProducts }) => {
       color,
       quantity,
       image_key: image?.name,
+      product_id: product.id,
     }
     sku ? updateSku(newSku) : createSku(newSku)
   }
