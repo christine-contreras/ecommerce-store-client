@@ -2,6 +2,7 @@ import * as React from 'react'
 import { Grid, Typography, Container, Button } from '@mui/material'
 import Loading from '../components/order/Loading'
 import NotFound from '../components/NotFound'
+import FetchingOrder from '../components/FetchingOrder'
 import { useRecoilValue, useRecoilState } from 'recoil'
 import {
   cartAtom,
@@ -21,11 +22,13 @@ const OrderConfirmation = () => {
 
   const [loading, setLoading] = React.useState(true)
   const [error, setError] = React.useState(false)
+  const [fetching, setFetching] = React.useState(false)
   const [order, setOrder] = React.useState(null)
 
   React.useEffect(() => {
     setLoading(true)
     setError(false)
+    setFetching(false)
     const search = new URLSearchParams(window.location.search)
 
     if (search.has('session_id')) {
@@ -36,16 +39,19 @@ const OrderConfirmation = () => {
       if (orderExists) {
         setOrder(orderExists)
         setLoading(false)
+        setFetching(false)
       } else {
         if (cartItems && cartItems?.length !== 0) {
           handleFetchStripeOrder(session)
+          setFetching(true)
+        } else {
+          setLoading(false)
+          setFetching(true)
         }
       }
     } else {
-      setTimeout(() => {
-        setLoading(false)
-        setError(true)
-      }, 2000)
+      setLoading(false)
+      setError(true)
     }
   }, [cartItems, order, user])
 
@@ -76,10 +82,13 @@ const OrderConfirmation = () => {
         setCart(newCart)
         setLoading(false)
         setError(false)
+        setFetching(false)
       })
       .catch((err) => {
         console.error(err)
+        setLoading(false)
         setError(true)
+        setFetching(false)
       })
   }
 
@@ -91,11 +100,11 @@ const OrderConfirmation = () => {
 
   return (
     <>
-      {loading ? (
-        <Loading />
-      ) : error ? (
-        <NotFound />
-      ) : (
+      {loading && <Loading />}
+      {error && <NotFound />}
+      {fetching && <FetchingOrder />}
+
+      {!loading && !error && !fetching && (
         <Grid item container sx={{ backgroundColor: 'secondary.main' }}>
           <Container maxWidth='md' sx={{ pt: 4, pb: 4 }}>
             <Grid
@@ -130,5 +139,4 @@ const OrderConfirmation = () => {
     </>
   )
 }
-
 export default OrderConfirmation

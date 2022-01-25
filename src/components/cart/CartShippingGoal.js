@@ -12,7 +12,8 @@ const CartShippingGoal = () => {
     if (cart) {
       const cartProgress = 100 - parseInt(cart.total)
       setAmountLeft(cartProgress)
-      setProgress(cartProgress >= 100 ? 0 : parseInt(cart.total))
+
+      setProgress(parseInt(cart.total) >= 100 ? 100 : parseInt(cart.total))
     }
   }, [cart])
 

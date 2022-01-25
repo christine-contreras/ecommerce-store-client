@@ -1,4 +1,5 @@
 import * as React from 'react'
+import ProductPlaceHolder from '../../style/images/product-placeholder.jpg'
 import { Grid, Typography, IconButton } from '@mui/material'
 import HighlightOffIcon from '@mui/icons-material/HighlightOff'
 import ProductQuantity from './ProductQuantity'
@@ -72,7 +73,7 @@ const ProductCart = ({ item, setLoading }) => {
     <Grid item container spacing={2}>
       <Grid item xs={4}>
         <img
-          src={item?.sku.image_url}
+          src={item?.sku.image_url ?? ProductPlaceHolder}
           alt={item?.sku.product.title}
           title={item?.sku.product.title}
           className='img-responsive'
