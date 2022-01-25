@@ -20,6 +20,9 @@ const PDP = () => {
 
   React.useEffect(() => {
     if (product) {
+      if (product.skus.length === 0 || product.isActive === false) {
+        setError(true)
+      }
       setLoading(false)
     } else {
       fetchProduct()

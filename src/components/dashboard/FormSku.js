@@ -23,6 +23,7 @@ const FormSku = ({ sku, closeModal, updateProducts }) => {
   const [size, setSize] = React.useState(sizes[0])
   const [color, setColor] = React.useState(colors[0])
   const [quantity, setQuantity] = React.useState(1)
+
   const [image, setImage] = React.useState(null)
   const [loading, setLoading] = React.useState(false)
   const [updated, setUpdated] = React.useState(false)
@@ -197,7 +198,7 @@ const FormSku = ({ sku, closeModal, updateProducts }) => {
                 type='number'
                 value={quantity}
                 onChange={(e) => setQuantity(parseInt(e.target.value))}
-                inputProps={{ min: '1' }}
+                inputProps={{ min: '0' }}
               />
             </FormControl>
           </Grid>

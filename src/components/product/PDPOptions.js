@@ -21,7 +21,7 @@ const PDPOptions = () => {
     selectedOptionIndexAtom
   )
 
-  const sizes = options[selectedOption].sizes
+  const sizes = options[selectedOption]?.sizes
   const [selectedSize, setSelectedSize] = React.useState(0)
   const [quantity, setQuantity] = React.useState(1)
   const outOfStock =

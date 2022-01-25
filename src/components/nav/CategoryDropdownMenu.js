@@ -31,13 +31,15 @@ const CategoryDropdownMenu = ({
       <Typography variant='subtitle2' component='p'>
         Categories
       </Typography>
-      {categories.map((page) => (
-        <MenuItem
-          onClick={() => navigate(`/category/${page.id}`)}
-          key={`category-menu-item-${page.name}`}>
-          {page.name}
-        </MenuItem>
-      ))}
+      {categories
+        ?.filter((cat) => cat.isActive === true)
+        .map((page) => (
+          <MenuItem
+            onClick={() => navigate(`/category/${page.id}`)}
+            key={`category-menu-item-${page.name}`}>
+            {page.name}
+          </MenuItem>
+        ))}
     </Menu>
   )
 }

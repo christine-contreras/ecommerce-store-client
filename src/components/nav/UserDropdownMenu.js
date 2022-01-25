@@ -36,6 +36,9 @@ const UserDropdownMenu = ({
           keepMounted
           open={isMenuOpen}
           onClose={handleMenuClose}>
+          <MenuItem onClick={() => navigate(`/admin-dashboard/products`)}>
+            Dashboard
+          </MenuItem>
           <MenuItem onClick={onLogout}>Logout</MenuItem>
         </Menu>
       )}

@@ -6,6 +6,9 @@ import {
   Stack,
   Button,
   Typography,
+  FormGroup,
+  FormControlLabel,
+  Switch,
 } from '@mui/material'
 import { productsAtom, selectedProductAtom } from '../../atoms/atoms'
 import { useRecoilState } from 'recoil'
@@ -15,6 +18,8 @@ const FormProduct = () => {
   const [product, setProduct] = useRecoilState(selectedProductAtom)
   const [title, setTitle] = React.useState('')
   const [description, setDescription] = React.useState('')
+  const [active, setActive] = React.useState(false)
+
   const [loading, setLoading] = React.useState(false)
   const [updated, setUpdated] = React.useState(false)
   const [errors, setErrors] = React.useState([])
@@ -23,6 +28,7 @@ const FormProduct = () => {
     if (product) {
       setTitle(product.title)
       setDescription(product.description)
+      setActive(product.isActive)
     }
   }, [product])
 
@@ -35,6 +41,7 @@ const FormProduct = () => {
     const newProduct = {
       title,
       description,
+      isActive: active,
     }
 
     if (product) {
@@ -99,6 +106,23 @@ const FormProduct = () => {
       </Grid>
 
       <form onSubmit={handleSubmit} className='form'>
+        <Grid container justifyContent='flex-end'>
+          <Grid item>
+            <FormGroup>
+              <FormControlLabel
+                control={
+                  <Switch
+                    checked={active}
+                    color='success'
+                    onChange={(e) => setActive(e.target.checked)}
+                  />
+                }
+                label='Active'
+              />
+            </FormGroup>
+          </Grid>
+        </Grid>
+
         <TextField
           value={title}
           onChange={(e) => setTitle(e.target.value)}

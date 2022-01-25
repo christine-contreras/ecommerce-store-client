@@ -46,12 +46,12 @@ const ProductPreview = ({ product, carousel }) => {
           <CardMedia
             component='img'
             image={productOptions[option]?.image_url ?? ProductPlaceHolder}
-            alt={product.title}
+            alt={product?.title}
           />
-          {product.best_seller ? (
+          {product?.best_seller ? (
             <Chip label='Best Seller' className='badge' color='secondary' />
           ) : (
-            product.new_arrival && (
+            product?.new_arrival && (
               <Chip label='New Arrival' className='badge' color='secondary' />
             )
           )}
@@ -63,7 +63,7 @@ const ProductPreview = ({ product, carousel }) => {
               alignItems='center'
               justifyContent='space-between'>
               <Grid item xs={12} md={10}>
-                <Typography>{product.title}</Typography>
+                <Typography>{product?.title}</Typography>
               </Grid>
               <Grid item xs={12} md='auto' textAlign='center'>
                 <Typography>
@@ -77,7 +77,7 @@ const ProductPreview = ({ product, carousel }) => {
           options={productOptions}
           option={option}
           setOption={setOption}
-          product={product.title}
+          product={product?.title}
         />
       </Card>
     </Grid>

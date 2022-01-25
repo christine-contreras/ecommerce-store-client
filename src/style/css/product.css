@@ -72,6 +72,10 @@ img.selected {
 
 }
 
+.MuiFormControlLabel-root.size-option.disabled {
+    color: #ccc;
+}
+
 .MuiFormControlLabel-root.size-option.selected {
     border: 2px solid;
     

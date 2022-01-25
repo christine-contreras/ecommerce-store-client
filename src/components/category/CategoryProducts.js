@@ -39,12 +39,17 @@ const CategoryProducts = () => {
             </Grid>
           ) : (
             <Grid item container spacing={5}>
-              {products.map((product) => (
-                <ProductPreview
-                  key={`product-preview-category-${product.id}`}
-                  product={product}
-                />
-              ))}
+              {products
+                ?.filter(
+                  (product) =>
+                    product.isActive && product.inStock === 'in stock'
+                )
+                .map((product) => (
+                  <ProductPreview
+                    key={`product-preview-category-${product.id}`}
+                    product={product}
+                  />
+                ))}
             </Grid>
           )}
         </Grid>

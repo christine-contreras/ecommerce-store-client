@@ -67,7 +67,7 @@ const TableActionsProduct = ({ product }) => {
         closeModal={handleCloseDeleteModel}
         handleDelete={handleDeleteProduct}
         item='Product'
-        warningMessage={`Are you sure you want to delete ${product.name}? All Skus for this product will be deleted.`}
+        warningMessage={`Are you sure you want to delete ${product.title}? All Skus, Product Slottings, for this product will be deleted. We recommend deactivating a product instead.`}
       />
 
       {/* edit category modal */}

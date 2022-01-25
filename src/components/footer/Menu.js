@@ -13,13 +13,15 @@ const Menu = () => {
       <Typography variant='subtitle2' component='p'>
         Categories
       </Typography>
-      {categories.map((page) => (
-        <MenuItem
-          onClick={() => navigate(`/category/${page.id}`)}
-          key={`footer-menu-item-${page.name}`}>
-          {page.name}
-        </MenuItem>
-      ))}
+      {categories
+        ?.filter((cat) => cat.isActive === true)
+        .map((page) => (
+          <MenuItem
+            onClick={() => navigate(`/category/${page.id}`)}
+            key={`footer-menu-item-${page.name}`}>
+            {page.name}
+          </MenuItem>
+        ))}
     </MenuList>
   )
 }

@@ -38,9 +38,10 @@ const Products = () => {
   const columns = [
     { field: 'id', headerName: 'Product #', width: 100 },
     { field: 'title', headerName: 'Product', width: 250 },
-    { field: 'quantity', headerName: '# Of SKUs', width: 125 },
+    { field: 'quantity', headerName: '# Of SKUs', width: 100 },
     { field: 'isActive', headerName: 'Is Active?', width: 125 },
-    { field: 'isSlotted', headerName: 'Is Slotted?', width: 125 },
+    { field: 'inStock', headerName: 'Stock', width: 125 },
+    { field: 'isSlotted', headerName: 'Is Slotted?', width: 100 },
     {
       field: 'actions',
       headerName: 'Action',
