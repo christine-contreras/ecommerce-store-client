@@ -53,7 +53,9 @@ export const selectedCategoryProductsAtom = selector({
   key: 'selectedCategoryProductsAtom',
   get: ({ get }) => {
     const category = get(selectedCategoryAtom)
-    const products = category ? category.products : []
+    const products = category
+      ? category.products?.filter((p) => p.isActive && p.inStock === 'in stock')
+      : []
     return products
   },
 })
