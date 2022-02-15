@@ -36,28 +36,28 @@ export const theme = createTheme({
       '@media (max-width:600px)': {
         fontSize: '3em',
       },
-      fontFamily: '"Afterglow", cursive',
+      fontFamily: '"Afterglow"',
     },
     h2: {
       fontSize: '3.5em',
       '@media (max-width:600px)': {
         fontSize: '2.5em',
       },
-      fontFamily: '"Afterglow", cursive',
+      fontFamily: '"Afterglow"',
     },
     h3: {
       fontSize: '3em',
       '@media (max-width:600px)': {
         fontSize: '2em',
       },
-      fontFamily: '"Afterglow", cursive',
+      fontFamily: '"Afterglow"',
     },
     h4: {
       fontSize: '2.5em',
       '@media (max-width:600px)': {
         fontSize: '1.5em',
       },
-      fontFamily: '"Afterglow", cursive',
+      fontFamily: '"Afterglow"',
     },
     // h5: {
     //   fontFamily: '"Libre Caslon Text", serif',
