@@ -29,20 +29,23 @@ const OrderConfirmation = () => {
     setLoading(true)
     setError(false)
     setFetching(false)
+    //grab params from url
     const search = new URLSearchParams(window.location.search)
 
     if (search.has('session_id')) {
+      //check if order already exists
       const session = search.get('session_id')
       const orderExists = userOrders.find(
         (order) => order.session_id === session
       )
       if (orderExists) {
+        //display if it does
         setOrder(orderExists)
         setLoading(false)
         setFetching(false)
       } else {
         if (cartItems && cartItems?.length !== 0) {
-          handleFetchStripeOrder(session)
+          handleFetchStripeOrder(session) //if it doesn't or there are no orders fetch stripe order
           setFetching(true)
         } else {
           setLoading(false)
