@@ -1,11 +1,9 @@
 import { createTheme } from '@mui/material/styles'
-import { orange, teal, brown, grey } from '@mui/material/colors'
 
 //https://material-ui.com/customization/default-theme/#default-theme
 //https://material-ui.com/customization/color/#color
 export const theme = createTheme({
   palette: {
-    // mode: 'light',
     primary: {
       main: '#f8d7b1',
       light: '#ffffe3',
@@ -25,10 +23,6 @@ export const theme = createTheme({
     text: {
       primary: '#291108',
     },
-    // background: {
-    //   default: '#fff',
-    //   paper: '#f8f4ef',
-    // },
   },
   typography: {
     h1: {
@@ -59,9 +53,6 @@ export const theme = createTheme({
       },
       fontFamily: '"Afterglow"',
     },
-    // h5: {
-    //   fontFamily: '"Libre Caslon Text", serif',
-    // },
     h6: {
       fontSize: '4em',
       '@media (max-width:600px)': {

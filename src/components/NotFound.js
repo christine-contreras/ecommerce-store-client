@@ -22,7 +22,7 @@ const NotFound = () => {
           </Grid>
           <Grid item xs={12}>
             <Typography textAlign='center'>
-              The page you are looking for can't be found
+              The page you are looking for can&apos;t be found
             </Typography>
           </Grid>
         </Grid>

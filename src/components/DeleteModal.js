@@ -35,7 +35,7 @@ const DeleteModal = ({
             className='btn btn-lg'
             color='error'
             onClick={handleDelete}>
-            Yes, I'm Sure
+            Yes, I&rsquo;m Sure
           </Button>
         </Grid>
         <Grid item textAlign='center'>

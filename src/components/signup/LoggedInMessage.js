@@ -8,7 +8,7 @@ const LoggedInMessage = ({ onLogout }) => {
   return (
     <>
       <Typography variant='subtitle1' align='center'>
-        You're Already Logged In
+        You&apos;re Already Logged In
       </Typography>
       <Typography component='p' align='center'>
         If you would like to create a new account please logout.

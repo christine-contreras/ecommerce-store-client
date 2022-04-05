@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import '../style/css/form.css'
 import { useLocation, useNavigate } from 'react-router'
 import { Grid, Typography, Box, Container, Button } from '@mui/material'
@@ -57,7 +58,7 @@ const SignUpLogin = ({ title, onLogout, handleCheckout }) => {
                     color='info'
                     size='large'
                     endIcon={<ArrowCircleRightOutlinedIcon />}>
-                    <strong>Don't Have An Account? Sign Up</strong>
+                    <strong>Don&apos;t Have An Account? Sign Up</strong>
                   </Button>
                 </Grid>
               </>
@@ -76,3 +77,9 @@ const SignUpLogin = ({ title, onLogout, handleCheckout }) => {
 }
 
 export default SignUpLogin
+
+SignUpLogin.propTypes = {
+  title: PropTypes.string,
+  onLogout: PropTypes.func,
+  handleCheckout: PropTypes.func,
+}

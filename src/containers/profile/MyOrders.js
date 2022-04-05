@@ -13,8 +13,8 @@ const MyOrders = () => {
             No Orders
           </Typography>
           <Typography component='p' align='center'>
-            If you made an order and don't see if here, please contact customer
-            service.
+            If you made an order and don&apos;t see if here, please contact
+            customer service.
           </Typography>
         </Grid>
       )}

@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Grid, Typography } from '@mui/material'
 import { useLocation } from 'react-router'
 import MyInfo from './MyInfo'
@@ -28,3 +29,7 @@ const Main = ({ title }) => {
 }
 
 export default Main
+
+Main.propTypes = {
+  title: PropTypes.string,
+}

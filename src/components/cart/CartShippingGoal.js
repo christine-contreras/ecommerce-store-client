@@ -26,7 +26,7 @@ const CartShippingGoal = () => {
           </Typography>
         ) : (
           <Typography>
-            You're <strong>${amountLeft}</strong> away from{' '}
+            You&apos;re <strong>${amountLeft}</strong> away from{' '}
             <strong>Free Shipping</strong>
           </Typography>
         )}

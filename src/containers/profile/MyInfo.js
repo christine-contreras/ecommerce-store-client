@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Grid, Typography, Button } from '@mui/material'
+import { Grid, Button } from '@mui/material'
 import FormProfile from '../../components/profile/FormProfile'
 import DeleteModal from '../../components/DeleteModal'
 

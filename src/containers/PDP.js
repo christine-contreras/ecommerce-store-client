@@ -35,7 +35,7 @@ const PDP = () => {
     fetch(`/api/products/${params.id}`)
       .then((res) => res.json())
       .then((data) => setProduct(data))
-      .catch((err) => {
+      .catch(() => {
         setError(true)
         setLoading(false)
       })
