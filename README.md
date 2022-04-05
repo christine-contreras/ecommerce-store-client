@@ -2,6 +2,8 @@
 
 This is an eCommerce app where you can create categories, products and skus if you are an atom. A user is able to browse categories, products, add items to a cart and complete an order.
 
+[demo here](https://free-spirit-designs-app.herokuapp.com/)
+
 ## Back-end API for App
 
 You can use this app in conjunction with my eCommerce API [see the repo](https://github.com/christine-contreras/ecommerce-store-api)
